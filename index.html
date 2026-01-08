@@ -15,36 +15,42 @@
 
         body {
             background-color: #111;
+            /* Permitimos scroll vertical y alineamos al inicio para que no se corte arriba */
             display: flex;
-            justify-content: center; /* Centrado horizontal */
-            align-items: center;     /* Centrado vertical */
-            min-height: 100vh;       /* Altura completa de la pantalla */
+            flex-direction: column;
+            align-items: center;     
+            justify-content: flex-start; 
+            min-height: 100vh;
             margin: 0;
+            padding-top: 20px; 
+            padding-bottom: 50px; 
             font-family: 'Russo One', sans-serif;
-            overflow: hidden;        /* Evita scroll si no es necesario */
+            overflow-x: hidden;      
+            overflow-y: auto;        
         }
 
         /* Wrapper que cambia de tamaño dinámicamente */
         #scale-wrapper {
             position: relative;
-            /* El tamaño se asignará por JS */
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Sombra para resaltar del fondo */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Contenedor principal de la tarjeta (TAMAÑO FIJO ORIGINAL) */
+        /* Contenedor principal de la tarjeta (TAMAÑO FIJO ORIGINAL 1080x1080) */
         .card-container {
             width: 1080px;
             height: 1080px;
             background: var(--bg-gradient);
-            position: absolute; /* Importante para el escalado */
+            position: absolute; 
             top: 0;
             left: 0;
-            transform-origin: top left; /* Escalar desde la esquina */
+            transform-origin: top left; 
             overflow: hidden;
             color: white;
         }
 
-        /* --- ESTILOS INTERNOS DE LA TARJETA (Idénticos) --- */
+        /* --- ESTILOS INTERNOS --- */
         .bg-glow {
             position: absolute;
             width: 600px;
@@ -125,9 +131,11 @@
             pointer-events: none;
         }
 
+        /* Área del Jugador (Izquierda Abajo) - MODIFICADO */
         .player-area {
             position: absolute;
-            bottom: 50px;
+            /* SE HA CAMBIADO DE 50px A 180px PARA SUBIRLO */
+            bottom: 180px; 
             left: 50px;
             width: 300px;
             z-index: 10;
@@ -198,49 +206,21 @@
 
     </style>
     <script>
-        // --- AUTO ESCALADO CORREGIDO ---
+        // --- AUTO ESCALADO PARA MAXIMIZAR TAMAÑO ---
         function resizeCard() {
             const card = document.getElementById('tournament-card');
             const wrapper = document.getElementById('scale-wrapper');
-            const originalSize = 1080; // Tamaño real del diseño
-            
-            // Obtenemos ancho y alto de la ventana
+            const originalSize = 1080;
             const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
+            const margin = 10; 
             
-            // Calculamos el margen deseado (20px a cada lado)
-            const margin = 20; 
-            
-            // Calculamos cuánto debemos encoger
-            // Usamos Math.min para asegurar que quepa tanto en ancho como en alto si giras el cel
-            let availableWidth = windowWidth - (margin * 2);
-            let availableHeight = windowHeight - (margin * 2);
-            
-            // Factor de escala basado en el ancho (prioridad) o alto
-            // Normalmente en celular vertical el limitante es el ancho
-            let scale = availableWidth / originalSize;
-            
-            // Si la escala es mayor a 1 (pantalla gigante), la dejamos en 1 o calculamos límite por altura
-            if (scale > 1) {
-                 // Si sobra espacio, verifica que no se salga por altura
-                 if (originalSize > availableHeight) {
-                     scale = availableHeight / originalSize;
-                 } else {
-                     scale = 1; 
-                 }
-            } else {
-                // Si es pantalla pequeña, verificamos también la altura para que no se corte abajo
-                if ((originalSize * scale) > availableHeight) {
-                    scale = availableHeight / originalSize;
-                }
-            }
+            // Calculamos escala basada SOLO en el ancho para maximizar
+            let scale = (windowWidth - margin) / originalSize;
 
-            // APLICAR CAMBIOS
-            // 1. Decimos al CSS que escale la tarjeta
+            if (scale > 1) scale = 1;
+
+            // Aplicamos cambios
             card.style.transform = `scale(${scale})`;
-            
-            // 2. Ajustamos el tamaño del CONTENEDOR (wrapper) al tamaño real que quedó
-            // Esto permite que el Flexbox del body lo centre correctamente
             wrapper.style.width = `${originalSize * scale}px`;
             wrapper.style.height = `${originalSize * scale}px`;
         }
@@ -248,7 +228,7 @@
         window.addEventListener('resize', resizeCard);
         window.addEventListener('load', resizeCard);
 
-        // --- FUNCIONES DE CARGA Y TEXTO ---
+        // --- FUNCIONES DE INTERACTIVIDAD ---
         function triggerUpload(inputId) { document.getElementById(inputId).click(); }
         
         function loadImage(event, imgId, containerId = null, mode = 'src') {
