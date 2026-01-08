@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Plantilla Torneo Beyblade</title>
+    <!-- Importamos una fuente estilo Gaming/Deportivo -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Russo+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-primary: #ff0000; /* Rojo intenso */
+            --color-dark: #050000;    /* Negro casi puro */
+            --bg-gradient: radial-gradient(circle at top left, #4a0000 0%, #000000 60%);
+        }
+
+        body {
+            background-color: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Russo One', sans-serif;
+            overflow-x: hidden; /* Evitar scroll horizontal */
+            /* Mejorar respuesta táctil */
+            touch-action: manipulation; 
+        }
+
+        /* Wrapper para el escalado inteligente */
+        #scale-wrapper {
+            position: relative;
+            margin-top: 20px;
+            margin-bottom: 80px; /* Espacio para instrucciones */
+            transition: height 0.3s ease;
+        }
+
+        /* Contenedor principal de la tarjeta */
+        .card-container {
+            width: 1080px;  /* Tamaño fijo HD */
+            height: 1080px;
+            background: var(--bg-gradient);
+            position: relative;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+            /* El transform se manejará con JS */
+            transform-origin: top center;
+        }
+
+        /* Decoraciones de fondo */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,0,0,0.15) 0%, rgba(0,0,0,0) 70%);
+            bottom: -100px;
+            right: -100px;
+            z-index: 1;
+        }
+
+        /* Header con Logos */
+        .header-logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+            margin-top: 40px;
+        }
+
+        /* Logo de la Cabra (Principal) */
+        .logo-main-container {
+            position: absolute;
+            top: 65px; 
+            left: 50px;
+            z-index: 20;
+            margin-top: 40px;
+        }
+        .logo-main {
+            width: 280px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        /* Grupo de logos derecha */
+        .logos-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .logo-secondary {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+            transition: transform 0.2s;
+        }
+        .logo-nbl-size {
+            height: 130px;
+        }
+
+        /* Texto del evento */
+        .event-info {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            z-index: 15;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+        .event-title {
+            font-size: 2rem;
+            color: white;
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        .event-date {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin: 0;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 10px 0; /* Más área táctil */
+        }
+        .event-date:active, .event-date:hover {
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* La línea "Tech" divisoria */
+        .tech-border-line {
+            position: absolute;
+            top: 280px;
+            left: 380px;
+            right: 0;
+            bottom: 0;
+            border-top: 3px solid white;
+            border-left: 3px solid white;
+            border-top-left-radius: 40px;
+            z-index: 5;
+            box-shadow: -2px -2px 10px rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+        }
+
+        /* Área del Jugador (Izquierda Abajo) */
+        .player-area {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            width: 300px;
+            z-index: 10;
+        }
+
+        .player-photo-frame {
+            width: 300px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            /* Mejoras visuales para móvil */
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5); 
+        }
+        
+        /* Etiqueta para indicar donde subir foto */
+        .placeholder-text {
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            font-size: 1.2rem; /* Texto más grande para leer en móvil */
+            pointer-events: none;
+            font-weight: bold;
+            text-shadow: 0 2px 4px black;
+        }
+
+        .rank-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+            font-weight: 700;
+        }
+        .player-name {
+            font-size: 3.5rem;
+            color: white;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1;
+            min-height: 1.2em; /* Para asegurar que sea fácil de tocar */
+        }
+
+        /* Área del Beyblade (Centro/Derecha) */
+        .beyblade-display-area {
+            position: absolute;
+            top: 300px;
+            left: 400px;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 8;
+        }
+        
+        .beyblade-placeholder {
+            width: 80%;
+            height: 80%;
+            border: 2px dashed rgba(255, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 0, 0, 0.4);
+            font-size: 2rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: visible;
+        }
+
+        /* Footer Logo */
+        .footer-logo {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 150px;
+            opacity: 0.8;
+        }
+
+        /* Utilidad para simular imagen cargada */
+        .img-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .img-contain {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hidden-input { display: none; }
+
+        /* Panel de instrucciones móvil */
+        .mobile-instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #111;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-family: sans-serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            text-align: center;
+            z-index: 100;
+            width: 90%;
+            max-width: 400px;
+            font-size: 0.9rem;
+            border: 2px solid #ff0000;
+        }
+    </style>
+    <script>
+        // --- AUTO ESCALADO PARA MÓVIL ---
+        function resizeCard() {
+            const card = document.getElementById('tournament-card');
+            const wrapper = document.getElementById('scale-wrapper');
+            const cardWidth = 1080;
+            const windowWidth = window.innerWidth;
+            const margin = 20; // Margen de seguridad
+
+            // Si la pantalla es más pequeña que la tarjeta (caso móvil)
+            if (windowWidth < cardWidth + margin) {
+                const scale = (windowWidth - margin) / cardWidth;
+                card.style.transform = `scale(${scale})`;
+                // Ajustamos la altura del contenedor padre porque el transform no empuja el contenido
+                wrapper.style.height = `${1080 * scale}px`;
+                wrapper.style.width = `${1080 * scale}px`; // Centrado visual
+            } else {
+                // Pantalla grande
+                card.style.transform = 'none';
+                wrapper.style.height = '1080px';
+                wrapper.style.width = '1080px';
+            }
+        }
+
+        window.addEventListener('resize', resizeCard);
+        window.addEventListener('load', resizeCard);
+
+        // --- LÓGICA DE CARGA DE IMÁGENES ---
+        function triggerUpload(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function loadImage(event, imgId, containerId = null, mode = 'src') {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (mode === 'src') {
+                        const imgElement = document.getElementById(imgId);
+                        imgElement.src = e.target.result;
+                        imgElement.style.display = 'block'; 
+                        const errorDiv = imgElement.nextElementSibling;
+                        if(errorDiv && errorDiv.tagName === 'DIV') errorDiv.style.display = 'none';
+
+                    } else if (mode === 'container') {
+                        const container = document.getElementById(containerId);
+                        container.innerHTML = ''; 
+                        container.style.background = 'none';
+                        container.style.border = 'none';
+                        container.style.boxShadow = 'none';
+
+                        const newImg = document.createElement('img');
+                        newImg.src = e.target.result;
+                        newImg.className = imgId === 'beyblade-img' ? 'img-contain' : 'img-cover';
+                        container.appendChild(newImg);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // --- LÓGICA DE FECHA ---
+        function triggerDatePicker() {
+            const dateInput = document.getElementById('date-input');
+            try {
+                dateInput.showPicker();
+            } catch (error) {
+                dateInput.click();
+            }
+        }
+
+        function updateDateDisplay(input) {
+            if (input.value) {
+                const parts = input.value.split('-'); 
+                const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
+                document.getElementById('date-text').innerText = formattedDate;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <input type="file" id="input-player" class="hidden-input" accept="image/*" onchange="loadImage(event, 'player-img', 'player-frame', 'container')">
+    <input type="file" id="input-beyblade" class="hidden-input" accept="image/*" onchange="loadImage(event, 'beyblade-img', 'beyblade-frame', 'container')">
+    <input type="date" id="date-input" style="opacity: 0; position: absolute; pointer-events: none; z-index: -1;" onchange="updateDateDisplay(this)">
+
+    <!-- WRAPPER PARA EL ESCALADO -->
+    <div id="scale-wrapper">
+        <div class="card-container" id="tournament-card">
+            <!-- Fondo Decorativo -->
+            <div class="bg-glow"></div>
+
+            <!-- Información Texto -->
+            <div class="event-info">
+                <h2 class="event-title" contenteditable="true">Torneo</h2>
+                <p class="event-date" id="date-text" onclick="triggerDatePicker()">DD.MM.YYYY</p>
+            </div>
+
+            <!-- LOGOS SUPERIORES (FIJOS) -->
+            <div class="logo-main-container">
+                <img src="MFL.png" id="img-mfl" alt="Logo Cabra Principal" class="logo-main" onerror="this.src='https://placehold.co/280x280?text=MFL.png'; this.style.opacity='0.5'">
+            </div>
+
+            <div class="header-logos">
+                <div style="width: 300px;"></div>
+                <div class="logos-right">
+                    <img src="NBL.png" id="img-nbl" alt="Logo Night Blade" class="logo-secondary logo-nbl-size" onerror="this.src='https://placehold.co/150x80?text=NBL.png';">
+                    <img src="MNBCS.png" id="img-mnbcs" alt="Logo MNBCS" class="logo-secondary" onerror="this.src='https://placehold.co/100x100?text=MNBCS.png';">
+                </div>
+            </div>
+
+            <div class="tech-border-line"></div>
+
+            <!-- ÁREA DEL JUGADOR -->
+            <div class="player-area">
+                <div class="player-photo-frame" id="player-frame" onclick="triggerUpload('input-player')">
+                    <div class="placeholder-text">
+                        FOTO JUGADOR<br>(Toca para subir)
+                    </div>
+                </div>
+                <h3 class="rank-text" contenteditable="true">3rd Place</h3>
+                <h1 class="player-name" contenteditable="true">NOMBRE</h1>
+            </div>
+
+            <!-- ÁREA DEL BEYBLADE -->
+            <div class="beyblade-display-area">
+                <div class="beyblade-placeholder" id="beyblade-frame" onclick="triggerUpload('input-beyblade')">
+                    <div style="text-align:center; font-size: 2.5rem; font-weight:bold; color: rgba(255,0,0,0.6);">
+                        FOTO BEYBLADE<br>(Toca para subir)
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Instrucciones Móviles -->
+        <!-- <div class="mobile-instructions">
+            <b>Modo Móvil Activo:</b><br>
+            1. Toca la <b>Fecha</b> para cambiarla.<br>
+            2. Toca los cuadros grandes para subir fotos.<br>
+            3. Toca los textos (NOMBRE) para editar.
+        </div> -->
+
+</body>
+</html>
