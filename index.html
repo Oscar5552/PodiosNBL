@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Plantilla Torneo Beyblade - Fire Metal Stretch Deck</title>
+    <title>Plantilla Torneo Beyblade - Fire Metal Smart Deck</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -208,14 +208,15 @@
         }
 
         .beyblade-box-frame {
-            width: 450px; height: 450px;
-            background: rgba(0,0,0,0.5);
+            width: 450px;
+            height: 450px; /* Altura base default */
+            background: #000000; /* Fondo negro forzado */
             border: 6px solid;
             border-image: linear-gradient(45deg, var(--fire-yellow), var(--fire-orange), var(--metal-dark)) 1;
             box-shadow: 0 0 40px rgba(255, 90, 0, 0.5);
             display: flex; justify-content: center; align-items: center;
             position: relative; cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, height 0.3s; /* Animación suave para cambio de altura */
         }
         
         .beyblade-box-frame:hover {
@@ -231,10 +232,7 @@
             text-shadow: 0 0 10px var(--fire-orange);
         }
 
-        /* Utilidades Imagen */
-        /* CAMBIO: img-cover para jugador (recorta) */
         .img-cover { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
-        /* CAMBIO: img-stretch para deck (estira/deforma para llenar) */
         .img-stretch { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; z-index: 1; }
         .hidden-input { display: none; }
 
@@ -265,7 +263,6 @@
         window.addEventListener('resize', resizeCard);
         window.addEventListener('load', resizeCard);
 
-        // --- FUNCIONES DE CARGA Y DATOS ---
         function triggerUpload(inputId) { document.getElementById(inputId).click(); }
         function triggerDatePicker() { try { document.getElementById('date-input').showPicker(); } catch (e) { document.getElementById('date-input').click(); } }
         function updateDateDisplay(input) { if (input.value) { const parts = input.value.split('-'); document.getElementById('date-text').innerText = `${parts[2]}.${parts[1]}.${parts[0]}`; } }
@@ -286,11 +283,24 @@
                         if(oldImg) oldImg.remove();
                         
                         const newImg = document.createElement('img');
+                        
+                        // LÓGICA DE ALTURA DINÁMICA
+                        if (imgId === 'beyblade-img') {
+                            newImg.onload = function() {
+                                // Altura base definida en CSS
+                                const baseHeight = 450;
+                                console.log("900 > " + this.naturalHeight);
+                                // Si la imagen es muy alta (>970px), aumentar 20px
+                                if (this.naturalHeight > 900) {
+                                    container.style.height = (baseHeight + 70) + 'px'; // 570px
+                                } else {
+                                    container.style.height = baseHeight + 'px'; // 550px
+                                }
+                            };
+                        }
+
                         newImg.src = e.target.result;
-                        
-                        // CAMBIO JS: Si es beyblade usa stretch, si es jugador usa cover
                         newImg.className = imgId === 'beyblade-img' ? 'img-stretch' : 'img-cover';
-                        
                         container.appendChild(newImg);
                     }
                 };
