@@ -143,29 +143,21 @@
             z-index: 10;
         }
 
+        /* --- CAMBIOS PRINCIPALES AQUÍ --- */
         .player-photo-frame {
             width: 450px;
             height: 500px;
-            background: #111;
+            /* background: #111;  <-- SE ELIMINÓ EL FONDO NEGRO */
+            background: transparent; /* Ahora es transparente */
             position: relative;
             cursor: pointer;
-            overflow: hidden;
-            border: 8px solid var(--metal-light);
-            box-shadow: 
-                inset 0 0 20px rgba(0,0,0,1),
-                0 0 0 4px var(--fire-orange),
-                0 0 30px rgba(255, 90, 0, 0.4);
+            /* overflow: hidden; <-- Se puede quitar si no hay sombras que cortar */
+            border: none;
+            /* box-shadow: ... <-- SE ELIMINARON TODAS LAS SOMBRAS/MARCOS */
         }
         
-        .player-photo-frame::after {
-            content: ''; position: absolute; inset: 0; pointer-events: none;
-            background: 
-                linear-gradient(45deg, var(--fire-orange) 10px, transparent 10px) top left,
-                linear-gradient(135deg, var(--fire-orange) 10px, transparent 10px) top right,
-                linear-gradient(225deg, var(--fire-orange) 10px, transparent 10px) bottom right,
-                linear-gradient(315deg, var(--fire-orange) 10px, transparent 10px) bottom left;
-            background-size: 50% 50%; background-repeat: no-repeat; opacity: 0.8; z-index: 2;
-        }
+        /* SE ELIMINÓ TODO EL BLOQUE .player-photo-frame::after QUE TENÍA LAS ESQUINAS NARANJAS */
+        /* ------------------------------- */
 
         /* Panel de Nombre */
         .name-panel {
@@ -209,14 +201,14 @@
 
         .beyblade-box-frame {
             width: 450px;
-            height: 450px; /* Altura base default */
-            background: #000000; /* Fondo negro forzado */
+            height: 450px; 
+            background: #000000; 
             border: 6px solid;
             border-image: linear-gradient(45deg, var(--fire-yellow), var(--fire-orange), var(--metal-dark)) 1;
             box-shadow: 0 0 40px rgba(255, 90, 0, 0.5);
             display: flex; justify-content: center; align-items: center;
             position: relative; cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s, height 0.3s; /* Animación suave para cambio de altura */
+            transition: transform 0.3s, box-shadow 0.3s, height 0.3s; 
         }
         
         .beyblade-box-frame:hover {
@@ -232,8 +224,22 @@
             text-shadow: 0 0 10px var(--fire-orange);
         }
 
+        /* CLASES PARA IMAGENES */
         .img-cover { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
         .img-stretch { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        /* Esta clase asegura que la imagen del jugador se vea completa dentro del área */
+        .player-img-fit {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            object-position: center; 
+        }
+
         .hidden-input { display: none; }
 
         .bg-big-rank {
@@ -276,6 +282,7 @@
                     if (mode === 'src') {
                         document.getElementById(imgId).src = e.target.result;
                     } else if (mode === 'container') {
+                        console.log(containerId);
                         const container = document.getElementById(containerId);
                         const placeholder = container.querySelector('.placeholder-text, .placeholder-text-fire');
                         if(placeholder) placeholder.style.display = 'none';
@@ -284,23 +291,23 @@
                         
                         const newImg = document.createElement('img');
                         
-                        // LÓGICA DE ALTURA DINÁMICA
+                        // LÓGICA DE ALTURA DINÁMICA (Solo para Beyblade)
                         if (imgId === 'beyblade-img') {
                             newImg.onload = function() {
-                                // Altura base definida en CSS
                                 const baseHeight = 450;
-                                console.log("900 > " + this.naturalHeight);
-                                // Si la imagen es muy alta (>970px), aumentar 20px
                                 if (this.naturalHeight > 900) {
-                                    container.style.height = (baseHeight + 70) + 'px'; // 570px
+                                    container.style.height = (baseHeight + 70) + 'px'; 
                                 } else {
-                                    container.style.height = baseHeight + 'px'; // 550px
+                                    container.style.height = baseHeight + 'px'; 
                                 }
                             };
                         }
 
                         newImg.src = e.target.result;
-                        newImg.className = imgId === 'beyblade-img' ? 'img-stretch' : 'img-cover';
+
+                        // Usa 'player-img-fit' para el jugador para que no se corte
+                        newImg.className = imgId === 'beyblade-img' ? 'img-stretch' : 'player-img-fit';
+
                         container.appendChild(newImg);
                     }
                 };
