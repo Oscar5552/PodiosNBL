@@ -27,10 +27,8 @@ body {
 #scale-wrapper {
     position: relative;
     box-shadow: 0 0 80px rgba(255, 90, 0, 0.3);
-    /* CAMBIO: Centrado automático horizontal */
     margin: 0 auto;
     transition: all 0.3s ease;
-    /* CAMBIO: Evita scroll horizontal fantasma al escalar */
     overflow: hidden;
 }
 
@@ -38,106 +36,81 @@ body {
 body.photo-mode {
     background: #000;
     overflow: hidden;
-    /* Esto centra la tarjeta perfectamente en la pantalla */
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
     padding: 0;
-    min-height: 100vh; /* Asegura que ocupe toda la altura */
+    min-height: 100vh;
 }
 
 body.photo-mode #scale-wrapper {
-    /* ELIMINA o comenta la línea que decía transform: scale(0.9) !important; */
-    /* transform: scale(0.9) !important; <--- ESTA LINEA CAUSABA PROBLEMAS */
-    
     box-shadow: none;
-    margin: auto; /* Ayuda al centrado */
+    margin: auto;
 }
 
-
-
-/* --- OCULTAR CONTROLES --- */
-/* Esta regla debe ser muy específica para forzar que se oculten */
 body.photo-mode .ui-controls,
-body.photo-mode .modal, 
+body.photo-mode .modal,
 body.photo-mode input[type="file"] {
     display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
 }
 
-/* --- BOTÓN DE SALIR --- */
 #exit-photo-mode {
-    display: none; /* Oculto en modo normal */
+    display: none;
     position: fixed;
-    z-index: 10001; /* Encima de todo */
+    z-index: 10001;
     background: rgba(200, 0, 0, 0.8);
     border: 2px solid white;
     color: white;
     font-family: 'Russo One', sans-serif;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     border-radius: 30px;
-    
-    /* Posición para escritorio */
     top: 20px;
     right: 20px;
     padding: 10px 20px;
     font-size: 1rem;
 }
 
-/* Mostrar el botón SOLO en modo foto */
 body.photo-mode #exit-photo-mode {
     display: block !important;
 }
 
-/* --- AJUSTES MÓVILES (Reemplaza el bloque final de styles.css) --- */
+/* --- AJUSTES MÓVILES --- */
 @media screen and (max-width: 768px) {
-
-    /* 1. Barra de Controles (Modo Normal) - Flotante y centrada */
     .ui-controls {
         top: auto !important;
-        bottom: 30px !important;    /* Despegado del fondo */
-        left: 50% !important;       /* Ubicación central */
+        bottom: 30px !important;
+        left: 50% !important;
         right: auto !important;
-        transform: translateX(-50%) !important; /* Centrado matemático exacto */
-        
-        width: 90% !important;      /* No ocupa todo el ancho */
-        max-width: 380px;           /* Límite para que no se vea gigante */
-        
-        border-radius: 50px !important; /* Bordes muy redondos (estilo cápsula) */
+        transform: translateX(-50%) !important;
+        width: 90% !important;
+        max-width: 380px;
+        border-radius: 50px !important;
         border: 2px solid var(--fire-orange) !important;
-        
-        justify-content: center;    /* Centrar botones internos */
+        justify-content: center;
         padding: 15px 20px !important;
         background: rgba(17, 17, 17, 0.95);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.8); /* Sombra fuerte para resaltar */
-        gap: 20px; /* Espacio entre el contador y el botón de foto */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+        gap: 20px;
     }
 
-    /* Ajuste para que el texto de los combos no se rompa */
     .control-group {
         white-space: nowrap;
     }
 
-    /* 2. Botón 'Cerrar Modo Foto' - Flotante y centrado */
     #exit-photo-mode {
         top: auto !important;
-        bottom: 50px !important;    /* Más arriba para que no estorbe */
+        bottom: 50px !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%) !important;
-        
-        width: auto !important;     /* Ancho automático según el texto */
-        min-width: 200px;           /* Pero con un mínimo */
-        
+        width: auto !important;
+        min-width: 200px;
         padding: 12px 30px !important;
         font-size: 1rem !important;
-        border-radius: 50px !important; /* Redondo también */
-        
+        border-radius: 50px !important;
         background: rgba(220, 20, 20, 0.95) !important;
-        box-shadow: 0 0 25px rgba(0,0,0,1) !important;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 1) !important;
         border: 2px solid white !important;
         z-index: 99999 !important;
     }
@@ -152,19 +125,13 @@ body.photo-mode #exit-photo-mode {
         linear-gradient(to bottom right, rgba(255, 90, 0, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%),
         repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 10px),
         radial-gradient(circle at 30% 30%, rgba(255, 90, 0, 0.2), transparent 60%);
-
     position: absolute;
     top: 0;
     left: 0;
-
-    /* CAMBIO CRÍTICO: Esto permite que el zoom funcione desde la esquina */
     transform-origin: top left;
-
     overflow: hidden;
     border: 4px solid var(--metal-light);
     box-shadow: inset 0 0 50px rgba(255, 90, 0, 0.5), 0 0 20px rgba(255, 90, 0, 0.8);
-
-    /* Suavizado de fuente para cuando se vea pequeño */
     -webkit-font-smoothing: antialiased;
 }
 
@@ -409,7 +376,8 @@ body.photo-mode #exit-photo-mode {
 /* Contenedor Flotante */
 .beyblade-display-area {
     position: absolute;
-    top: 380px;
+    /* CAMBIO: SUBIR DE 380px A 340px */
+    top: 340px;
     right: 80px;
     z-index: 15;
     width: 450px;
@@ -419,8 +387,9 @@ body.photo-mode #exit-photo-mode {
     transition: top 0.3s ease;
 }
 
+/* CAMBIO: SUBIR MODO COMPACTO DE 180px A 150px */
 .beyblade-display-area.compact-mode {
-    top: 180px;
+    top: 150px;
 }
 
 #deck-list-container {
@@ -515,16 +484,19 @@ body.photo-mode #exit-photo-mode {
     justify-content: flex-end;
 }
 
+/* CAMBIO: TEXTO MÁS GRANDE (0.9rem) Y ANCHO MAYOR */
 .part-label {
     margin-top: 5px;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
+    /* AUMENTADO */
     color: #ccc;
     font-family: 'Black Ops One', cursive;
     text-transform: uppercase;
     text-shadow: 0 2px 2px black;
     letter-spacing: 1px;
     text-align: center;
-    max-width: 160px;
+    max-width: 180px;
+    /* AUMENTADO para que quepa más texto */
     word-wrap: break-word;
     line-height: 1.1;
     min-height: 25px;
