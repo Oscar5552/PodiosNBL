@@ -1,0 +1,699 @@
+/* --- ESTILOS GENERALES --- */
+:root {
+    --fire-orange: #ff5a00;
+    --fire-yellow: #ffd200;
+    --metal-dark: #1a1a1a;
+    --metal-light: #333333;
+    --glow-intensity: drop-shadow(0 0 15px rgba(255, 90, 0, 0.8));
+}
+
+body {
+    background-color: #050505;
+    background-image: radial-gradient(circle at center, #220a00 0%, #000000 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    font-family: 'Russo One', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: white;
+}
+
+#scale-wrapper {
+    position: relative;
+    box-shadow: 0 0 80px rgba(255, 90, 0, 0.3);
+    /* CAMBIO: Centrado automático horizontal */
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    /* CAMBIO: Evita scroll horizontal fantasma al escalar */
+    overflow: hidden;
+}
+
+/* --- MODO FOTO --- */
+body.photo-mode {
+    background: #000;
+    overflow: hidden;
+    /* Esto centra la tarjeta perfectamente en la pantalla */
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    padding: 0;
+    min-height: 100vh; /* Asegura que ocupe toda la altura */
+}
+
+body.photo-mode #scale-wrapper {
+    /* ELIMINA o comenta la línea que decía transform: scale(0.9) !important; */
+    /* transform: scale(0.9) !important; <--- ESTA LINEA CAUSABA PROBLEMAS */
+    
+    box-shadow: none;
+    margin: auto; /* Ayuda al centrado */
+}
+
+
+
+/* --- OCULTAR CONTROLES --- */
+/* Esta regla debe ser muy específica para forzar que se oculten */
+body.photo-mode .ui-controls,
+body.photo-mode .modal, 
+body.photo-mode input[type="file"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* --- BOTÓN DE SALIR --- */
+#exit-photo-mode {
+    display: none; /* Oculto en modo normal */
+    position: fixed;
+    z-index: 10001; /* Encima de todo */
+    background: rgba(200, 0, 0, 0.8);
+    border: 2px solid white;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    border-radius: 30px;
+    
+    /* Posición para escritorio */
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+/* Mostrar el botón SOLO en modo foto */
+body.photo-mode #exit-photo-mode {
+    display: block !important;
+}
+
+/* --- AJUSTES MÓVILES (Reemplaza el bloque final de styles.css) --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. Barra de Controles (Modo Normal) - Flotante y centrada */
+    .ui-controls {
+        top: auto !important;
+        bottom: 30px !important;    /* Despegado del fondo */
+        left: 50% !important;       /* Ubicación central */
+        right: auto !important;
+        transform: translateX(-50%) !important; /* Centrado matemático exacto */
+        
+        width: 90% !important;      /* No ocupa todo el ancho */
+        max-width: 380px;           /* Límite para que no se vea gigante */
+        
+        border-radius: 50px !important; /* Bordes muy redondos (estilo cápsula) */
+        border: 2px solid var(--fire-orange) !important;
+        
+        justify-content: center;    /* Centrar botones internos */
+        padding: 15px 20px !important;
+        background: rgba(17, 17, 17, 0.95);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.8); /* Sombra fuerte para resaltar */
+        gap: 20px; /* Espacio entre el contador y el botón de foto */
+    }
+
+    /* Ajuste para que el texto de los combos no se rompa */
+    .control-group {
+        white-space: nowrap;
+    }
+
+    /* 2. Botón 'Cerrar Modo Foto' - Flotante y centrado */
+    #exit-photo-mode {
+        top: auto !important;
+        bottom: 50px !important;    /* Más arriba para que no estorbe */
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        
+        width: auto !important;     /* Ancho automático según el texto */
+        min-width: 200px;           /* Pero con un mínimo */
+        
+        padding: 12px 30px !important;
+        font-size: 1rem !important;
+        border-radius: 50px !important; /* Redondo también */
+        
+        background: rgba(220, 20, 20, 0.95) !important;
+        box-shadow: 0 0 25px rgba(0,0,0,1) !important;
+        border: 2px solid white !important;
+        z-index: 99999 !important;
+    }
+}
+
+/* --- TARJETA PRINCIPAL --- */
+.card-container {
+    width: 1080px;
+    height: 1080px;
+    background-color: var(--metal-dark);
+    background-image:
+        linear-gradient(to bottom right, rgba(255, 90, 0, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%),
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 10px),
+        radial-gradient(circle at 30% 30%, rgba(255, 90, 0, 0.2), transparent 60%);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* CAMBIO CRÍTICO: Esto permite que el zoom funcione desde la esquina */
+    transform-origin: top left;
+
+    overflow: hidden;
+    border: 4px solid var(--metal-light);
+    box-shadow: inset 0 0 50px rgba(255, 90, 0, 0.5), 0 0 20px rgba(255, 90, 0, 0.8);
+
+    /* Suavizado de fuente para cuando se vea pequeño */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Decoración */
+.ember-burst {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255, 90, 0, 0.15) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.metal-crack-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, var(--fire-yellow), var(--fire-orange), transparent);
+    height: 3px;
+    filter: blur(1px);
+}
+
+.crack-1 {
+    top: 150px;
+    left: -100px;
+    width: 600px;
+    transform: rotate(20deg);
+    opacity: 0.7;
+}
+
+.crack-2 {
+    bottom: 200px;
+    right: -100px;
+    width: 800px;
+    transform: rotate(-15deg);
+    opacity: 0.5;
+}
+
+/* Header & Player */
+.header-logos {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    z-index: 20;
+    background: linear-gradient(to bottom, #444, #222);
+    padding: 15px 30px;
+    border: 2px solid #555;
+    border-bottom: 4px solid var(--fire-orange);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    transform: skewX(-10deg);
+}
+
+.header-logos img {
+    transform: skewX(10deg);
+}
+
+.logo-main-container {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 20;
+    filter: var(--glow-intensity);
+}
+
+.logo-main {
+    width: 260px;
+}
+
+.logo-secondary {
+    height: 90px;
+    object-fit: contain;
+    filter: contrast(1.2);
+}
+
+.logo-nbl-size {
+    height: 120px;
+}
+
+.event-info {
+    position: absolute;
+    top: 310px;
+    left: 50px;
+    z-index: 15;
+}
+
+.event-title {
+    font-family: 'Black Ops One', cursive;
+    font-size: 4.5rem;
+    line-height: 0.9;
+    text-transform: uppercase;
+    background: linear-gradient(to bottom, var(--fire-yellow), var(--fire-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+    margin-bottom: 10px;
+}
+
+.event-date {
+    font-size: 1.8rem;
+    color: #ddd;
+    background: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+    padding: 5px 20px;
+    border-left: 3px solid var(--fire-yellow);
+    border-right: 3px solid var(--fire-yellow);
+    text-transform: uppercase;
+}
+
+.player-area {
+    position: absolute;
+    bottom: 120px;
+    left: 50px;
+    z-index: 10;
+}
+
+.player-photo-frame {
+    width: 450px;
+    height: 500px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    border: none;
+}
+
+.name-panel {
+    position: absolute;
+    bottom: 40px;
+    left: -20px;
+    width: 550px;
+    background: linear-gradient(90deg, var(--fire-orange) 0%, var(--metal-dark) 80%);
+    padding: 15px 20px 15px 40px;
+    z-index: 12;
+    transform: skewX(-15deg);
+    border: 2px solid var(--fire-yellow);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.name-panel-inner {
+    transform: skewX(15deg);
+}
+
+.rank-text {
+    font-family: 'Black Ops One';
+    font-size: 2.5rem;
+    color: var(--fire-yellow);
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.player-name {
+    font-family: 'Russo One';
+    font-size: 3.2rem;
+    color: white;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+}
+
+.placeholder-text-fire {
+    color: var(--fire-orange);
+    text-align: center;
+    font-size: 1.5rem;
+    pointer-events: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--fire-orange);
+}
+
+.hidden-input {
+    display: none;
+}
+
+.bg-big-rank {
+    position: absolute;
+    right: -20px;
+    bottom: 80px;
+    font-family: 'Black Ops One';
+    font-size: 25rem;
+    color: transparent;
+    -webkit-text-stroke: 4px rgba(255, 90, 0, 0.1);
+    z-index: 0;
+    pointer-events: none;
+    line-height: 0.8;
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 0 20px rgba(255, 90, 0, 0.2));
+}
+
+.player-img-fit {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    object-position: center;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95));
+}
+
+/* --- DECK BUILDER --- */
+.ui-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #222;
+    padding: 15px;
+    border: 2px solid var(--fire-orange);
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-family: 'Black Ops One';
+}
+
+.ui-controls button {
+    background: var(--fire-orange);
+    border: none;
+    padding: 5px 10px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: var(--fire-yellow) !important;
+}
+
+/* Contenedor Flotante */
+.beyblade-display-area {
+    position: absolute;
+    top: 380px;
+    right: 80px;
+    z-index: 15;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: top 0.3s ease;
+}
+
+.beyblade-display-area.compact-mode {
+    top: 180px;
+}
+
+#deck-list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.compact-mode #deck-list-container {
+    gap: 15px;
+}
+
+/* FILA DE COMBO ALINEADA AL FONDO */
+.combo-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 5px 0;
+    transition: transform 0.2s;
+}
+
+.compact-mode .combo-row {
+    transform: scale(0.9);
+    transform-origin: left bottom;
+}
+
+/* --- CAPAS CX (Stack) --- */
+.bey-image-container {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Blade Standard */
+.blade-normal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.9));
+    z-index: 2;
+}
+
+/* Capas CX */
+.cx-assist {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1.0);
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
+}
+
+.cx-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
+}
+
+.cx-chip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(0.55);
+    z-index: 3;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+}
+
+/* ETIQUETAS DE TEXTO */
+.slot-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.part-label {
+    margin-top: 5px;
+    font-size: 0.7rem;
+    color: #ccc;
+    font-family: 'Black Ops One', cursive;
+    text-transform: uppercase;
+    text-shadow: 0 2px 2px black;
+    letter-spacing: 1px;
+    text-align: center;
+    max-width: 160px;
+    word-wrap: break-word;
+    line-height: 1.1;
+    min-height: 25px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* PIEZAS PEQUEÑAS (Alineadas también al fondo) */
+.bey-parts-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.slot-icon {
+    width: 125px;
+    height: 125px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+.compact-mode .slot-icon {
+    width: 95px;
+    height: 95px;
+}
+
+.slot-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 6px rgba(0, 0, 0, 0.9));
+}
+
+.slot-icon.bit-slot {
+    width: 95px;
+    height: 95px;
+}
+
+/* Ajustes para el modo compacto */
+.compact-mode .slot-icon {
+    width: 90px;
+    height: 90px;
+}
+
+.compact-mode .slot-icon.bit-slot {
+    width: 70px;
+    height: 70px;
+}
+
+/* --- MODAL --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    width: 800px;
+    height: 80vh;
+    background: #111;
+    border: 2px solid var(--fire-orange);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 50px rgba(255, 90, 0, 0.3);
+}
+
+.modal-header {
+    padding: 15px;
+    background: #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+}
+
+.modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+#search-box {
+    background: #333;
+    border: 1px solid #555;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    width: 200px;
+    font-family: 'Russo One';
+}
+
+.close-btn {
+    background: none;
+    border: 1px solid var(--fire-orange);
+    color: var(--fire-orange);
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 15px;
+}
+
+.item-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.item-card:hover {
+    border-color: var(--fire-yellow);
+    background: #252525;
+}
+
+.item-card img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.item-name {
+    font-size: 0.7rem;
+    display: block;
+    color: #aaa;
+}
+
+.tabs {
+    display: flex;
+    background: #151515;
+    padding: 10px;
+    gap: 10px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: #333;
+    color: #888;
+    border: none;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: var(--fire-orange);
+    color: black;
+    font-weight: bold;
+}

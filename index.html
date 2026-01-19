@@ -1,337 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Plantilla Torneo Beyblade - Fire Metal Smart Deck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>NBL Deck Builder</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --fire-orange: #ff5a00;
-            --fire-yellow: #ffd200;
-            --metal-dark: #1a1a1a;
-            --metal-light: #333333;
-            --glow-intensity: drop-shadow(0 0 15px rgba(255, 90, 0, 0.8));
-        }
-
-        body {
-            background-color: #050505;
-            background-image: radial-gradient(circle at center, #220a00 0%, #000000 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;     
-            justify-content: flex-start; 
-            min-height: 100vh;
-            margin: 0;
-            padding-top: 20px; 
-            padding-bottom: 50px; 
-            font-family: 'Russo One', sans-serif;
-            overflow-x: hidden;      
-            overflow-y: auto;
-            color: white;        
-        }
-
-        #scale-wrapper {
-            position: relative;
-            box-shadow: 0 0 80px rgba(255, 90, 0, 0.3);
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* --- TARJETA PRINCIPAL --- */
-        .card-container {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--metal-dark);
-            background-image: 
-                linear-gradient(to bottom right, rgba(255, 90, 0, 0.1) 0%, transparent 50%, rgba(0,0,0,0.8) 100%),
-                repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 10px),
-                radial-gradient(circle at 30% 30%, rgba(255, 90, 0, 0.2), transparent 60%);
-            position: absolute; 
-            top: 0;
-            left: 0;
-            transform-origin: top left; 
-            overflow: hidden;
-            border: 4px solid var(--metal-light);
-            box-shadow: inset 0 0 50px rgba(255, 90, 0, 0.5), 0 0 20px rgba(255, 90, 0, 0.8);
-        }
-
-        /* Elementos Decorativos */
-        .ember-burst {
-            position: absolute;
-            width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(255, 90, 0, 0.15) 0%, transparent 70%);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            mix-blend-mode: screen;
-        }
-        .metal-crack-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, var(--fire-yellow), var(--fire-orange), transparent);
-            height: 3px;
-            filter: blur(1px);
-        }
-        .crack-1 { top: 150px; left: -100px; width: 600px; transform: rotate(20deg); opacity: 0.7; }
-        .crack-2 { bottom: 200px; right: -100px; width: 800px; transform: rotate(-15deg); opacity: 0.5; }
-
-        /* --- LOGOS --- */
-        .header-logos {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            z-index: 20;
-            background: linear-gradient(to bottom, #444, #222);
-            padding: 15px 30px;
-            border: 2px solid #555;
-            border-bottom: 4px solid var(--fire-orange);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
-            transform: skewX(-10deg);
-        }
-        .header-logos img { transform: skewX(10deg); }
-        
-        .logo-main-container {
-            position: absolute;
-            top: 40px; 
-            left: 40px;
-            z-index: 20;
-            filter: var(--glow-intensity);
-        }
-
-        .logo-main { width: 260px; }
-        .logo-secondary { height: 90px; object-fit: contain; filter: contrast(1.2); }
-        .logo-nbl-size { height: 120px; }
-
-        /* --- TEXTOS INFO --- */
-        .event-info {
-            position: absolute;
-            top: 310px; 
-            left: 50px;
-            z-index: 15;
-        }
-        .event-title {
-            font-family: 'Black Ops One', cursive;
-            font-size: 4.5rem;
-            line-height: 0.9;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, var(--fire-yellow), var(--fire-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
-            margin-bottom: 10px;
-        }
-        .event-date {
-            font-size: 1.8rem;
-            color: #ddd;
-            background: rgba(0,0,0,0.6);
-            display: inline-block;
-            padding: 5px 20px;
-            border-left: 3px solid var(--fire-yellow);
-            border-right: 3px solid var(--fire-yellow);
-            text-transform: uppercase;
-        }
-
-        /* --- ZONA DEL JUGADOR --- */
-        .player-area {
-            position: absolute;
-            bottom: 120px;
-            left: 50px;
-            z-index: 10;
-        }
-
-        /* --- CAMBIOS PRINCIPALES AQUÍ --- */
-        .player-photo-frame {
-            width: 450px;
-            height: 500px;
-            /* background: #111;  <-- SE ELIMINÓ EL FONDO NEGRO */
-            background: transparent; /* Ahora es transparente */
-            position: relative;
-            cursor: pointer;
-            /* overflow: hidden; <-- Se puede quitar si no hay sombras que cortar */
-            border: none;
-            /* box-shadow: ... <-- SE ELIMINARON TODAS LAS SOMBRAS/MARCOS */
-        }
-        
-        /* SE ELIMINÓ TODO EL BLOQUE .player-photo-frame::after QUE TENÍA LAS ESQUINAS NARANJAS */
-        /* ------------------------------- */
-
-        /* Panel de Nombre */
-        .name-panel {
-            position: absolute;
-            bottom: 40px;
-            left: -20px;
-            width: 550px; 
-            background: linear-gradient(90deg, var(--fire-orange) 0%, var(--metal-dark) 80%);
-            padding: 15px 20px 15px 40px; 
-            z-index: 12;
-            transform: skewX(-15deg);
-            border: 2px solid var(--fire-yellow);
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.9);
-        }
-        .name-panel-inner { transform: skewX(15deg); }
-
-        .rank-text {
-            font-family: 'Black Ops One', cursive;
-            font-size: 2.5rem;
-            color: var(--fire-yellow);
-            margin: 0; line-height: 1; opacity: 1;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-        }
-        .player-name {
-            font-family: 'Russo One', sans-serif;
-            font-size: 3.2rem;
-            color: white;
-            text-transform: uppercase;
-            margin: 0; line-height: 1;
-            text-shadow: 0 2px 10px rgba(0,0,0,1);
-        }
-
-        /* --- ZONA BEYBLADE --- */
-        .beyblade-display-area {
-            position: absolute;
-            top: 380px;
-            right: 80px;
-            z-index: 8;
-            display: flex; flex-direction: column; align-items: center;
-        }
-
-        .beyblade-box-frame {
-            width: 450px;
-            height: 450px; 
-            background: #000000; 
-            border: 6px solid;
-            border-image: linear-gradient(45deg, var(--fire-yellow), var(--fire-orange), var(--metal-dark)) 1;
-            box-shadow: 0 0 40px rgba(255, 90, 0, 0.5);
-            display: flex; justify-content: center; align-items: center;
-            position: relative; cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s, height 0.3s; 
-        }
-        
-        .beyblade-box-frame:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 60px rgba(255, 90, 0, 0.8);
-        }
-
-        .placeholder-text-fire {
-            color: var(--fire-orange);
-            text-align: center; font-size: 1.5rem;
-            pointer-events: none; font-weight: bold;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px var(--fire-orange);
-        }
-
-        /* CLASES PARA IMAGENES */
-        .img-cover { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
-        .img-stretch { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; z-index: 1; }
-        
-        /* Esta clase asegura que la imagen del jugador se vea completa dentro del área */
-        .player-img-fit {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            object-position: center; 
-        }
-
-        .hidden-input { display: none; }
-
-        .bg-big-rank {
-            position: absolute;
-            right: -20px; bottom: 80px;
-            font-family: 'Black Ops One', cursive;
-            font-size: 25rem;
-            color: transparent;
-            -webkit-text-stroke: 4px rgba(255, 90, 0, 0.1);
-            z-index: 0; pointer-events: none;
-            line-height: 0.8; transform: rotate(-5deg);
-            filter: drop-shadow(0 0 20px rgba(255, 90, 0, 0.2));
-        }
-
-    </style>
-    <script>
-        function resizeCard() {
-            const card = document.getElementById('tournament-card');
-            const wrapper = document.getElementById('scale-wrapper');
-            const originalSize = 1080; const windowWidth = window.innerWidth; const margin = 10; 
-            let scale = (windowWidth - margin) / originalSize;
-            if (scale > 1) scale = 1;
-            card.style.transform = `scale(${scale})`;
-            wrapper.style.width = `${originalSize * scale}px`;
-            wrapper.style.height = `${originalSize * scale}px`;
-        }
-        window.addEventListener('resize', resizeCard);
-        window.addEventListener('load', resizeCard);
-
-        function triggerUpload(inputId) { document.getElementById(inputId).click(); }
-        function triggerDatePicker() { try { document.getElementById('date-input').showPicker(); } catch (e) { document.getElementById('date-input').click(); } }
-        function updateDateDisplay(input) { if (input.value) { const parts = input.value.split('-'); document.getElementById('date-text').innerText = `${parts[2]}.${parts[1]}.${parts[0]}`; } }
-        function syncRank(element) { document.getElementById('bg-rank-display').innerText = element.innerText; }
-
-        function loadImage(event, imgId, containerId = null, mode = 'src') {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    if (mode === 'src') {
-                        document.getElementById(imgId).src = e.target.result;
-                    } else if (mode === 'container') {
-                        console.log(containerId);
-                        const container = document.getElementById(containerId);
-                        const placeholder = container.querySelector('.placeholder-text, .placeholder-text-fire');
-                        if(placeholder) placeholder.style.display = 'none';
-                        const oldImg = container.querySelector('img');
-                        if(oldImg) oldImg.remove();
-                        
-                        const newImg = document.createElement('img');
-                        
-                        // LÓGICA DE ALTURA DINÁMICA (Solo para Beyblade)
-                        if (imgId === 'beyblade-img') {
-                            newImg.onload = function() {
-                                const baseHeight = 450;
-                                if (this.naturalHeight > 900) {
-                                    container.style.height = (baseHeight + 70) + 'px'; 
-                                } else {
-                                    container.style.height = baseHeight + 'px'; 
-                                }
-                            };
-                        }
-
-                        newImg.src = e.target.result;
-
-                        // Usa 'player-img-fit' para el jugador para que no se corte
-                        newImg.className = imgId === 'beyblade-img' ? 'img-stretch' : 'player-img-fit';
-
-                        container.appendChild(newImg);
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-    </script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-    <input type="file" id="input-player" class="hidden-input" accept="image/*" onchange="loadImage(event, 'player-img', 'player-frame', 'container')">
-    <input type="file" id="input-beyblade" class="hidden-input" accept="image/*" onchange="loadImage(event, 'beyblade-img', 'beyblade-frame', 'container')">
-    <input type="date" id="date-input" style="opacity: 0; position: absolute; pointer-events: none; z-index: -1;" onchange="updateDateDisplay(this)">
+    <button id="exit-photo-mode" onclick="togglePhotoMode()">CERRAR MODO FOTO (ESC)</button>
+
+    <div class="ui-controls">
+        <div class="control-group">
+            <label>COMBOS:</label>
+            <button onclick="updateDeckSize(-1)">-</button>
+            <span id="combo-count-display">3</span>
+            <button onclick="updateDeckSize(1)">+</button>
+        </div>
+        <button class="save-btn" onclick="togglePhotoMode()">📷 MODO FOTO</button>
+    </div>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h3 id="modal-title">SELECCIONAR PIEZA</h3>
+                    <input type="text" id="search-box" placeholder="Buscar pieza..." onkeyup="filterItems()">
+                </div>
+                <button class="close-btn" onclick="closeModal()">X</button>
+            </div>
+
+            <div id="blade-tabs" class="tabs hidden">
+                <button class="tab-btn active" onclick="switchTab('std')">STANDARD</button>
+                <button class="tab-btn" onclick="switchTab('cx')">SISTEMA CX</button>
+            </div>
+
+            <div class="modal-body" id="modal-grid"></div>
+        </div>
+    </div>
+
+    <input type="file" id="input-player" class="hidden-input" accept="image/*"
+        onchange="loadImage(event, 'player-img', 'player-frame', 'container')">
+    <input type="date" id="date-input" style="opacity: 0; position: absolute; pointer-events: none; z-index: -1;"
+        onchange="updateDateDisplay(this)">
 
     <div id="scale-wrapper">
         <div class="card-container" id="tournament-card">
-            
+
             <div class="ember-burst"></div>
             <div class="metal-crack-line crack-1"></div>
             <div class="metal-crack-line crack-2"></div>
             <div class="bg-big-rank" id="bg-rank-display">3RD</div>
 
             <div class="logo-main-container">
-                <img src="MFL.png" id="img-mfl" alt="Logo Cabra" class="logo-main" onerror="this.src='https://placehold.co/260x260/333/ff5a00?text=MFL';">
+                <img src="MFL.png" id="img-mfl" alt="Logo Cabra" class="logo-main"
+                    onerror="this.src='https://placehold.co/260x260/333/ff5a00?text=MFL';">
             </div>
 
             <div class="event-info">
@@ -340,16 +68,16 @@
             </div>
 
             <div class="header-logos">
-                <img src="NBL.png" id="img-nbl" alt="NBL" class="logo-secondary logo-nbl-size" onerror="this.src='https://placehold.co/150x120/333/ff5a00?text=NBL';">
+                <img src="NBL.png" id="img-nbl" alt="NBL" class="logo-secondary logo-nbl-size"
+                    onerror="this.src='https://placehold.co/150x120/333/ff5a00?text=NBL';">
                 <div style="width: 2px; height: 50px; background: rgba(255,90,0,0.5); transform: skewX(10deg);"></div>
-                <img src="MNBCS.png" id="img-mnbcs" alt="MNBCS" class="logo-secondary" onerror="this.src='https://placehold.co/100x100/333/ff5a00?text=MNBCS';">
+                <img src="MNBCS.png" id="img-mnbcs" alt="MNBCS" class="logo-secondary"
+                    onerror="this.src='https://placehold.co/100x100/333/ff5a00?text=MNBCS';">
             </div>
 
             <div class="player-area">
                 <div class="player-photo-frame" id="player-frame" onclick="triggerUpload('input-player')">
-                    <div class="placeholder-text-fire" style="padding-top:200px;">
-                        [+] FOTO JUGADOR
-                    </div>
+                    <div class="placeholder-text-fire" style="padding-top:200px;">[+] FOTO</div>
                 </div>
             </div>
 
@@ -361,15 +89,15 @@
             </div>
 
             <div class="beyblade-display-area">
-                <div class="beyblade-box-frame" id="beyblade-frame" onclick="triggerUpload('input-beyblade')">
-                    <div class="placeholder-text-fire">
-                        [+] FOTO<br>BEYBLADE
-                    </div>
+                <div id="deck-list-container">
                 </div>
             </div>
-            
+
         </div>
     </div>
 
+    <script src="parts_data.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
