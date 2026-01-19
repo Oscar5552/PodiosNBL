@@ -7,24 +7,39 @@ let deckState = [
 
 let currentEdit = { index: 0, partType: '' };
 let currentBladeTab = 'std';
-let currentListItems = []; // Lista actual para el buscador
-let currentSearchCallback = null; // Callback actual al hacer click
+let currentListItems = []; 
+let currentSearchCallback = null; 
 
-// Cargar DB generada por PowerShell
+// Cargar DB
 const db = (typeof partsData !== 'undefined') ? partsData : {};
 
 document.addEventListener('DOMContentLoaded', () => {
     resizeCard();
     renderDeck();
+    
+    // Configurar botones modo foto
+    const exitBtn = document.getElementById('exit-photo-mode');
+    if (exitBtn) exitBtn.addEventListener('click', () => { document.body.classList.remove('photo-mode'); resizeCard(); });
 });
 
-// --- HELPERS (RUTAS SEGURAS) ---
+// --- HELPERS (CORRECCIÓN DE RUTAS) ---
 function getImgSrc(path, variant) {
     if (!path || !variant) return '';
-    let cleanPath = path.replace(/\\/g, '/'); // Asegurar slash normal
-    // Codificar partes para soportar espacios y caracteres especiales
+    
+    // 1. Normalizar barras (cambiar \ por /)
+    let cleanPath = path.replace(/\\/g, '/');
+    
+    // 2. [CORRECCIÓN WEB] Si la ruta incluye "piezas", cortamos todo lo anterior
+    // Esto arregla el error si se subió como "E:/trabajo/piezas/..."
+    const index = cleanPath.toLowerCase().indexOf('piezas/');
+    if (index !== -1) {
+        cleanPath = cleanPath.substring(index);
+    }
+
+    // 3. Codificar para soportar espacios y caracteres especiales
     let parts = cleanPath.split('/').map(p => encodeURIComponent(p)).join('/');
     let file = encodeURIComponent(variant);
+    
     return `${parts}/${file}`;
 }
 
@@ -32,79 +47,33 @@ function cleanDisplayName(name) {
     if (!name) return "";
     if (name.includes('_')) {
         const parts = name.split('_');
-        return parts[parts.length - 1]; // Tomar última parte tras guión bajo
+        return parts[parts.length - 1]; 
     }
     return name;
 }
 
 // --- LAYOUT ---
 function resizeCard() {
+    if (document.body.classList.contains('photo-mode')) return; // No reescalar en modo foto móvil si ya está ajustado
+    
     const card = document.getElementById('tournament-card');
     const wrapper = document.getElementById('scale-wrapper');
-    const originalSize = 1080; // Tamaño base de la tarjeta
-
-    // Obtener dimensiones actuales de la ventana
+    const originalSize = 1080;
     const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+    
+    // Margen automático
+    const margin = windowWidth < 768 ? 0 : 40;
+    let scale = (windowWidth - margin) / originalSize;
+    if (scale > 1) scale = 1;
 
-    let scale = 1;
-
-    // --- LÓGICA DIFERENTE SEGÚN EL MODO ---
-    if (document.body.classList.contains('photo-mode')) {
-        // === MODO FOTO ===
-        // El objetivo es que la tarjeta SE VEA COMPLETA en la pantalla.
-
-        if (windowWidth <= 768) {
-            // MÓVIL: Calculamos la escala para que el ANCHO de la tarjeta (1080)
-            // quepa exactamente en el ANCHO de la pantalla del celular.
-            scale = windowWidth / originalSize;
-        } else {
-            // ESCRITORIO: Calculamos la escala para que quepa tanto en ancho como en alto,
-            // dejando un pequeño margen (50px) para que no se pegue a los bordes.
-            const margin = 50;
-            const scaleX = (windowWidth - margin) / originalSize;
-            const scaleY = (windowHeight - margin) / originalSize;
-            // Usamos el menor factor de escala para asegurar que nada se corte
-            scale = Math.min(scaleX, scaleY, 1);
-        }
-
-    } else {
-        // === MODO EDICIÓN (Normal) ===
-        // El objetivo es que sea cómodo de editar.
-
-        // En móvil usamos márgen 0 para aprovechar todo el ancho. En PC, un margen de 40px.
-        const margin = windowWidth < 768 ? 0 : 40;
-        scale = (windowWidth - margin) / originalSize;
-        // Limitamos a escala 1 para que no se pixelee en pantallas gigantes
-        if (scale > 1) scale = 1;
-    }
-
-    // --- APLICAR LA ESCALA CALCULADA ---
     card.style.transform = `scale(${scale})`;
-
-    // --- AJUSTAR EL CONTENEDOR (Wrapper) ---
-    if (document.body.classList.contains('photo-mode') && windowWidth <= 768) {
-        // En MODO FOTO MÓVIL, el wrapper no debe tener tamaño fijo.
-        // El CSS del body (flexbox) se encargará de centrar la tarjeta escalada.
-        wrapper.style.width = 'auto';
-        wrapper.style.height = 'auto';
-    } else {
-        // EN TODOS LOS DEMÁS CASOS, el wrapper debe tener el tamaño exacto 
-        // que ocupa la tarjeta escalada para mantener el flujo de la página.
-        const newSize = originalSize * scale;
-        wrapper.style.width = `${newSize}px`;
-        wrapper.style.height = `${newSize}px`;
-    }
+    wrapper.style.width = `${originalSize * scale}px`;
+    wrapper.style.height = `${originalSize * scale}px`;
 }
-
-// Aseguramos que se ejecute al cargar y al rotar el celular
 window.addEventListener('resize', resizeCard);
-window.addEventListener('orientationchange', () => {
-    setTimeout(resizeCard, 100); // Pequeño delay para que el navegador recalcule el ancho
-});
-window.addEventListener('resize', resizeCard);
+window.addEventListener('orientationchange', () => setTimeout(resizeCard, 100));
 
-// Inputs y Carga de Fotos
+// Inputs
 function triggerUpload(inputId) { document.getElementById(inputId).click(); }
 function triggerDatePicker() { try { document.getElementById('date-input').showPicker(); } catch (e) { document.getElementById('date-input').click(); } }
 function updateDateDisplay(input) { if (input.value) { const parts = input.value.split('-'); document.getElementById('date-text').innerText = `${parts[2]}.${parts[1]}.${parts[0]}`; } }
@@ -148,7 +117,6 @@ function renderDeck() {
     const container = document.getElementById('deck-list-container');
     const displayArea = document.querySelector('.beyblade-display-area');
 
-    // Modo Compacto (Sube la caja si hay 4+ combos)
     if (deckState.length >= 4) displayArea.classList.add('compact-mode');
     else displayArea.classList.remove('compact-mode');
 
@@ -163,7 +131,6 @@ function renderDeck() {
 
         // --- RENDERIZADO CX (STACK) ---
         if (combo.type === 'cx' && combo.cxParts.chip) {
-            // Nombre Combinado: Chip Main Assist
             const nChip = cleanDisplayName(combo.cxParts.chip.name);
             const nMain = cleanDisplayName(combo.cxParts.main ? combo.cxParts.main.name : '');
             const nAssist = cleanDisplayName(combo.cxParts.assist ? combo.cxParts.assist.name : '');
@@ -173,7 +140,7 @@ function renderDeck() {
             const srcAssist = combo.cxParts.assist ? getImgSrc(combo.cxParts.assist.path, combo.cxParts.assist.variants[0]) : '';
             const srcChip = getImgSrc(combo.cxParts.chip.path, combo.cxParts.chip.variants[0]);
 
-            // Estructura HTML para superposición CSS
+            // Estructura de capas (Stack)
             bladeHtml = `
                 ${srcAssist ? `<img src="${srcAssist}" class="cx-assist">` : ''}
                 ${srcMain ? `<img src="${srcMain}" class="cx-main">` : ''}
@@ -190,7 +157,6 @@ function renderDeck() {
             bladeName = "Blade";
         }
 
-        // Ratchets y Bits
         const rImg = combo.ratchet ? `<img src="${getImgSrc(combo.ratchet.path, combo.ratchet.variants[0])}">` : '?';
         const bImg = combo.bit ? `<img src="${getImgSrc(combo.bit.path, combo.bit.variants[0])}">` : '?';
 
@@ -205,7 +171,7 @@ function renderDeck() {
                 <div class="part-label">${bladeName}</div>
             </div>
 
-<div class="bey-parts-row">
+            <div class="bey-parts-row">
                 <div class="slot-group">
                     <div class="slot-icon" onclick="openModal(${index}, 'ratchet')">${rImg}</div>
                     <div class="part-label">${rName}</div>
@@ -221,18 +187,16 @@ function renderDeck() {
     });
 }
 
-// --- BUSCADOR ---
+// --- MODAL & BUSCADOR ---
 function filterItems() {
     const query = document.getElementById('search-box').value.toLowerCase();
     const filtered = currentListItems.filter(item => {
         const n = cleanDisplayName(item.name).toLowerCase();
         return n.includes(query);
     });
-    // Renderizamos filtrado PERO mantenemos el callback actual
     renderList(filtered, currentSearchCallback, false);
 }
 
-// --- MODAL ---
 function openModal(index, partType) {
     currentEdit = { index, partType };
     const modal = document.getElementById('modal');
@@ -365,65 +329,25 @@ function showVariants(item, onSelectFinal) {
 }
 
 function closeModal() { document.getElementById('modal').classList.add('hidden'); }
-function formatName(name) { if (name.includes('_')) return name.split('_').pop(); return name; }
 
-/* Reemplaza tu función togglePhotoMode con esta */
+// --- MODO FOTO ---
 function togglePhotoMode() {
     document.body.classList.toggle('photo-mode');
     const card = document.getElementById('tournament-card');
     const wrapper = document.getElementById('scale-wrapper');
 
     if (document.body.classList.contains('photo-mode')) {
-        // --- CORRECCIÓN PARA MÓVIL ---
-        // Si la pantalla es pequeña (celular), calculamos el zoom para que quepa
+        // En modo foto: escalar para que quepa en la pantalla
+        const scale = window.innerWidth < 1080 ? window.innerWidth / 1080 : 0.9;
+        card.style.transform = `scale(${scale})`;
+        
         if (window.innerWidth < 1080) {
-            const scale = window.innerWidth / 1080; // Ajuste exacto al ancho
-            card.style.transform = `scale(${scale})`;
-            
-            // Ajustamos el wrapper para que no ocupe espacio extra innecesario
             wrapper.style.width = `${1080 * scale}px`;
             wrapper.style.height = `${1080 * scale}px`;
-        } else {
-            // En PC, dejamos el tamaño original (o un poco menos para que no se salga)
-            card.style.transform = "scale(0.9)"; 
         }
     } else {
-        // Al salir, volvemos al cálculo normal
         resizeCard();
     }
 }
 document.querySelector('.save-btn').onclick = togglePhotoMode;
 document.addEventListener('keydown', (e) => { if (e.key === "Escape" && document.body.classList.contains('photo-mode')) togglePhotoMode(); });
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Configurar el botón de "Salir del Modo Foto"
-    const exitBtn = document.getElementById('exit-photo-mode');
-    if (exitBtn) {
-        exitBtn.addEventListener('click', () => {
-            // Quitar la clase del body
-            document.body.classList.remove('photo-mode');
-            // IMPORTANTE: Recalcular la escala para volver al tamaño de edición
-            resizeCard();
-        });
-    }
-
-    // 2. Configurar el botón de "Entrar al Modo Foto"
-    const photoModeBtn = document.getElementById('btn-photo-mode');
-    if (photoModeBtn) {
-        // Un truco para limpiar listeners viejos y evitar que se ejecute varias veces
-        const newBtn = photoModeBtn.cloneNode(true);
-        photoModeBtn.parentNode.replaceChild(newBtn, photoModeBtn);
-
-        newBtn.addEventListener('click', () => {
-            // Agregar la clase al body
-            document.body.classList.add('photo-mode');
-            // IMPORTANTE: Recalcular la escala para ajustar la vista a la pantalla
-            resizeCard();
-
-            // (Aquí iría tu código para tomar la captura con html2canvas si lo tuvieras)
-            // Por ejemplo: setTimeout(() => takeScreenshot(), 500);
-        });
-    }
-
-    // Asegurar que la escala inicial sea correcta
-    resizeCard();
-});
