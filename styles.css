@@ -252,8 +252,8 @@ body.photo-mode #exit-photo-mode {
 }
 
 .player-photo-frame {
-    width: 450px;
-    height: 500px;
+    width: 550px;           /* Aumentado de 450px */
+    height: 620px;          /* Aumentado de 500px */
     background: transparent;
     position: relative;
     cursor: pointer;
@@ -264,13 +264,25 @@ body.photo-mode #exit-photo-mode {
     position: absolute;
     bottom: 40px;
     left: -20px;
-    width: 550px;
+    width: 650px;           /* Aumentado de 550px para cubrir la foto más grande */
     background: linear-gradient(90deg, var(--fire-orange) 0%, var(--metal-dark) 80%);
     padding: 15px 20px 15px 40px;
     z-index: 12;
     transform: skewX(-15deg);
     border: 2px solid var(--fire-yellow);
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Ajuste del placeholder para que se vea centrado con el nuevo tamaño */
+.placeholder-text-fire {
+    color: var(--fire-orange);
+    text-align: center;
+    padding-top: 260px;     /* Ajustado para el nuevo alto de 620px */
+    font-size: 1.5rem;
+    pointer-events: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--fire-orange);
 }
 
 .name-panel-inner {
