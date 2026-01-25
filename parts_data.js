@@ -1422,7 +1422,8 @@
                                           "c06.png",
                                           "c07.png",
                                           "c11.png",
-                                          "e06.png"
+                                          "e06.png",
+                                          "yellkong.png"
                                       ]
                      },
                      {
@@ -1631,7 +1632,8 @@
                                           "b06.png",
                                           "b07.png",
                                           "b12.png",
-                                          "j02.png"
+                                          "j02.png",
+                                          "17.png"
                                       ]
                      },
                      {
