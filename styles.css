@@ -1,15 +1,22 @@
-/* --- ESTILOS GENERALES --- */
+/* --- ESTILOS GENERALES: ENFOQUE MORADO PROTAGONISTA + CIAN ELÉCTRICO --- */
 :root {
-    --fire-orange: #ff5a00;
-    --fire-yellow: #ffd200;
-    --metal-dark: #1a1a1a;
-    --metal-light: #333333;
-    --glow-intensity: drop-shadow(0 0 15px rgba(255, 90, 0, 0.8));
+    /* PALETA SGL ACTUALIZADA */
+    --fire-neon-blue: #00d9ff;
+    /* Cian puro (fuego del logo) */
+    --fire-white: #ffffff;
+    /* Blanco */
+    --c-purple-main: #6a1b9a;
+    /* Morado principal (PROTAGONISTA) */
+    --c-purple-dark: #1a0033;
+    /* Morado profundo para evitar tonos verdosos */
+    --metal-dark: #050505;
+    --metal-light: #1a1a1a;
+    --glow-intensity: drop-shadow(0 0 12px rgba(106, 27, 154, 0.7));
 }
 
 body {
     background-color: #050505;
-    background-image: radial-gradient(circle at center, #220a00 0%, #000000 100%);
+    background-image: radial-gradient(circle at center, var(--c-purple-dark) 0%, #000000 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,10 +33,30 @@ body {
 
 #scale-wrapper {
     position: relative;
-    box-shadow: 0 0 80px rgba(255, 90, 0, 0.3);
+    box-shadow: 0 0 80px rgba(106, 27, 154, 0.3);
     margin: 0 auto;
     transition: all 0.3s ease;
     overflow: hidden;
+}
+
+/* --- FILTROS SELECTIVOS ANTI-NEBLINA (SOLO BLADES Y CX) --- */
+/* Ajustados a 0.85 brightness para que no se vean tan oscuras */
+.blade-normal-img,
+.cx-main,
+.cx-assist,
+.cx-chip {
+    opacity: 1 !important;
+    filter:
+        brightness(0.85) contrast(1.8) saturate(1.1) drop-shadow(0 15px 25px rgba(0, 0, 0, 1)) !important;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    mix-blend-mode: normal !important;
+}
+
+.slot-icon img {
+    opacity: 1 !important;
+    filter:
+        brightness(0.9) contrast(1.4) saturate(1.2) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.9)) !important;
 }
 
 /* --- MODO FOTO --- */
@@ -58,8 +85,8 @@ body.photo-mode input[type="file"] {
     display: none;
     position: fixed;
     z-index: 10001;
-    background: rgba(200, 0, 0, 0.8);
-    border: 2px solid white;
+    background: var(--c-purple-main);
+    border: 2px solid var(--fire-neon-blue);
     color: white;
     font-family: 'Russo One', sans-serif;
     cursor: pointer;
@@ -81,66 +108,43 @@ body.photo-mode #exit-photo-mode {
         top: auto !important;
         bottom: 30px !important;
         left: 50% !important;
-        right: auto !important;
         transform: translateX(-50%) !important;
         width: 90% !important;
         max-width: 380px;
         border-radius: 50px !important;
-        border: 2px solid var(--fire-orange) !important;
+        border: 2px solid var(--c-purple-main) !important;
         justify-content: center;
         padding: 15px 20px !important;
-        background: rgba(17, 17, 17, 0.95);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+        background: rgba(10, 10, 10, 0.95);
+        box-shadow: 0 10px 25px rgba(106, 27, 154, 0.4);
         gap: 20px;
-    }
-
-    .control-group {
-        white-space: nowrap;
-    }
-
-    #exit-photo-mode {
-        top: auto !important;
-        bottom: 50px !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
-        width: auto !important;
-        min-width: 200px;
-        padding: 12px 30px !important;
-        font-size: 1rem !important;
-        border-radius: 50px !important;
-        background: rgba(220, 20, 20, 0.95) !important;
-        box-shadow: 0 0 25px rgba(0, 0, 0, 1) !important;
-        border: 2px solid white !important;
-        z-index: 99999 !important;
     }
 }
 
-/* --- TARJETA PRINCIPAL --- */
+/* --- TARJETA PRINCIPAL (CARD) --- */
 .card-container {
     width: 1080px;
     height: 1080px;
     background-color: var(--metal-dark);
     background-image:
-        linear-gradient(to bottom right, rgba(255, 90, 0, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.8) 100%),
+        linear-gradient(to bottom right, rgba(106, 27, 154, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.9) 100%),
         repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, transparent 2px, transparent 10px),
-        radial-gradient(circle at 30% 30%, rgba(255, 90, 0, 0.2), transparent 60%);
+        radial-gradient(circle at 30% 30%, rgba(0, 217, 255, 0.1), transparent 60%);
     position: absolute;
     top: 0;
     left: 0;
     transform-origin: top left;
     overflow: hidden;
-    border: 4px solid var(--metal-light);
-    box-shadow: inset 0 0 50px rgba(255, 90, 0, 0.5), 0 0 20px rgba(255, 90, 0, 0.8);
+    border: 4px solid #2a0a4d;
+    box-shadow: inset 0 0 60px rgba(106, 27, 154, 0.4), 0 0 20px rgba(106, 27, 154, 0.2);
     -webkit-font-smoothing: antialiased;
 }
 
-/* Decoración */
 .ember-burst {
     position: absolute;
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(255, 90, 0, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(106, 27, 154, 0.15) 0%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -150,7 +154,7 @@ body.photo-mode #exit-photo-mode {
 
 .metal-crack-line {
     position: absolute;
-    background: linear-gradient(90deg, transparent, var(--fire-yellow), var(--fire-orange), transparent);
+    background: linear-gradient(90deg, transparent, var(--fire-white), var(--fire-neon-blue), transparent);
     height: 3px;
     filter: blur(1px);
 }
@@ -171,7 +175,7 @@ body.photo-mode #exit-photo-mode {
     opacity: 0.5;
 }
 
-/* Header & Player */
+/* Header & Logos */
 .header-logos {
     position: absolute;
     top: 40px;
@@ -180,16 +184,12 @@ body.photo-mode #exit-photo-mode {
     gap: 25px;
     align-items: center;
     z-index: 20;
-    background: linear-gradient(to bottom, #444, #222);
+    background: linear-gradient(to bottom, #222, #050505);
     padding: 15px 30px;
-    border: 2px solid #555;
-    border-bottom: 4px solid var(--fire-orange);
+    border: 2px solid #333;
+    border-bottom: 4px solid var(--fire-neon-blue);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
     transform: skewX(-10deg);
-}
-
-.header-logos img {
-    transform: skewX(10deg);
 }
 
 .logo-main-container {
@@ -205,18 +205,20 @@ body.photo-mode #exit-photo-mode {
 }
 
 .logo-secondary {
-    height: 90px;
+    height: 120px;
     object-fit: contain;
-    filter: contrast(1.2);
+    filter: brightness(1.2);
 }
 
 .logo-nbl-size {
     height: 120px;
+    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.4));
 }
 
+/* Info de Evento */
 .event-info {
     position: absolute;
-    top: 310px;
+    top: 245px;
     left: 50px;
     z-index: 15;
 }
@@ -226,24 +228,25 @@ body.photo-mode #exit-photo-mode {
     font-size: 4.5rem;
     line-height: 0.9;
     text-transform: uppercase;
-    background: linear-gradient(to bottom, var(--fire-yellow), var(--fire-orange));
+    background: linear-gradient(to bottom, var(--fire-white) 20%, var(--c-purple-main) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(0 2px 10px rgba(106, 27, 154, 0.5));
     margin-bottom: 10px;
 }
 
 .event-date {
     font-size: 1.8rem;
-    color: #ddd;
-    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    background: rgba(49, 10, 93, 0.8);
     display: inline-block;
     padding: 5px 20px;
-    border-left: 3px solid var(--fire-yellow);
-    border-right: 3px solid var(--fire-yellow);
+    border-left: 3px solid var(--fire-neon-blue);
+    border-right: 3px solid var(--fire-neon-blue);
     text-transform: uppercase;
 }
 
+/* Área del Jugador - CORRECCIÓN DE POSICIÓN DE TEXTO */
 .player-area {
     position: absolute;
     bottom: 120px;
@@ -252,37 +255,42 @@ body.photo-mode #exit-photo-mode {
 }
 
 .player-photo-frame {
-    width: 550px;           /* Aumentado de 450px */
-    height: 620px;          /* Aumentado de 500px */
+    width: 550px;
+    height: 620px;
     background: transparent;
     position: relative;
     cursor: pointer;
-    border: none;
+    display: flex;
+    /* Añadido */
+    justify-content: center;
+    /* Añadido */
+    align-items: center;
+    /* Añadido */
+}
+
+.placeholder-text-fire {
+    color: var(--fire-neon-blue);
+    text-align: center;
+    font-size: 1.5rem;
+    pointer-events: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--fire-neon-blue);
+    padding-top: 0 !important;
+    /* Eliminamos el padding antiguo */
 }
 
 .name-panel {
     position: absolute;
     bottom: 40px;
     left: -20px;
-    width: 650px;           /* Aumentado de 550px para cubrir la foto más grande */
-    background: linear-gradient(90deg, var(--fire-orange) 0%, var(--metal-dark) 80%);
+    width: 650px;
+    background: linear-gradient(90deg, var(--c-purple-main) 0%, var(--metal-dark) 90%);
     padding: 15px 20px 15px 40px;
     z-index: 12;
     transform: skewX(-15deg);
-    border: 2px solid var(--fire-yellow);
+    border: 2px solid var(--fire-neon-blue);
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.9);
-}
-
-/* Ajuste del placeholder para que se vea centrado con el nuevo tamaño */
-.placeholder-text-fire {
-    color: var(--fire-orange);
-    text-align: center;
-    padding-top: 260px;     /* Ajustado para el nuevo alto de 620px */
-    font-size: 1.5rem;
-    pointer-events: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px var(--fire-orange);
 }
 
 .name-panel-inner {
@@ -292,34 +300,15 @@ body.photo-mode #exit-photo-mode {
 .rank-text {
     font-family: 'Black Ops One';
     font-size: 2.5rem;
-    color: var(--fire-yellow);
-    margin: 0;
-    line-height: 1;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    color: var(--fire-neon-blue);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
 .player-name {
     font-family: 'Russo One';
     font-size: 3.2rem;
     color: white;
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 1);
-}
-
-.placeholder-text-fire {
-    color: var(--fire-orange);
-    text-align: center;
-    font-size: 1.5rem;
-    pointer-events: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px var(--fire-orange);
-}
-
-.hidden-input {
-    display: none;
 }
 
 .bg-big-rank {
@@ -329,12 +318,10 @@ body.photo-mode #exit-photo-mode {
     font-family: 'Black Ops One';
     font-size: 25rem;
     color: transparent;
-    -webkit-text-stroke: 4px rgba(255, 90, 0, 0.1);
+    -webkit-text-stroke: 4px rgba(106, 27, 154, 0.15);
     z-index: 0;
     pointer-events: none;
-    line-height: 0.8;
     transform: rotate(-5deg);
-    filter: drop-shadow(0 0 20px rgba(255, 90, 0, 0.2));
 }
 
 .player-img-fit {
@@ -345,7 +332,6 @@ body.photo-mode #exit-photo-mode {
     top: 0;
     left: 0;
     z-index: 1;
-    object-position: center;
     filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95));
 }
 
@@ -354,14 +340,15 @@ body.photo-mode #exit-photo-mode {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #222;
+    background: #0a0a0a;
     padding: 15px;
-    border: 2px solid var(--fire-orange);
+    border: 2px solid var(--c-purple-main);
     border-radius: 8px;
     z-index: 1000;
     display: flex;
     gap: 15px;
     align-items: center;
+    box-shadow: 0 0 20px rgba(106, 27, 154, 0.3);
 }
 
 .control-group {
@@ -373,22 +360,27 @@ body.photo-mode #exit-photo-mode {
 }
 
 .ui-controls button {
-    background: var(--fire-orange);
-    border: none;
+    background: var(--c-purple-main);
+    border: 1px solid var(--fire-neon-blue);
     padding: 5px 10px;
-    color: black;
+    color: white;
     font-weight: bold;
     cursor: pointer;
 }
 
-.save-btn {
-    background: var(--fire-yellow) !important;
+.ui-controls button:hover {
+    background: var(--fire-neon-blue);
+    color: black;
 }
 
-/* Contenedor Flotante */
+.save-btn {
+    background: var(--fire-white) !important;
+    color: black !important;
+    border: 1px solid var(--fire-neon-blue) !important;
+}
+
 .beyblade-display-area {
     position: absolute;
-    /* CAMBIO: SUBIR DE 380px A 340px */
     top: 340px;
     right: 80px;
     z-index: 15;
@@ -396,12 +388,6 @@ body.photo-mode #exit-photo-mode {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: top 0.3s ease;
-}
-
-/* CAMBIO: SUBIR MODO COMPACTO DE 180px A 150px */
-.beyblade-display-area.compact-mode {
-    top: 150px;
 }
 
 #deck-list-container {
@@ -411,11 +397,6 @@ body.photo-mode #exit-photo-mode {
     gap: 30px;
 }
 
-.compact-mode #deck-list-container {
-    gap: 15px;
-}
-
-/* FILA DE COMBO ALINEADA AL FONDO */
 .combo-row {
     display: flex;
     align-items: flex-end;
@@ -425,12 +406,6 @@ body.photo-mode #exit-photo-mode {
     transition: transform 0.2s;
 }
 
-.compact-mode .combo-row {
-    transform: scale(0.9);
-    transform-origin: left bottom;
-}
-
-/* --- CAPAS CX (Stack) --- */
 .bey-image-container {
     width: 150px;
     height: 150px;
@@ -443,72 +418,15 @@ body.photo-mode #exit-photo-mode {
     align-items: center;
 }
 
-/* Blade Standard */
-.blade-normal-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.9));
-    z-index: 2;
-}
-
-/* Capas CX */
-.cx-assist {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform: scale(1.0);
-    z-index: 1;
-    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
-}
-
-.cx-main {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    z-index: 2;
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.8));
-}
-
-.cx-chip {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform: scale(0.55);
-    z-index: 3;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
-}
-
-/* ETIQUETAS DE TEXTO */
-.slot-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-/* CAMBIO: TEXTO MÁS GRANDE (0.9rem) Y ANCHO MAYOR */
 .part-label {
     margin-top: 5px;
     font-size: 0.9rem;
-    /* AUMENTADO */
-    color: #ccc;
+    color: var(--fire-neon-blue);
     font-family: 'Black Ops One', cursive;
     text-transform: uppercase;
     text-shadow: 0 2px 2px black;
-    letter-spacing: 1px;
     text-align: center;
     max-width: 180px;
-    /* AUMENTADO para que quepa más texto */
     word-wrap: break-word;
     line-height: 1.1;
     min-height: 25px;
@@ -517,7 +435,6 @@ body.photo-mode #exit-photo-mode {
     justify-content: center;
 }
 
-/* PIEZAS PEQUEÑAS (Alineadas también al fondo) */
 .bey-parts-row {
     display: flex;
     gap: 20px;
@@ -534,32 +451,15 @@ body.photo-mode #exit-photo-mode {
     overflow: visible;
 }
 
-.compact-mode .slot-icon {
-    width: 95px;
-    height: 95px;
-}
-
 .slot-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 5px 6px rgba(0, 0, 0, 0.9));
 }
 
 .slot-icon.bit-slot {
     width: 95px;
     height: 95px;
-}
-
-/* Ajustes para el modo compacto */
-.compact-mode .slot-icon {
-    width: 90px;
-    height: 90px;
-}
-
-.compact-mode .slot-icon.bit-slot {
-    width: 70px;
-    height: 70px;
 }
 
 /* --- MODAL --- */
@@ -583,27 +483,20 @@ body.photo-mode #exit-photo-mode {
 .modal-content {
     width: 800px;
     height: 80vh;
-    background: #111;
-    border: 2px solid var(--fire-orange);
+    background: #050505;
+    border: 2px solid var(--c-purple-main);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 50px rgba(255, 90, 0, 0.3);
+    box-shadow: 0 0 50px rgba(106, 27, 154, 0.5);
 }
 
 .modal-header {
     padding: 15px;
-    background: #222;
+    background: #111;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #444;
-}
-
-.modal-title-group {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex: 1;
+    border-bottom: 1px solid var(--c-purple-main);
 }
 
 #search-box {
@@ -618,8 +511,8 @@ body.photo-mode #exit-photo-mode {
 
 .close-btn {
     background: none;
-    border: 1px solid var(--fire-orange);
-    color: var(--fire-orange);
+    border: 1px solid var(--fire-neon-blue);
+    color: var(--fire-neon-blue);
     cursor: pointer;
     padding: 5px 10px;
 }
@@ -643,28 +536,8 @@ body.photo-mode #exit-photo-mode {
 }
 
 .item-card:hover {
-    border-color: var(--fire-yellow);
-    background: #252525;
-}
-
-.item-card img {
-    width: 100%;
-    height: 80px;
-    object-fit: contain;
-    margin-bottom: 5px;
-}
-
-.item-name {
-    font-size: 0.7rem;
-    display: block;
-    color: #aaa;
-}
-
-.tabs {
-    display: flex;
-    background: #151515;
-    padding: 10px;
-    gap: 10px;
+    border-color: var(--fire-neon-blue);
+    background: #1a1a33;
 }
 
 .tab-btn {
@@ -677,7 +550,8 @@ body.photo-mode #exit-photo-mode {
 }
 
 .tab-btn.active {
-    background: var(--fire-orange);
-    color: black;
+    background: var(--c-purple-main);
+    color: white;
     font-weight: bold;
+    border: 1px solid var(--fire-neon-blue);
 }

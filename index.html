@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NBL Deck Builder</title>
+    <title>SGL Deck Builder</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-
 
     <div class="ui-controls">
         <div class="control-group">
@@ -22,8 +17,10 @@
             <span id="combo-count-display">3</span>
             <button onclick="updateDeckSize(1)">+</button>
         </div>
-
+        <button class="save-btn" onclick="togglePhotoMode()">MODO FOTO</button>
     </div>
+
+    <button id="exit-photo-mode">SALIR MODO FOTO</button>
 
     <div id="modal" class="modal hidden">
         <div class="modal-content">
@@ -34,50 +31,40 @@
                 </div>
                 <button class="close-btn" onclick="closeModal()">X</button>
             </div>
-
             <div id="blade-tabs" class="tabs hidden">
                 <button class="tab-btn active" onclick="switchTab('std')">STANDARD</button>
                 <button class="tab-btn" onclick="switchTab('cx')">SISTEMA CX</button>
             </div>
-
             <div class="modal-body" id="modal-grid"></div>
         </div>
     </div>
 
-    <input type="file" id="input-player" class="hidden-input" accept="image/*"
-        onchange="loadImage(event, 'player-img', 'player-frame', 'container')">
-    <input type="date" id="date-input" style="opacity: 0; position: absolute; pointer-events: none; z-index: -1;"
-        onchange="updateDateDisplay(this)">
+    <input type="file" id="input-player" class="hidden-input" style="display:none;" accept="image/*" onchange="loadImage(event, 'player-img', 'player-frame', 'container')">
+    <input type="date" id="date-input" style="opacity: 0; position: absolute; pointer-events: none; z-index: -1;" onchange="updateDateDisplay(this)">
 
     <div id="scale-wrapper">
         <div class="card-container" id="tournament-card">
-
             <div class="ember-burst"></div>
-            <div class="metal-crack-line crack-1"></div>
-            <div class="metal-crack-line crack-2"></div>
             <div class="bg-big-rank" id="bg-rank-display">3RD</div>
 
             <div class="logo-main-container">
-                <img src="MFL.png" id="img-mfl" alt="Logo Cabra" class="logo-main"
-                    onerror="this.src='https://placehold.co/260x260/333/ff5a00?text=MFL';">
+                <img src="SGL.png" id="img-SGL" alt="Logo SGL" class="logo-main">
             </div>
 
             <div class="event-info">
-                <h2 class="event-title" contenteditable="true">NBL 2026</h2>
-                <div class="event-date" id="date-text" onclick="triggerDatePicker()">DD.MM.YYYY</div>
+                <h2 class="event-title" contenteditable="true">SGL 2026</h2>
+                <div class="event-date" id="date-text" onclick="triggerDatePicker()">26.01.2026</div>
             </div>
 
             <div class="header-logos">
-                <img src="NBL.png" id="img-nbl" alt="NBL" class="logo-secondary logo-nbl-size"
-                    onerror="this.src='https://placehold.co/150x120/333/ff5a00?text=NBL';">
-                <div style="width: 2px; height: 50px; background: rgba(255,90,0,0.5); transform: skewX(10deg);"></div>
-                <img src="MNBCS.png" id="img-mnbcs" alt="MNBCS" class="logo-secondary"
-                    onerror="this.src='https://placehold.co/100x100/333/ff5a00?text=MNBCS';">
+                <img src="NBL.png" alt="NBL" class="logo-secondary logo-nbl-size">
+                <div style="width: 2px; height: 50px; background: var(--fire-neon-blue); transform: skewX(10deg);"></div>
+                <img src="MNBCS.png" alt="MNBCS" class="logo-secondary">
             </div>
 
             <div class="player-area">
                 <div class="player-photo-frame" id="player-frame" onclick="triggerUpload('input-player')">
-                    <div class="placeholder-text-fire" style="padding-top:200px;">[+] FOTO</div>
+                    <div class="placeholder-text-fire">[+] SUBIR FOTO</div>
                 </div>
             </div>
 
@@ -89,15 +76,12 @@
             </div>
 
             <div class="beyblade-display-area">
-                <div id="deck-list-container">
-                </div>
+                <div id="deck-list-container"></div>
             </div>
-
         </div>
     </div>
 
     <script src="parts_data.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>
