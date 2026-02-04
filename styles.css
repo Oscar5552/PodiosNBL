@@ -53,6 +53,50 @@ body {
     mix-blend-mode: normal !important;
 }
 
+/* --- POSICIONAMIENTO CX (OVERLAP) --- */
+.cx-main {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.cx-assist {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 135% !important;
+    height: 135% !important;
+    object-fit: contain !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.cx-chip {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 50% !important;
+    height: 50% !important;
+    object-fit: contain !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Orden de capas: Assist (fondo) → Main → Chip (frente) */
+.cx-assist {
+    z-index: 1 !important;
+}
+
+.cx-main {
+    z-index: 2 !important;
+}
+
+.cx-chip {
+    z-index: 3 !important;
+}
+
 .slot-icon img {
     opacity: 1 !important;
     filter:
