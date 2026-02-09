@@ -401,7 +401,8 @@
                                         "12.png",
                                         "a06.png",
                                         "c05.png",
-                                        "d05.png"
+                                        "d05.png",
+                                        "c05_w.png"
                                     ]
                    },
                    {
@@ -412,7 +413,8 @@
                                         "a05.png",
                                         "b05.png",
                                         "d06.png",
-                                        "e05.png"
+                                        "e05.png",
+                                        
                                     ]
                    },
                    {
@@ -422,7 +424,8 @@
                                         "11.png",
                                         "a05.png",
                                         "ab02.png",
-                                        "d05.png"
+                                        "d05.png",
+                                        "a05_W.png"
                                     ]
                    },
                    {
@@ -646,6 +649,13 @@
                                         "e05.png"
                                     ]
                    },
+                                      {
+                       "path":  "/piezas/blades/YELLKONG",
+                       "name":  "YELLKONG",
+                       "variants":  [
+                                        "Yell_Kong_3-60GB.png"
+                                    ]
+                   },
                    {
                        "path":  "/piezas/blades/ロックレオーネ_ROCK LEONE",
                        "name":  "ロックレオーネ_ROCK LEONE",
@@ -791,6 +801,13 @@
                      }
                  ],
     "cx_main_blades":  [
+                                   {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Arc",
+                               "variants":  [
+                                                "arc_yellow.png",
+                                            ]
+                           },
                            {
                                "path":  "/piezas/blades/cx/main_blade",
                                "name":  "Blast",
@@ -800,9 +817,10 @@
                            },
                            {
                                "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Blush",
+                               "name":  "Brush",
                                "variants":  [
-                                                "Blush.png"
+                                                "Brush.png",
+                                                "brush_gold.png"
                                             ]
                            },
                            {

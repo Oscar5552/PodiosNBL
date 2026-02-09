@@ -54,21 +54,22 @@ function cleanDisplayName(name) {
 
 // --- LAYOUT ---
 function resizeCard() {
-    if (document.body.classList.contains('photo-mode')) return; // No reescalar en modo foto móvil si ya está ajustado
-    
-    const card = document.getElementById('tournament-card');
-    const wrapper = document.getElementById('scale-wrapper');
-    const originalSize = 1080;
-    const windowWidth = window.innerWidth;
-    
-    // Margen automático
-    const margin = windowWidth < 768 ? 0 : 40;
-    let scale = (windowWidth - margin) / originalSize;
-    if (scale > 1) scale = 1;
+     if (document.body.classList.contains('photo-mode')) return; // No reescalar en modo foto móvil si ya está ajustado
+     
+     const card = document.getElementById('tournament-card');
+     const wrapper = document.getElementById('scale-wrapper');
+     const originalSize = 1080;
+     const cardHeight = 1440;
+     const windowWidth = window.innerWidth;
+     
+     // Margen automático
+     const margin = windowWidth < 768 ? 0 : 40;
+     let scale = (windowWidth - margin) / originalSize;
+     if (scale > 1) scale = 1;
 
-    card.style.transform = `scale(${scale})`;
-    wrapper.style.width = `${originalSize * scale}px`;
-    wrapper.style.height = `${originalSize * scale}px`;
+     card.style.transform = `scale(${scale})`;
+     wrapper.style.width = `${originalSize * scale}px`;
+     wrapper.style.height = `${cardHeight * scale}px`;
 }
 window.addEventListener('resize', resizeCard);
 window.addEventListener('orientationchange', () => setTimeout(resizeCard, 100));
@@ -332,22 +333,22 @@ function closeModal() { document.getElementById('modal').classList.add('hidden')
 
 // --- MODO FOTO ---
 function togglePhotoMode() {
-    document.body.classList.toggle('photo-mode');
-    const card = document.getElementById('tournament-card');
-    const wrapper = document.getElementById('scale-wrapper');
+     document.body.classList.toggle('photo-mode');
+     const card = document.getElementById('tournament-card');
+     const wrapper = document.getElementById('scale-wrapper');
 
-    if (document.body.classList.contains('photo-mode')) {
-        // En modo foto: escalar para que quepa en la pantalla
-        const scale = window.innerWidth < 1080 ? window.innerWidth / 1080 : 0.9;
-        card.style.transform = `scale(${scale})`;
-        
-        if (window.innerWidth < 1080) {
-            wrapper.style.width = `${1080 * scale}px`;
-            wrapper.style.height = `${1080 * scale}px`;
-        }
-    } else {
-        resizeCard();
-    }
+     if (document.body.classList.contains('photo-mode')) {
+         // En modo foto: escalar para que quepa en la pantalla
+         const scale = window.innerWidth < 1080 ? window.innerWidth / 1080 : 0.9;
+         card.style.transform = `scale(${scale})`;
+         
+         if (window.innerWidth < 1080) {
+             wrapper.style.width = `${1080 * scale}px`;
+             wrapper.style.height = `${1440 * scale}px`;
+         }
+     } else {
+         resizeCard();
+     }
 }
 document.querySelector('.save-btn').onclick = togglePhotoMode;
 document.addEventListener('keydown', (e) => { if (e.key === "Escape" && document.body.classList.contains('photo-mode')) togglePhotoMode(); });

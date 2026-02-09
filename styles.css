@@ -168,7 +168,7 @@ body.photo-mode #exit-photo-mode {
 /* --- TARJETA PRINCIPAL (CARD) --- */
 .card-container {
     width: 1080px;
-    height: 1080px;
+    height: 1440px;
     background-color: var(--metal-dark);
     background-image:
         linear-gradient(to bottom right, rgba(106, 27, 154, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.9) 100%),
@@ -221,48 +221,48 @@ body.photo-mode #exit-photo-mode {
 
 /* Header & Logos */
 .header-logos {
-    position: absolute;
-    top: 25px;
-    right: 30px;
-    display: flex;
-    gap: 25px;
-    align-items: center;
-    z-index: 20;
-    background: linear-gradient(to bottom, #222, #050505);
-    padding: 15px 30px;
-    border: 2px solid #333;
-    border-bottom: 4px solid var(--fire-neon-blue);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-    transform: skewX(-10deg);
+     position: absolute;
+     top: 20px;
+     right: 20px;
+     display: flex;
+     gap: 25px;
+     align-items: center;
+     z-index: 30;
+     background: linear-gradient(to bottom, #333, #111);
+     padding: 20px 40px;
+     border: 2px solid #333;
+     border-bottom: 4px solid var(--fire-neon-blue);
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+     transform: skewX(-10deg);
 }
 
 .logo-main-container {
     position: absolute;
-    top: 25px;
-    left: 30px;
+    top: 20px;
+    left: 10px;
     z-index: 20;
     filter: var(--glow-intensity);
 }
 
 .logo-main {
-    width: 180px;
+     width: 220px;
 }
 
 .logo-secondary {
-    height: 70px;
-    object-fit: contain;
-    filter: brightness(1.2);
+     height: 100px;
+     object-fit: contain;
+     filter: brightness(1.2);
 }
 
 .logo-nbl-size {
-    height: 70px;
-    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.4));
+     height: 100px;
+     filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.4));
 }
 
 /* Info de Evento */
 .event-info {
     position: absolute;
-    top: 130px;
+    top: 200px;
     left: 50px;
     z-index: 15;
 }
@@ -293,14 +293,14 @@ body.photo-mode #exit-photo-mode {
 /* Área del Jugador - CORRECCIÓN DE POSICIÓN DE TEXTO */
 .player-area {
     position: absolute;
-    bottom: 80px;
-    left: 20px;
+    bottom: 150px;
+    left: -30px;
     z-index: 10;
 }
 
 .player-photo-frame {
-    width: 600px;
-    height: 700px;
+    width: 700px;
+    height: 950px;
     background: transparent;
     position: relative;
     cursor: pointer;
@@ -310,6 +310,7 @@ body.photo-mode #exit-photo-mode {
     /* Añadido */
     align-items: center;
     /* Añadido */
+    z-index: 10;
 }
 
 .placeholder-text-fire {
@@ -326,11 +327,11 @@ body.photo-mode #exit-photo-mode {
 
 .name-panel {
     position: absolute;
-    bottom: 40px;
-    left: -20px;
-    width: 710px;
+    bottom: 100px;
+    left: -50px;
+    width: 850px;
     background: linear-gradient(90deg, var(--c-purple-main) 0%, var(--metal-dark) 90%);
-    padding: 15px 20px 15px 40px;
+    padding: 15px 20px 15px 80px;
     z-index: 12;
     transform: skewX(-15deg);
     border: 2px solid var(--fire-neon-blue);
@@ -358,7 +359,7 @@ body.photo-mode #exit-photo-mode {
 .bg-big-rank {
     position: absolute;
     right: -20px;
-    bottom: 80px;
+    bottom: 250px;
     font-family: 'Black Ops One';
     font-size: 25rem;
     color: transparent;
@@ -424,14 +425,14 @@ body.photo-mode #exit-photo-mode {
 }
 
 .beyblade-display-area {
-    position: absolute;
-    top: 200px;
-    right: 30px;
-    z-index: 15;
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+     position: absolute;
+     top: 320px;
+     right: -80px;
+     z-index: 20;
+     width: 650px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
 }
 
 #deck-list-container {
@@ -451,8 +452,8 @@ body.photo-mode #exit-photo-mode {
 }
 
 .bey-image-container {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     position: relative;
     cursor: pointer;
     flex-shrink: 0;
@@ -464,7 +465,7 @@ body.photo-mode #exit-photo-mode {
 
 .part-label {
     margin-top: 5px;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: var(--fire-neon-blue);
     font-family: 'Black Ops One', cursive;
     text-transform: uppercase;
@@ -486,8 +487,8 @@ body.photo-mode #exit-photo-mode {
 }
 
 .slot-icon {
-    width: 145px;
-    height: 145px;
+    width: 160px;
+    height: 160px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -502,8 +503,8 @@ body.photo-mode #exit-photo-mode {
 }
 
 .slot-icon.bit-slot {
-    width: 110px;
-    height: 110px;
+    width: 125px;
+    height: 125px;
 }
 
 /* --- MODAL --- */
