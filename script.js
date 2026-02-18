@@ -13,11 +13,29 @@ let currentSearchCallback = null;
 // Cargar DB
 const db = (typeof partsData !== 'undefined') ? partsData : {};
 
+function initializeDate() {
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2, '0');
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const year = today.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    
+    const dateElement = document.getElementById('date-text');
+    if (dateElement) {
+        dateElement.innerText = formattedDate;
+    }
+    
+    const dateInput = document.getElementById('date-input');
+    if (dateInput) {
+        dateInput.value = today.toISOString().split('T')[0];
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     resizeCard();
     renderDeck();
+    initializeDate();
     
-    // Configurar botones modo foto
     const exitBtn = document.getElementById('exit-photo-mode');
     if (exitBtn) exitBtn.addEventListener('click', () => { document.body.classList.remove('photo-mode'); resizeCard(); });
 });
@@ -47,9 +65,15 @@ function cleanDisplayName(name) {
     if (!name) return "";
     if (name.includes('_')) {
         const parts = name.split('_');
-        return parts[parts.length - 1]; 
+        return parts[parts.length - 1];
     }
     return name;
+}
+
+function isComboBit(name) {
+    if (!name) return false;
+    const upperName = name.toUpperCase();
+    return upperName.includes('TURBO') || upperName.includes('OPERATE');
 }
 
 // --- LAYOUT ---
@@ -164,6 +188,14 @@ function renderDeck() {
         const rName = combo.ratchet ? cleanDisplayName(combo.ratchet.name) : "Ratchet";
         const bName = combo.bit ? cleanDisplayName(combo.bit.name) : "Bit";
 
+        const hasComboBit = combo.bit && isComboBit(combo.bit.name);
+        const ratchetSlot = hasComboBit ? '' : `
+            <div class="slot-group">
+                <div class="slot-icon" onclick="openModal(${index}, 'ratchet')">${rImg}</div>
+                <div class="part-label">${rName}</div>
+            </div>
+        `;
+
         row.innerHTML = `
             <div class="slot-group">
                 <div class="bey-image-container" onclick="openModal(${index}, 'blade')">
@@ -173,11 +205,7 @@ function renderDeck() {
             </div>
 
             <div class="bey-parts-row">
-                <div class="slot-group">
-                    <div class="slot-icon" onclick="openModal(${index}, 'ratchet')">${rImg}</div>
-                    <div class="part-label">${rName}</div>
-                </div>
-
+                ${ratchetSlot}
                 <div class="slot-group">
                     <div class="slot-icon bit-slot" onclick="openModal(${index}, 'bit')">${bImg}</div>
                     <div class="part-label">${bName}</div>
@@ -216,7 +244,12 @@ function openModal(index, partType) {
         currentSearchCallback = (selected) => {
             const combo = deckState[currentEdit.index];
             if (partType === 'ratchet') combo.ratchet = selected;
-            if (partType === 'bit') combo.bit = selected;
+            if (partType === 'bit') {
+                combo.bit = selected;
+                if (isComboBit(selected.name)) {
+                    combo.ratchet = null;
+                }
+            }
             closeModal();
             renderDeck();
         };
@@ -352,3 +385,195 @@ function togglePhotoMode() {
 }
 document.querySelector('.save-btn').onclick = togglePhotoMode;
 document.addEventListener('keydown', (e) => { if (e.key === "Escape" && document.body.classList.contains('photo-mode')) togglePhotoMode(); });
+
+let isExporting = false;
+
+async function inlineImages(node) {
+    const imgs = node.querySelectorAll('img');
+    for (const img of imgs) {
+        if (img.src && !img.src.startsWith('data:')) {
+            try {
+                const response = await fetch(img.src);
+                const blob = await response.blob();
+                const reader = new FileReader();
+                await new Promise((resolve) => {
+                    reader.onloadend = () => {
+                        img.dataset.originalSrc = img.src;
+                        img.src = reader.result;
+                        resolve();
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            } catch (e) {
+                console.warn('No se pudo convertir a base64:', img.src, e);
+            }
+        }
+    }
+}
+
+function restoreImages(node) {
+    const imgs = node.querySelectorAll('img');
+    for (const img of imgs) {
+        if (img.dataset.originalSrc) {
+            img.src = img.dataset.originalSrc;
+            delete img.dataset.originalSrc;
+        }
+    }
+}
+
+async function embedGoogleFonts() {
+    const fontUrl = 'https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&display=swap';
+    try {
+        const cssRes = await fetch(fontUrl);
+        let cssText = await cssRes.text();
+
+        const urlRegex = /url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/g;
+        let match;
+        const replacements = [];
+
+        while ((match = urlRegex.exec(cssText)) !== null) {
+            const originalUrl = match[1];
+            if (!replacements.find(r => r.url === originalUrl)) {
+                replacements.push({ url: originalUrl });
+            }
+        }
+
+        await Promise.all(replacements.map(async (item) => {
+            try {
+                const fontRes = await fetch(item.url);
+                const blob = await fontRes.blob();
+                const reader = new FileReader();
+                await new Promise((resolve) => {
+                    reader.onloadend = () => {
+                        item.base64 = reader.result;
+                        resolve();
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            } catch (e) {
+                console.warn('Error fetching font:', item.url, e);
+            }
+        }));
+
+        replacements.forEach(item => {
+            if (item.base64) {
+                cssText = cssText.replace(new RegExp(item.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), item.base64);
+            }
+        });
+
+        const style = document.createElement('style');
+        style.id = 'embedded-google-fonts';
+        style.textContent = cssText;
+        document.head.appendChild(style);
+        console.log('Fuentes incrustadas correctamente.');
+        
+        await document.fonts.ready;
+
+    } catch (err) {
+        console.error('Error incrustando fuentes:', err);
+    }
+}
+
+function removeEmbeddedFonts() {
+    const style = document.getElementById('embedded-google-fonts');
+    if (style) style.remove();
+}
+
+async function downloadCardHD() {
+    const card = document.getElementById('tournament-card');
+    if (!card) return;
+
+    const prevTransform = card.style.transform;
+    const wrapper = document.getElementById('scale-wrapper');
+    const prevWrapperW = wrapper ? wrapper.style.width : '';
+    const prevWrapperH = wrapper ? wrapper.style.height : '';
+
+    isExporting = true;
+
+    card.style.transform = 'scale(1)';
+    if (wrapper) {
+        wrapper.style.width = '1080px';
+        wrapper.style.height = '1440px';
+    }
+
+    await embedGoogleFonts();
+    await new Promise(r => setTimeout(r, 500));
+
+    try { await inlineImages(card); } catch (e) { console.error('Error convirtiendo imágenes a base64', e); }
+
+    let dataUrl = null;
+    let method = 'html-to-image';
+
+    try {
+        if (window.htmlToImage) {
+            console.log('Intentando exportar con html-to-image...');
+            const title = card.querySelector('.event-title');
+            const originalClip = title ? title.style.webkitBackgroundClip : '';
+            if (title) {
+                title.style.webkitBackgroundClip = 'text';
+                title.style.backgroundClip = 'text';
+            }
+
+            dataUrl = await window.htmlToImage.toPng(card, {
+                quality: 1.0,
+                pixelRatio: 1,
+                cacheBust: true,
+                style: { transform: 'none', margin: '0' },
+                filter: (node) => (node.classList && !node.classList.contains('hidden-input')) || node.tagName !== 'INPUT'
+            });
+
+            if (title && originalClip) title.style.webkitBackgroundClip = originalClip;
+        } else {
+            throw new Error('Librería html-to-image no cargada.');
+        }
+    } catch (err) {
+        console.warn('Falló html-to-image:', err);
+        console.log('Intentando fallback con html2canvas...');
+        method = 'html2canvas';
+
+        try {
+            if (window.html2canvas) {
+                const canvas = await window.html2canvas(card, {
+                    backgroundColor: null,
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    onclone: (clonedDoc) => {
+                        const titles = clonedDoc.querySelectorAll('.event-title');
+                        titles.forEach(t => {
+                            t.style.background = 'none';
+                            t.style.webkitBackgroundClip = 'initial';
+                            t.style.webkitTextFillColor = 'initial';
+                            t.style.color = '#FFFFFF';
+                            t.style.textShadow = '0 0 15px var(--c-purple-main), 0 5px 10px black';
+                        });
+                    }
+                });
+                dataUrl = canvas.toDataURL('image/png');
+            } else {
+                throw new Error('Librería html2canvas no cargada.');
+            }
+        } catch (err2) {
+            console.error('Fallaron ambos métodos:', err2);
+            alert('Error al exportar. Intenta usar Chrome/Firefox o asegurate de estar en un servidor local (localhost).');
+        }
+    }
+
+    if (dataUrl) {
+        const link = document.createElement('a');
+        link.download = `sgl-deck-${Date.now()}.png`;
+        link.href = dataUrl;
+        link.click();
+    }
+
+    restoreImages(card);
+    removeEmbeddedFonts();
+
+    card.style.transform = prevTransform;
+    if (wrapper) {
+        wrapper.style.width = prevWrapperW;
+        wrapper.style.height = prevWrapperH;
+    }
+    isExporting = false;
+    setTimeout(resizeCard, 50);
+}

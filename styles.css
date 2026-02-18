@@ -424,6 +424,22 @@ body.photo-mode #exit-photo-mode {
     border: 1px solid var(--fire-neon-blue) !important;
 }
 
+.download-btn {
+    background: linear-gradient(135deg, var(--c-purple-main), #4a148c) !important;
+    color: white !important;
+    border: 1px solid var(--fire-neon-blue) !important;
+    font-family: 'Russo One', sans-serif !important;
+    padding: 8px 15px !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, var(--fire-neon-blue), var(--c-purple-main)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 217, 255, 0.4);
+}
+
 .beyblade-display-area {
      position: absolute;
      top: 320px;
