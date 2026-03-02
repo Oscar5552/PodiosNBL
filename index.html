@@ -66,8 +66,14 @@
             </div>
 
             <div class="player-area">
-                <div class="player-photo-frame" id="player-frame" onclick="triggerUpload('input-player')">
+                <div class="player-photo-frame" id="player-frame" onclick="handlePlayerFrameClick(event)">
                     <div class="placeholder-text-fire">[+] SUBIR FOTO</div>
+                </div>
+                <div class="player-img-controls hidden" id="player-img-controls">
+                    <button onclick="adjustPlayerZoom(-0.1)" title="Alejar">−</button>
+                    <button onclick="adjustPlayerZoom(0.1)" title="Acercar">+</button>
+                    <button onclick="resetPlayerTransform()" title="Resetear">↺</button>
+                    <button onclick="triggerUpload('input-player')" title="Cambiar foto">📷</button>
                 </div>
             </div>
 

@@ -10,6 +10,10 @@ let currentBladeTab = 'std';
 let currentListItems = []; 
 let currentSearchCallback = null; 
 
+// --- ESTADO DE IMAGEN DEL JUGADOR ---
+let playerImgState = { scale: 1.0, x: 0, y: 0 };
+let playerDrag = { active: false, startX: 0, startY: 0, imgStartX: 0, imgStartY: 0 };
+
 // Cargar DB
 const db = (typeof partsData !== 'undefined') ? partsData : {};
 
@@ -117,14 +121,128 @@ function loadImage(event, imgId, containerId, mode) {
                 if (placeholder) placeholder.style.display = 'none';
                 const existingImg = container.querySelector('img.player-img-fit');
                 if (existingImg) existingImg.remove();
+
+                // Resetear estado de transformación
+                playerImgState = { scale: 1.0, x: 0, y: 0 };
+
                 const newImg = document.createElement('img');
                 newImg.src = e.target.result;
                 newImg.className = 'player-img-fit';
+                newImg.draggable = false;
                 container.appendChild(newImg);
+
+                // Aplicar transform inicial
+                applyPlayerImgTransform(newImg);
+
+                // Registrar eventos de drag
+                setupPlayerDrag(newImg);
+
+                // Mostrar controles
+                const controls = document.getElementById('player-img-controls');
+                if (controls) controls.classList.remove('hidden');
             }
         };
         reader.readAsDataURL(file);
     }
+}
+
+// --- CONTROLES DE IMAGEN DEL JUGADOR ---
+
+function handlePlayerFrameClick(event) {
+    const frame = document.getElementById('player-frame');
+    const existingImg = frame.querySelector('img.player-img-fit');
+    // Solo abrir file picker si no hay imagen o si se clickeó el placeholder
+    if (!existingImg) {
+        triggerUpload('input-player');
+    }
+}
+
+function applyPlayerImgTransform(img) {
+    if (!img) {
+        img = document.querySelector('#player-frame img.player-img-fit');
+    }
+    if (!img) return;
+    img.style.transform = `translate(${playerImgState.x}px, ${playerImgState.y}px) scale(${playerImgState.scale})`;
+}
+
+function adjustPlayerZoom(delta) {
+    playerImgState.scale = Math.max(0.2, Math.min(5.0, playerImgState.scale + delta));
+    applyPlayerImgTransform();
+}
+
+function resetPlayerTransform() {
+    playerImgState = { scale: 1.0, x: 0, y: 0 };
+    applyPlayerImgTransform();
+}
+
+function setupPlayerDrag(img) {
+    // Mouse events
+    img.addEventListener('mousedown', onPlayerDragStart);
+    // Touch events
+    img.addEventListener('touchstart', onPlayerDragStart, { passive: false });
+    // Scroll to zoom
+    img.addEventListener('wheel', onPlayerWheel, { passive: false });
+}
+
+function onPlayerDragStart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const pos = getEventPos(e);
+    playerDrag.active = true;
+    playerDrag.startX = pos.x;
+    playerDrag.startY = pos.y;
+    playerDrag.imgStartX = playerImgState.x;
+    playerDrag.imgStartY = playerImgState.y;
+
+    if (e.type === 'mousedown') {
+        document.addEventListener('mousemove', onPlayerDragMove);
+        document.addEventListener('mouseup', onPlayerDragEnd);
+    } else {
+        document.addEventListener('touchmove', onPlayerDragMove, { passive: false });
+        document.addEventListener('touchend', onPlayerDragEnd);
+    }
+}
+
+function onPlayerDragMove(e) {
+    if (!playerDrag.active) return;
+    e.preventDefault();
+    const pos = getEventPos(e);
+    const dx = pos.x - playerDrag.startX;
+    const dy = pos.y - playerDrag.startY;
+
+    // Compensar la escala de la tarjeta para que el drag se sienta 1:1
+    const card = document.getElementById('tournament-card');
+    const cardTransform = card.style.transform;
+    let cardScale = 1;
+    const match = cardTransform.match(/scale\(([\d.]+)\)/);
+    if (match) cardScale = parseFloat(match[1]);
+
+    playerImgState.x = playerDrag.imgStartX + dx / cardScale;
+    playerImgState.y = playerDrag.imgStartY + dy / cardScale;
+    applyPlayerImgTransform();
+}
+
+function onPlayerDragEnd() {
+    playerDrag.active = false;
+    document.removeEventListener('mousemove', onPlayerDragMove);
+    document.removeEventListener('mouseup', onPlayerDragEnd);
+    document.removeEventListener('touchmove', onPlayerDragMove);
+    document.removeEventListener('touchend', onPlayerDragEnd);
+}
+
+function onPlayerWheel(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const delta = e.deltaY > 0 ? -0.05 : 0.05;
+    playerImgState.scale = Math.max(0.2, Math.min(5.0, playerImgState.scale + delta));
+    applyPlayerImgTransform();
+}
+
+function getEventPos(e) {
+    if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
 }
 
 // --- DECK BUILDER ---

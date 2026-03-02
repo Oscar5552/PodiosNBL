@@ -303,7 +303,7 @@ body.photo-mode #exit-photo-mode {
     height: 950px;
     background: transparent;
     position: relative;
-    cursor: pointer;
+    cursor: default;
     display: flex;
     /* Añadido */
     justify-content: center;
@@ -378,6 +378,62 @@ body.photo-mode #exit-photo-mode {
     left: 0;
     z-index: 1;
     filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95));
+    cursor: grab;
+    transform-origin: center center;
+    transition: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.player-img-fit:active {
+    cursor: grabbing;
+}
+
+/* --- CONTROLES DE IMAGEN DEL JUGADOR --- */
+.player-img-controls {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 50;
+    background: rgba(10, 10, 10, 0.9);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 2px solid var(--c-purple-main);
+    box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);
+}
+
+.player-img-controls.hidden {
+    display: none !important;
+}
+
+.player-img-controls button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--fire-neon-blue);
+    background: var(--c-purple-main);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-family: 'Russo One', sans-serif;
+    padding: 0;
+}
+
+.player-img-controls button:hover {
+    background: var(--fire-neon-blue);
+    color: black;
+    transform: scale(1.1);
+}
+
+body.photo-mode .player-img-controls {
+    display: none !important;
 }
 
 /* --- DECK BUILDER --- */
