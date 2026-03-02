@@ -1442,7 +1442,8 @@
                                           "c07.png",
                                           "c11.png",
                                           "e06.png",
-                                          "yellkong.png"
+                                          "yellkong.png",
+                                          "18.png"
                                       ]
                      },
                      {
