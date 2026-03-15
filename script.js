@@ -38,6 +38,7 @@ function initializeDate() {
 document.addEventListener('DOMContentLoaded', () => {
     resizeCard();
     renderDeck();
+    updateDeckLayout(); 
     initializeDate();
     
     const exitBtn = document.getElementById('exit-photo-mode');
@@ -250,10 +251,17 @@ function getEventPos(e) {
 function updateDeckSize(delta) {
     const newSize = deckState.length + delta;
     if (newSize < 1 || newSize > 5) return;
-    if (delta > 0) deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: {} });
-    else deckState.pop();
+
+    if (delta > 0) {
+        deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: {} });
+    } else {
+        deckState.pop();
+    }
+
     document.getElementById('combo-count-display').innerText = newSize;
+
     renderDeck();
+    updateDeckLayout();
 }
 
 function renderDeck() {
@@ -332,6 +340,8 @@ function renderDeck() {
         `;
         container.appendChild(row);
     });
+
+updateDeckLayout();
 }
 
 // --- MODAL & BUSCADOR ---
@@ -694,4 +704,27 @@ async function downloadCardHD() {
     }
     isExporting = false;
     setTimeout(resizeCard, 50);
+}
+
+function updateDeckLayout(){
+
+const displayArea = document.querySelector(".beyblade-display-area");
+const count = deckState.length;
+
+displayArea.classList.remove(
+"mode-normal",
+"mode-medium",
+"mode-compact"
+);
+
+if(count <= 3){
+displayArea.classList.add("mode-normal");
+}
+else if(count === 4){
+displayArea.classList.add("mode-medium");
+}
+else{
+displayArea.classList.add("mode-compact");
+}
+
 }

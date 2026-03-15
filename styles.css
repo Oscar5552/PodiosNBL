@@ -672,3 +672,74 @@ body.photo-mode .player-img-controls {
     font-weight: bold;
     border: 1px solid var(--fire-neon-blue);
 }
+
+.beyblade-display-area.mode-normal .bey-image-container{
+width:200px;
+height:200px;
+}
+
+.beyblade-display-area.mode-normal .slot-icon{
+width:160px;
+height:160px;
+}
+
+.beyblade-display-area.mode-normal .slot-icon.bit-slot{
+width:120px;
+height:120px;
+}
+
+
+/* MEDIO (4) */
+
+.beyblade-display-area.mode-medium{
+top:300px;
+}
+
+.beyblade-display-area.mode-medium .bey-image-container{
+width:170px;
+height:170px;
+}
+
+.beyblade-display-area.mode-medium .slot-icon{
+width:135px;
+height:135px;
+}
+
+.beyblade-display-area.mode-medium .slot-icon.bit-slot{
+width:100px;
+height:100px;
+}
+
+.beyblade-display-area.mode-medium .part-label{
+font-size:1.1rem;
+}
+
+
+/* COMPACTO (5) */
+
+.beyblade-display-area.mode-compact{
+top:270px;
+}
+
+.beyblade-display-area.mode-compact #deck-list-container{
+gap:12px;
+}
+
+.beyblade-display-area.mode-compact .bey-image-container{
+width:140px;
+height:140px;
+}
+
+.beyblade-display-area.mode-compact .slot-icon{
+width:110px;
+height:110px;
+}
+
+.beyblade-display-area.mode-compact .slot-icon.bit-slot{
+width:85px;
+height:85px;
+}
+
+.beyblade-display-area.mode-compact .part-label{
+font-size:0.95rem;
+}
