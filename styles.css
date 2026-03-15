@@ -238,14 +238,14 @@ body.photo-mode #exit-photo-mode {
 
 .logo-main-container {
     position: absolute;
-    top: 20px;
-    left: 100px;
+    top: 2px;
+    left: 140px;
     z-index: 20;
     filter: var(--glow-intensity);
 }
 
 .logo-main {
-     width: 180px;
+     width: 200px;
 }
 
 .logo-secondary {
@@ -262,7 +262,7 @@ body.photo-mode #exit-photo-mode {
 /* Info de Evento */
 .event-info {
     position: absolute;
-    top: 200px;
+    top: 230px;
     left: 50px;
     z-index: 15;
 }
