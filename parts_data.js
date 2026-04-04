@@ -511,7 +511,9 @@
                                         "12.png",
                                         "13.png",
                                         "a05.png",
-                                        "d05.png"
+                                        "d05.png",
+                                        "d05g.png",
+
                                     ]
                    },
                    {
@@ -972,7 +974,8 @@
                      "variants":  [
                                       "20.png",
                                       "a13.png",
-                                      "d07.png"
+                                      "d07.png",
+                                      "b07.png",
                                   ]
                  },
                  {
@@ -1462,7 +1465,8 @@
                                           "31.png",
                                           "a07.png",
                                           "b09.png",
-                                          "c06.png"
+                                          "c06.png",
+                                          "c06u.png",
                                       ]
                      },
                      {
@@ -1632,7 +1636,9 @@
                          "name":  "7-60",
                          "variants":  [
                                           "17.png",
-                                          "f06.png"
+                                          "f06.png",
+                                          "fh.png",
+                                          "c06.png"
                                       ]
                      },
                      {

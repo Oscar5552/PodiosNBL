@@ -250,7 +250,7 @@ function getEventPos(e) {
 
 function updateDeckSize(delta) {
     const newSize = deckState.length + delta;
-    if (newSize < 1 || newSize > 5) return;
+    if (newSize < 1 || newSize > 6) return;
 
     if (delta > 0) {
         deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: {} });
@@ -268,8 +268,16 @@ function renderDeck() {
     const container = document.getElementById('deck-list-container');
     const displayArea = document.querySelector('.beyblade-display-area');
 
-    if (deckState.length >= 4) displayArea.classList.add('compact-mode');
-    else displayArea.classList.remove('compact-mode');
+    if (deckState.length >= 6) {
+        displayArea.classList.add('mode-very-compact');
+        displayArea.classList.remove('mode-compact');
+    } else if (deckState.length >= 4) {
+        displayArea.classList.add('mode-compact');
+        displayArea.classList.remove('mode-very-compact');
+    } else {
+        displayArea.classList.remove('mode-compact');
+        displayArea.classList.remove('mode-very-compact');
+    }
 
     container.innerHTML = '';
 
