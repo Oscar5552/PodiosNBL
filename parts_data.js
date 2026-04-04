@@ -1366,6 +1366,14 @@
                                           "f06.png"
                                       ]
                      },
+                                          {
+                         "path":  "/piezas/ratchets/1-50",
+                         "name":  "1-50",
+                         "variants":  [
+                                          "bp.png",
+                                          "bb.png",
+                                      ]
+                     },
                      {
                          "path":  "/piezas/ratchets/1-60",
                          "name":  "1-60",
