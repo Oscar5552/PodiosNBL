@@ -233,7 +233,7 @@ body.photo-mode #exit-photo-mode {
      border: 2px solid #333;
      border-bottom: 4px solid var(--fire-neon-blue);
      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-     transform: skewX(-10deg);
+     transform: none;
 }
 
 .logo-main-container {
@@ -255,8 +255,12 @@ body.photo-mode #exit-photo-mode {
 }
 
 .logo-nbl-size {
-     height: 100px;
+     height: 85px;
      filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.4));
+}
+
+.logo-rebels-size {
+     height: 125px;
 }
 
 /* Info de Evento */
