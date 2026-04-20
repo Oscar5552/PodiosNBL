@@ -12,6 +12,7 @@
     --metal-dark: #050505;
     --metal-light: #1a1a1a;
     --glow-intensity: drop-shadow(0 0 12px rgba(106, 27, 154, 0.7));
+    --glow-blue: drop-shadow(0 0 10px rgba(0, 217, 255, 0.35));
 }
 
 body {
@@ -125,9 +126,18 @@ body.photo-mode input[type="file"] {
     display: none !important;
 }
 
+body.photo-mode .ui-controls {
+    display: flex !important;
+}
+
+body.photo-mode .ui-controls .save-btn,
+body.photo-mode .ui-controls .download-btn {
+    display: none !important;
+}
+
 #exit-photo-mode {
     display: none;
-    position: fixed;
+    position: static;
     z-index: 10001;
     background: var(--c-purple-main);
     border: 2px solid var(--fire-neon-blue);
@@ -136,8 +146,6 @@ body.photo-mode input[type="file"] {
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     border-radius: 30px;
-    top: 20px;
-    right: 20px;
     padding: 10px 20px;
     font-size: 1rem;
 }
@@ -184,6 +192,32 @@ body.photo-mode #exit-photo-mode {
     -webkit-font-smoothing: antialiased;
 }
 
+.card-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(0, 217, 255, 0.10), transparent 45%),
+        radial-gradient(circle at 68% 22%, rgba(106, 27, 154, 0.16), transparent 55%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.35));
+    mix-blend-mode: screen;
+    opacity: 0.65;
+    z-index: 0;
+}
+
+.card-container::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+    border: 1px solid rgba(0, 217, 255, 0.10);
+    box-shadow:
+        inset 0 0 45px rgba(106, 27, 154, 0.18),
+        0 0 35px rgba(0, 217, 255, 0.06);
+    z-index: 0;
+}
+
 .ember-burst {
     position: absolute;
     width: 800px;
@@ -225,15 +259,20 @@ body.photo-mode #exit-photo-mode {
      top: 20px;
      right: 20px;
      display: flex;
-     gap: 25px;
+     gap: 32px;
      align-items: center;
      z-index: 30;
-     background: linear-gradient(to bottom, #333, #111);
+     background: linear-gradient(180deg, rgba(40, 40, 40, 0.92), rgba(10, 10, 10, 0.85));
      padding: 20px 40px;
-     border: 2px solid #333;
+     border: 1px solid rgba(255, 255, 255, 0.06);
      border-bottom: 4px solid var(--fire-neon-blue);
-     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+     box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.65),
+        inset 0 0 0 1px rgba(106, 27, 154, 0.22);
      transform: none;
+     -webkit-backdrop-filter: blur(6px);
+     backdrop-filter: blur(6px);
+     border-radius: 16px;
 }
 
 .logo-main-container {
@@ -248,31 +287,53 @@ body.photo-mode #exit-photo-mode {
     justify-content: flex-start;
 }
 
+.logo-main-container::before {
+    content: '';
+    position: absolute;
+    inset: -18px -18px -10px -18px;
+    pointer-events: none;
+    background: radial-gradient(circle at 40% 35%, rgba(0, 217, 255, 0.10), transparent 60%),
+        radial-gradient(circle at 55% 65%, rgba(106, 27, 154, 0.20), transparent 65%);
+    filter: blur(1px);
+    opacity: 0.8;
+    z-index: -1;
+}
+
 .logo-main {
-     width: 180px;
+     width: 210px;
      height: auto;
      display: block;
+     filter:
+        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.75))
+        drop-shadow(0 0 22px rgba(106, 27, 154, 0.35))
+        drop-shadow(0 0 18px rgba(0, 217, 255, 0.12));
 }
 
 .logo-secondary {
-     height: 100px;
+     height: 120px;
      object-fit: contain;
-     filter: brightness(1.2);
+     filter: brightness(1.15) saturate(1.05) drop-shadow(0 12px 22px rgba(0, 0, 0, 0.55));
+     transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.logo-secondary:hover {
+     transform: translateY(-1px) scale(1.02);
+     filter: brightness(1.2) saturate(1.12) drop-shadow(0 0 14px rgba(0, 217, 255, 0.18)) drop-shadow(0 12px 22px rgba(0, 0, 0, 0.6));
 }
 
 .logo-nbl-size {
-     height: 85px;
+     height: 105px;
      filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.4));
 }
 
 .logo-rebels-size {
-     height: 125px;
+     height: 145px;
 }
 
 /* Info de Evento */
 .event-info {
     position: absolute;
-    top: 230px;
+    top: 270px;
     left: 50px;
     z-index: 15;
 }
@@ -287,17 +348,24 @@ body.photo-mode #exit-photo-mode {
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 10px rgba(106, 27, 154, 0.5));
     margin-bottom: 10px;
+    letter-spacing: 0.02em;
+    padding-left: 6px;
 }
 
 .event-date {
     font-size: 1.3rem;
     color: #fff;
-    background: rgba(49, 10, 93, 0.8);
+    background: linear-gradient(180deg, rgba(49, 10, 93, 0.88), rgba(20, 6, 40, 0.86));
     display: inline-block;
     padding: 5px 20px;
     border-left: 3px solid var(--fire-neon-blue);
     border-right: 3px solid var(--fire-neon-blue);
     text-transform: uppercase;
+    border-radius: 10px;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.55), 0 0 18px rgba(0, 217, 255, 0.10);
+    letter-spacing: 0.08em;
+    font-family: 'Russo One', sans-serif;
+    margin-left: 6px;
 }
 
 /* Área del Jugador - CORRECCIÓN DE POSICIÓN DE TEXTO */
@@ -340,12 +408,31 @@ body.photo-mode #exit-photo-mode {
     bottom: 100px;
     left: -50px;
     width: 850px;
-    background: linear-gradient(90deg, var(--c-purple-main) 0%, var(--metal-dark) 90%);
+    background: linear-gradient(90deg, rgba(106, 27, 154, 0.96) 0%, rgba(43, 12, 78, 0.92) 45%, rgba(0, 0, 0, 0.88) 100%);
     padding: 15px 20px 15px 80px;
     z-index: 12;
     transform: skewX(-15deg);
-    border: 2px solid var(--fire-neon-blue);
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(0, 217, 255, 0.65);
+    box-shadow: 12px 14px 32px rgba(0, 0, 0, 0.85), 0 0 24px rgba(106, 27, 154, 0.18);
+    overflow: hidden;
+}
+
+.name-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.14), transparent 40%);
+    opacity: 0.6;
+}
+
+.name-panel::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    opacity: 0.9;
 }
 
 .name-panel-inner {
@@ -354,9 +441,10 @@ body.photo-mode #exit-photo-mode {
 
 .rank-text {
     font-family: 'Black Ops One';
-    font-size: 2.5rem;
+    font-size: 2.35rem;
     color: var(--fire-neon-blue);
     text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    letter-spacing: 0.04em;
 }
 
 .player-name {
@@ -364,6 +452,7 @@ body.photo-mode #exit-photo-mode {
     font-size: 3.2rem;
     color: white;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+    letter-spacing: 0.03em;
 }
 
 .bg-big-rank {
@@ -373,10 +462,11 @@ body.photo-mode #exit-photo-mode {
     font-family: 'Black Ops One';
     font-size: 25rem;
     color: transparent;
-    -webkit-text-stroke: 4px rgba(106, 27, 154, 0.15);
+    -webkit-text-stroke: 4px rgba(106, 27, 154, 0.12);
     z-index: 0;
     pointer-events: none;
     transform: rotate(-5deg);
+    opacity: 0.75;
 }
 
 .player-img-fit {
@@ -401,10 +491,8 @@ body.photo-mode #exit-photo-mode {
 
 /* --- CONTROLES DE IMAGEN DEL JUGADOR --- */
 .player-img-controls {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    transform: none;
     display: flex;
     gap: 8px;
     z-index: 50;
@@ -413,6 +501,7 @@ body.photo-mode #exit-photo-mode {
     border-radius: 30px;
     border: 2px solid var(--c-purple-main);
     box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);
+    justify-content: center;
 }
 
 .player-img-controls.hidden {
@@ -443,7 +532,7 @@ body.photo-mode #exit-photo-mode {
 }
 
 body.photo-mode .player-img-controls {
-    display: none !important;
+    display: flex !important;
 }
 
 /* --- DECK BUILDER --- */
@@ -457,8 +546,9 @@ body.photo-mode .player-img-controls {
     border-radius: 8px;
     z-index: 1000;
     display: flex;
-    gap: 15px;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
     box-shadow: 0 0 20px rgba(106, 27, 154, 0.3);
 }
 
@@ -468,6 +558,13 @@ body.photo-mode .player-img-controls {
     gap: 10px;
     color: white;
     font-family: 'Black Ops One';
+    justify-content: center;
+}
+
+.ui-controls .save-btn,
+.ui-controls .download-btn {
+    width: 100%;
+    justify-content: center;
 }
 
 .ui-controls button {
@@ -729,7 +826,8 @@ font-size:1.1rem;
 
 .beyblade-display-area.mode-compact{
 top:270px;
-left:600px;
+left:auto;
+right:30px;
 }
 
 .beyblade-display-area.mode-compact #deck-list-container{
@@ -759,7 +857,8 @@ font-size:0.95rem;
 
 .beyblade-display-area.mode-very-compact{
 top:240px;
-right:10px;
+left:auto;
+right:40px;
 }
 
 .beyblade-display-area.mode-very-compact #deck-list-container{
