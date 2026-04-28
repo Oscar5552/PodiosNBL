@@ -256,23 +256,35 @@ body.photo-mode #exit-photo-mode {
 /* Header & Logos */
 .header-logos {
      position: absolute;
-     top: 20px;
-     right: 20px;
-     display: flex;
-     gap: 32px;
+     left: 70px;
+     right: 70px;
+     bottom: 22px;
+     min-height: 96px;
+     display: grid;
+     grid-template-columns: 1.45fr 0.95fr 1fr 1.25fr 1fr;
+     grid-template-rows: 96px;
+     grid-template-areas:
+        "nbl arlequin rebels vortex mnbcs";
+     column-gap: 20px;
      align-items: center;
      z-index: 30;
-     background: linear-gradient(180deg, rgba(40, 40, 40, 0.92), rgba(10, 10, 10, 0.85));
-     padding: 20px 40px;
-     border: 1px solid rgba(255, 255, 255, 0.06);
-     border-bottom: 4px solid var(--fire-neon-blue);
-     box-shadow:
-        0 10px 22px rgba(0, 0, 0, 0.65),
-        inset 0 0 0 1px rgba(106, 27, 154, 0.22);
+     background: transparent;
+     padding: 10px 20px;
+     border: 0;
+     box-shadow: none;
      transform: none;
-     -webkit-backdrop-filter: blur(6px);
-     backdrop-filter: blur(6px);
-     border-radius: 16px;
+     -webkit-backdrop-filter: none;
+     backdrop-filter: none;
+     border-radius: 0;
+}
+
+.header-logos::before {
+     content: none;
+}
+
+.ally-logos,
+.partner-logos {
+     display: contents;
 }
 
 .logo-main-container {
@@ -310,6 +322,10 @@ body.photo-mode #exit-photo-mode {
 }
 
 .logo-secondary {
+     justify-self: center;
+     align-self: center;
+     max-width: 100%;
+     width: 126px;
      height: 120px;
      object-fit: contain;
      filter: brightness(1.15) saturate(1.05) drop-shadow(0 12px 22px rgba(0, 0, 0, 0.55));
@@ -322,20 +338,50 @@ body.photo-mode #exit-photo-mode {
 }
 
 .logo-nbl-size {
-     height: 105px;
-     filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.4));
+     grid-area: nbl;
+     width: 272px;
+     height: 98px;
+     filter: brightness(1.1) saturate(1.12) drop-shadow(0 0 12px rgba(0, 217, 255, 0.38)) drop-shadow(0 12px 22px rgba(0, 0, 0, 0.55));
+}
+
+.logo-arlequin-size {
+     grid-area: arlequin;
+     width: 98px;
+     height: 98px;
+     filter: brightness(1.12) saturate(1.08) drop-shadow(0 0 12px rgba(106, 27, 154, 0.42)) drop-shadow(0 12px 22px rgba(0, 0, 0, 0.55));
 }
 
 .logo-rebels-size {
-     height: 145px;
+     grid-area: rebels;
+     width: 116px;
+     height: 98px;
+}
+
+.logo-vortex-size {
+     grid-area: vortex;
+     max-width: none;
+     width: 194px;
+     height: 98px;
+}
+
+.logo-mnbcs-size {
+     grid-area: mnbcs;
+     width: 118px;
+     height: 98px;
+}
+
+.logo-partner {
+     filter: brightness(1.08) saturate(1.02) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.58));
 }
 
 /* Info de Evento */
 .event-info {
     position: absolute;
-    top: 270px;
-    left: 50px;
+    top: 54px;
+    left: auto;
+    right: 70px;
     z-index: 15;
+    text-align: right;
 }
 
 .event-title {
@@ -344,6 +390,7 @@ body.photo-mode #exit-photo-mode {
     line-height: 0.9;
     text-transform: uppercase;
     background: linear-gradient(to bottom, var(--fire-white) 20%, var(--c-purple-main) 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 10px rgba(106, 27, 154, 0.5));
@@ -365,7 +412,8 @@ body.photo-mode #exit-photo-mode {
     box-shadow: 0 10px 18px rgba(0, 0, 0, 0.55), 0 0 18px rgba(0, 217, 255, 0.10);
     letter-spacing: 0.08em;
     font-family: 'Russo One', sans-serif;
-    margin-left: 6px;
+    margin-left: 0;
+    margin-right: 6px;
 }
 
 /* Área del Jugador - CORRECCIÓN DE POSICIÓN DE TEXTO */
@@ -405,7 +453,7 @@ body.photo-mode #exit-photo-mode {
 
 .name-panel {
     position: absolute;
-    bottom: 100px;
+    bottom: 170px;
     left: -50px;
     width: 850px;
     background: linear-gradient(90deg, rgba(106, 27, 154, 0.96) 0%, rgba(43, 12, 78, 0.92) 45%, rgba(0, 0, 0, 0.88) 100%);
@@ -605,8 +653,8 @@ body.photo-mode .player-img-controls {
 
 .beyblade-display-area {
      position: absolute;
-     top: 320px;
-     right: -80px;
+     top: 238px;
+     right: -56px;
      z-index: 20;
      width: 650px;
      display: flex;
@@ -799,7 +847,7 @@ height:120px;
 /* MEDIO (4) */
 
 .beyblade-display-area.mode-medium{
-top:300px;
+top:230px;
 }
 
 .beyblade-display-area.mode-medium .bey-image-container{
@@ -825,7 +873,7 @@ font-size:1.1rem;
 /* COMPACTO (5) */
 
 .beyblade-display-area.mode-compact{
-top:270px;
+top:210px;
 left:auto;
 right:30px;
 }
@@ -856,7 +904,7 @@ font-size:0.95rem;
 /* MUY COMPACTO (6) */
 
 .beyblade-display-area.mode-very-compact{
-top:240px;
+top:198px;
 left:auto;
 right:40px;
 }
