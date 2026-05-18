@@ -117,7 +117,8 @@
                        "path":  "/piezas/blades/エアロペガサス_AEROPEGASUS",
                        "name":  "エアロペガサス_AEROPEGASUS",
                        "variants":  [
-                                        "11.png"
+                                        "11.png",
+                                        "12.png"
                                     ]
                    },
                    {
