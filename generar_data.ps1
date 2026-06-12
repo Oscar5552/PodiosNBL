@@ -12,6 +12,8 @@ $data = @{
     cx_chips = @()
     cx_main_blades = @()
     cx_assists = @()
+    cx_infinity_metal_blades = @()
+    cx_infinity_over_blades = @()
 }
 
 # Función que limpia la ruta cortando todo lo que esté antes de "piezas"
@@ -37,6 +39,50 @@ Function Get-Clean-Relative-Path($fullPath) {
     return ""
 }
 
+# Nombre visible en JSON: solo texto latino (sin japonés)
+Function Clean-PartName($name) {
+    if (-not $name) { return "" }
+
+    $normalized = $name.Normalize([Text.NormalizationForm]::FormKC)
+
+    if ($normalized -match '_') {
+        $parts = $normalized -split '_'
+        for ($i = $parts.Length - 1; $i -ge 0; $i--) {
+            $seg = Clean-LatinTokens $parts[$i].Trim()
+            if ($seg.Length -gt 0) { return $seg }
+        }
+    }
+
+    $cleaned = Clean-LatinTokens $normalized
+    if ($cleaned.Length -gt 0) { return $cleaned }
+    return $name.Trim()
+}
+
+Function Clean-LatinTokens($text) {
+    if (-not $text) { return "" }
+
+    $step = $text -replace '[\p{IsCJKUnifiedIdeographs}\p{IsHiragana}\p{IsKatakana}]+', ' '
+    $step = ($step -replace '[^\p{L}\p{N}\s\(\)\.\-\+,''&]', '').Trim()
+    $step = ($step -replace '\s+', ' ')
+    if ($step.Length -eq 0) { return "" }
+
+    $tokens = $step -split '\s+'
+    $latin = @()
+    for ($i = $tokens.Length - 1; $i -ge 0; $i--) {
+        if ($tokens[$i] -match '^[A-Za-z0-9][A-Za-z0-9\.\-\(\)&'']*$') {
+            $latin = ,$tokens[$i] + $latin
+        } else { break }
+    }
+
+    if ($latin.Count -eq 0) { return "" }
+
+    while ($latin.Count -gt 1 -and $latin[0].Length -le 2) {
+        $latin = $latin[1..($latin.Count - 1)]
+    }
+
+    return ($latin -join ' ').Trim()
+}
+
 Function Get-FolderParts($path) {
     $results = @()
     if (Test-Path $path) {
@@ -46,7 +92,7 @@ Function Get-FolderParts($path) {
             if ($images.Count -gt 0) {
                 $cleanPath = Get-Clean-Relative-Path $folder.FullName
                 if ($cleanPath -ne "") {
-                    $results += @{ name = $folder.Name; path = $cleanPath; variants = @($images.Name) }
+                    $results += @{ name = (Clean-PartName $folder.Name); path = $cleanPath; variants = @($images.Name) }
                 }
             }
         }
@@ -62,7 +108,7 @@ Function Get-FileParts($path) {
         
         if ($cleanPath -ne "") {
             foreach ($file in $files) {
-                $results += @{ name = $file.BaseName; path = $cleanPath; variants = @($file.Name) }
+                $results += @{ name = (Clean-PartName $file.BaseName); path = $cleanPath; variants = @($file.Name) }
             }
         }
     }
@@ -79,7 +125,7 @@ if (Test-Path "$rootPath\blades") {
             $imgs = Get-ChildItem -Path $f.FullName -Filter *.png
             if ($imgs.Count -gt 0) {
                 $clean = Get-Clean-Relative-Path $f.FullName
-                $data.blades += @{ name = $f.Name; path = $clean; variants = @($imgs.Name) }
+                $data.blades += @{ name = (Clean-PartName $f.Name); path = $clean; variants = @($imgs.Name) }
             }
         }
     }
@@ -92,7 +138,17 @@ $pAssist= if (Test-Path "$rootPath\blades\cx\assist") { "$rootPath\blades\cx\ass
 
 $data.cx_chips = Get-FileParts $pChips
 $data.cx_main_blades = Get-FileParts $pMain
-$data.cx_assists = Get-FileParts $pAssist
+
+# Assists: PNG sueltos en raíz + subcarpetas (KNUCKLE, ODD, etc.)
+$data.cx_assists = @()
+$data.cx_assists += Get-FileParts $pAssist
+$data.cx_assists += Get-FolderParts $pAssist
+
+# CX Infinity (Expand Blade): Metal Blade + Over Blade
+$pInfinityMetal = "$rootPath\blades\cx\cx infinity\blade infinity"
+$pInfinityOver  = "$rootPath\blades\cx\cx infinity\assist infinity"
+$data.cx_infinity_metal_blades = Get-FolderParts $pInfinityMetal
+$data.cx_infinity_over_blades  = Get-FolderParts $pInfinityOver
 
 # 3. Piezas (Carpetas)
 $data.ratchets = Get-FolderParts "$rootPath\ratchets"

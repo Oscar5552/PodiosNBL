@@ -1,8 +1,8 @@
 // --- ESTADO INICIAL ---
 let deckState = [
-    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null } },
-    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null } },
-    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null } }
+    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } },
+    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } },
+    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } }
 ];
 
 let currentEdit = { index: 0, partType: '' };
@@ -253,7 +253,7 @@ function updateDeckSize(delta) {
     if (newSize < 1 || newSize > 6) return;
 
     if (delta > 0) {
-        deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: {} });
+        deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } });
     } else {
         deckState.pop();
     }
@@ -288,8 +288,28 @@ function renderDeck() {
         let bladeHtml = '';
         let bladeName = "";
 
-        // --- RENDERIZADO CX (STACK) ---
-        if (combo.type === 'cx' && combo.cxParts.chip) {
+        // --- RENDERIZADO CX INFINITY (4 capas) ---
+        if (combo.type === 'cx-inf' && combo.cxParts.chip) {
+            const nChip = cleanDisplayName(combo.cxParts.chip.name);
+            const nMetal = cleanDisplayName(combo.cxParts.metal ? combo.cxParts.metal.name : '');
+            const nOver = cleanDisplayName(combo.cxParts.over ? combo.cxParts.over.name : '');
+            const nAssist = cleanDisplayName(combo.cxParts.assist ? combo.cxParts.assist.name : '');
+            bladeName = `${nChip} ${nMetal} ${nOver} ${nAssist}`.trim();
+
+            const srcMetal = combo.cxParts.metal ? getImgSrc(combo.cxParts.metal.path, combo.cxParts.metal.variants[0]) : '';
+            const srcOver = combo.cxParts.over ? getImgSrc(combo.cxParts.over.path, combo.cxParts.over.variants[0]) : '';
+            const srcAssist = combo.cxParts.assist ? getImgSrc(combo.cxParts.assist.path, combo.cxParts.assist.variants[0]) : '';
+            const srcChip = getImgSrc(combo.cxParts.chip.path, combo.cxParts.chip.variants[0]);
+
+            bladeHtml = `
+                ${srcAssist ? `<img src="${srcAssist}" class="cx-assist">` : ''}
+                ${srcMetal ? `<img src="${srcMetal}" class="cx-metal">` : ''}
+                ${srcOver ? `<img src="${srcOver}" class="cx-over">` : ''}
+                <img src="${srcChip}" class="cx-chip">
+            `;
+
+        // --- RENDERIZADO CX ESTÁNDAR (3 capas) ---
+        } else if (combo.type === 'cx' && combo.cxParts.chip) {
             const nChip = cleanDisplayName(combo.cxParts.chip.name);
             const nMain = cleanDisplayName(combo.cxParts.main ? combo.cxParts.main.name : '');
             const nAssist = cleanDisplayName(combo.cxParts.assist ? combo.cxParts.assist.name : '');
@@ -299,7 +319,6 @@ function renderDeck() {
             const srcAssist = combo.cxParts.assist ? getImgSrc(combo.cxParts.assist.path, combo.cxParts.assist.variants[0]) : '';
             const srcChip = getImgSrc(combo.cxParts.chip.path, combo.cxParts.chip.variants[0]);
 
-            // Estructura de capas (Stack)
             bladeHtml = `
                 ${srcAssist ? `<img src="${srcAssist}" class="cx-assist">` : ''}
                 ${srcMain ? `<img src="${srcMain}" class="cx-main">` : ''}
@@ -395,9 +414,9 @@ function openModal(index, partType) {
 
 function switchTab(tab) {
     currentBladeTab = tab;
-    document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('active');
-        if (b.textContent.includes(tab === 'std' ? 'STANDARD' : 'CX')) b.classList.add('active');
+    const tabIndex = { std: 0, cx: 1, 'cx-inf': 2 };
+    document.querySelectorAll('#blade-tabs .tab-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === tabIndex[tab]);
     });
     document.getElementById('search-box').value = '';
 
@@ -407,13 +426,15 @@ function switchTab(tab) {
             const combo = deckState[currentEdit.index];
             combo.type = 'std';
             combo.blade = selected;
-            combo.cxParts = {};
+            combo.cxParts = { chip: null, main: null, assist: null, metal: null, over: null };
             closeModal();
             renderDeck();
         };
         renderList(db.blades, currentSearchCallback);
-    } else {
+    } else if (tab === 'cx') {
         renderCXStep1();
+    } else {
+        renderCXInfinityStep1();
     }
 }
 
@@ -443,7 +464,49 @@ function renderCXStep3(chip, main) {
         const combo = deckState[currentEdit.index];
         combo.type = 'cx';
         combo.blade = null;
-        combo.cxParts = { chip, main, assist };
+        combo.cxParts = { chip, main, assist, metal: null, over: null };
+        closeModal();
+        renderDeck();
+    };
+    renderList(db.cx_assists, currentSearchCallback, false);
+}
+
+function renderCXInfinityStep1() {
+    const grid = document.getElementById('modal-grid');
+    grid.innerHTML = '<h4 style="grid-column:1/-1; color:white; text-align:center;">PASO 1: LOCK CHIP</h4>';
+    currentListItems = db.cx_chips;
+    currentSearchCallback = (chip) => renderCXInfinityStep2(chip);
+    renderList(db.cx_chips, currentSearchCallback, false);
+}
+
+function renderCXInfinityStep2(chip) {
+    const grid = document.getElementById('modal-grid');
+    grid.innerHTML = '<h4 style="grid-column:1/-1; color:white; text-align:center;">PASO 2: METAL BLADE</h4>';
+    document.getElementById('search-box').value = '';
+    currentListItems = db.cx_infinity_metal_blades;
+    currentSearchCallback = (metal) => renderCXInfinityStep3(chip, metal);
+    renderList(db.cx_infinity_metal_blades, currentSearchCallback, false);
+}
+
+function renderCXInfinityStep3(chip, metal) {
+    const grid = document.getElementById('modal-grid');
+    grid.innerHTML = '<h4 style="grid-column:1/-1; color:white; text-align:center;">PASO 3: OVER BLADE</h4>';
+    document.getElementById('search-box').value = '';
+    currentListItems = db.cx_infinity_over_blades;
+    currentSearchCallback = (over) => renderCXInfinityStep4(chip, metal, over);
+    renderList(db.cx_infinity_over_blades, currentSearchCallback, false);
+}
+
+function renderCXInfinityStep4(chip, metal, over) {
+    const grid = document.getElementById('modal-grid');
+    grid.innerHTML = '<h4 style="grid-column:1/-1; color:white; text-align:center;">PASO 4: ASSIST BLADE</h4>';
+    document.getElementById('search-box').value = '';
+    currentListItems = db.cx_assists;
+    currentSearchCallback = (assist) => {
+        const combo = deckState[currentEdit.index];
+        combo.type = 'cx-inf';
+        combo.blade = null;
+        combo.cxParts = { chip, metal, over, assist, main: null };
         closeModal();
         renderDeck();
     };
@@ -482,7 +545,9 @@ function showVariants(item, onSelectFinal) {
     backBtn.innerText = "VOLVER"; backBtn.className = "item-card"; backBtn.style.gridColumn = "1/-1";
     backBtn.onclick = () => {
         if (currentEdit.partType === 'blade') {
-            if (currentBladeTab === 'std') switchTab('std'); else renderCXStep1();
+            if (currentBladeTab === 'std') switchTab('std');
+            else if (currentBladeTab === 'cx') renderCXStep1();
+            else renderCXInfinityStep1();
         } else openModal(currentEdit.index, currentEdit.partType);
     };
     grid.appendChild(backBtn);

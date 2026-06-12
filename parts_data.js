@@ -1,1350 +1,145 @@
 ﻿const partsData = {
+    "cx_infinity_over_blades":  [
+                                    {
+                                        "path":  "/piezas/blades/cx/cx infinity/assist infinity/BREAK",
+                                        "name":  "BREAK",
+                                        "variants":  [
+                                                         "13.png",
+                                                         "a07.png"
+                                                     ]
+                                    },
+                                    {
+                                        "path":  "/piezas/blades/cx/cx infinity/assist infinity/FLOW",
+                                        "name":  "FLOW",
+                                        "variants":  [
+                                                         "09.png"
+                                                     ]
+                                    },
+                                    {
+                                        "path":  "/piezas/blades/cx/cx infinity/assist infinity/GUARD",
+                                        "name":  "GUARD",
+                                        "variants":  [
+                                                         "15.png"
+                                                     ]
+                                    },
+                                    {
+                                        "path":  "/piezas/blades/cx/cx infinity/assist infinity/PEAK",
+                                        "name":  "PEAK",
+                                        "variants":  [
+                                                         "a07.png",
+                                                         "b06.png"
+                                                     ]
+                                    }
+                                ],
     "cx_assists":  [
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/B (Bumper)",
                            "name":  "B (Bumper)",
                            "variants":  [
                                             "B (Bumper).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/C (Charge)",
                            "name":  "C (Charge)",
                            "variants":  [
                                             "C (Charge).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/D (Dual)",
                            "name":  "D (Dual)",
                            "variants":  [
                                             "D (Dual).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/ERASE",
+                           "name":  "ERASE",
+                           "variants":  [
+                                            "21.png"
+                                        ]
+                       },
+                       {
+                           "path":  "/piezas/blades/cx/assist/F (Free)",
                            "name":  "F (Free)",
                            "variants":  [
                                             "F (Free).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/H (Heavy)",
                            "name":  "H (Heavy)",
                            "variants":  [
                                             "H (Heavy).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/J (Jaggy)",
                            "name":  "J (Jaggy)",
                            "variants":  [
                                             "J (Jaggy).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/KNUCKLE",
+                           "name":  "KNUCKLE",
+                           "variants":  [
+                                            "29.png",
+                                            "a11.png"
+                                        ]
+                       },
+                       {
+                           "path":  "/piezas/blades/cx/assist/M (Masive)",
                            "name":  "M (Masive)",
                            "variants":  [
                                             "M (Masive).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/ODD",
+                           "name":  "ODD",
+                           "variants":  [
+                                            "a19.png",
+                                            "b08.png"
+                                        ]
+                       },
+                       {
+                           "path":  "/piezas/blades/cx/assist/R (Round)",
                            "name":  "R (Round)",
                            "variants":  [
                                             "R (Round).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/S (Slash)",
                            "name":  "S (Slash)",
                            "variants":  [
                                             "S (Slash).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/T (Turn)",
                            "name":  "T (Turn)",
                            "variants":  [
                                             "T (Turn).png"
                                         ]
                        },
                        {
-                           "path":  "/piezas/blades/cx/assist",
+                           "path":  "/piezas/blades/cx/assist/VERTICAL",
+                           "name":  "VERTICAL",
+                           "variants":  [
+                                            "25.png"
+                                        ]
+                       },
+                       {
+                           "path":  "/piezas/blades/cx/assist/W. (Wheel)",
                            "name":  "W. (Wheel)",
                            "variants":  [
                                             "W. (Wheel).png"
                                         ]
                        }
                    ],
-    "blades":  [
-                   {
-                       "path":  "/piezas/blades/アイアンマン_IRON MAN",
-                       "name":  "アイアンマン_IRON MAN",
-                       "variants":  [
-                                        "a07.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/インパクトドレイク_IMPACTDRAKE",
-                       "name":  "インパクトドレイク_IMPACTDRAKE",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ウィザードアロー_WIZARDARROW",
-                       "name":  "ウィザードアロー_WIZARDARROW",
-                       "variants":  [
-                                        "12.png",
-                                        "b05.png",
-                                        "e05.png",
-                                        "e15.png",
-                                        "f05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ウィザードロッド_WIZARDROD",
-                       "name":  "ウィザードロッド_WIZARDROD",
-                       "variants":  [
-                                        "11.png",
-                                        "b05.png",
-                                        "d05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/エアロペガサス_AEROPEGASUS",
-                       "name":  "エアロペガサス_AEROPEGASUS",
-                       "variants":  [
-                                        "11.png",
-                                        "12.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/オプティマスプライマルOPTIMUS PRIMAL",
-                       "name":  "オプティマスプライマルOPTIMUS PRIMAL",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/オプティマスプライムOPTIMUS PRIME",
-                       "name":  "オプティマスプライムOPTIMUS PRIME",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/クリムゾンガルーダ_CRIMSONGARUDA",
-                       "name":  "クリムゾンガルーダ_CRIMSONGARUDA",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/クロコクランチ_CROCOCRUNCH",
-                       "name":  "クロコクランチ_CROCOCRUNCH",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/クロックミラージュ_CLOCKMIRAGE",
-                       "name":  "クロックミラージュ_CLOCKMIRAGE",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png",
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/コバルトドラグーン_COBALTDRAGOON",
-                       "name":  "コバルトドラグーン_COBALTDRAGOON",
-                       "variants":  [
-                                        "11.png",
-                                        "12.png",
-                                        "f05s.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/コバルトドレイク_COBALTDRAKE",
-                       "name":  "コバルトドレイク_COBALTDRAKE",
-                       "variants":  [
-                                        "09.png",
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ゴーストサークル_GOSTCIRCLE",
-                       "name":  "ゴーストサークル_GOSTCIRCLE",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ゴートタックル_GOATTACKLE",
-                       "name":  "ゴートタックル_GOATTACKLE",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ゴーレムロック_GOLEMROCK",
-                       "name":  "ゴーレムロック_GOLEMROCK",
-                       "variants":  [
-                                        "11.png",
-                                        "GolemRock_M-85HN.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/サノスTHANOS",
-                       "name":  "サノスTHANOS",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/サムライカリバー_SAMURAICALIBUR",
-                       "name":  "サムライカリバー_SAMURAICALIBUR",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/サムライスチール_SAMURAISTEEL",
-                       "name":  "サムライスチール_SAMURAISTEEL",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/サムライセイバー_SUMURAISABER",
-                       "name":  "サムライセイバー_SUMURAISABER",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シェルタードレイク_SHELTERDRAKE",
-                       "name":  "シェルタードレイク_SHELTERDRAKE",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シノビシャドウ_SHINOBISHADOW",
-                       "name":  "シノビシャドウ_SHINOBISHADOW",
-                       "variants":  [
-                                        "a06.png",
-                                        "b05.png",
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シノビナイフ_SHINOBIKNIFE",
-                       "name":  "シノビナイフ_SHINOBIKNIFE",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シャークエッジ_SHARKEDGE",
-                       "name":  "シャークエッジ_SHARKEDGE",
-                       "variants":  [
-                                        "12.png",
-                                        "a05.png",
-                                        "a12.png",
-                                        "b05.png",
-                                        "e06.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シャークギル_SHARKGILL",
-                       "name":  "シャークギル_SHARKGILL",
-                       "variants":  [
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シャークスケイル_SHARKSCALE",
-                       "name":  "シャークスケイル_SHARKSCALE",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/シルバーウルフ_SILVERWOLF",
-                       "name":  "シルバーウルフ_SILVERWOLF",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/スコーピオスピア_SCORPIOSPEAR",
-                       "name":  "スコーピオスピア_SCORPIOSPEAR",
-                       "variants":  [
-                                        "15.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/スタースクリームSTARSCREAM",
-                       "name":  "スタースクリームSTARSCREAM",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ストームペガシス_STORMPEGASIS",
-                       "name":  "ストームペガシス_STORMPEGASIS",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/スパイダーマンSPIDER-MAN",
-                       "name":  "スパイダーマンSPIDER-MAN",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/スフィンクスカウル_SPHINXCOWL",
-                       "name":  "スフィンクスカウル_SPHINXCOWL",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png",
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ゼノエクスカリバー_XENO XCALIBUR",
-                       "name":  "ゼノエクスカリバー_XENO XCALIBUR",
-                       "variants":  [
-                                        "12.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ダースベイダーDARTH VADER",
-                       "name":  "ダースベイダーDARTH VADER",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ティラノビート_TYRANNOBEAT",
-                       "name":  "ティラノビート_TYRANNOBEAT",
-                       "variants":  [
-                                        "a05.png",
-                                        "a06.png",
-                                        "b06.png",
-                                        "e01.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ティラノロアTYRANNOROAR",
-                       "name":  "ティラノロアTYRANNOROAR",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/トリケラスパイキーTRICERASPIKY",
-                       "name":  "トリケラスパイキーTRICERASPIKY",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/トリケラプレスTRICERAPRESS",
-                       "name":  "トリケラプレスTRICERAPRESS",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドライガースラッシュ_DRIGERSLASH",
-                       "name":  "ドライガースラッシュ_DRIGERSLASH",
-                       "variants":  [
-                                        "a06.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドラグーンストーム_DRAGOONSTORM",
-                       "name":  "ドラグーンストーム_DRAGOONSTORM",
-                       "variants":  [
-                                        "13.png",
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドラシエルシールド_DRACIELSHIELD",
-                       "name":  "ドラシエルシールド_DRACIELSHIELD",
-                       "variants":  [
-                                        "13.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドランザースパイラル_DRANZERSPIRAL",
-                       "name":  "ドランザースパイラル_DRANZERSPIRAL",
-                       "variants":  [
-                                        "13.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドランソード_DRANSWORD",
-                       "name":  "ドランソード_DRANSWORD",
-                       "variants":  [
-                                        "10.png",
-                                        "12.png",
-                                        "a06.png",
-                                        "c05.png",
-                                        "d05.png",
-                                        "c05_w.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドランダガー_DRANDAGGER",
-                       "name":  "ドランダガー_DRANDAGGER",
-                       "variants":  [
-                                        "12.png",
-                                        "a05.png",
-                                        "b05.png",
-                                        "d06.png",
-                                        "e05.png",
-                                        
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ドランバスター_DRANBUSTER",
-                       "name":  "ドランバスター_DRANBUSTER",
-                       "variants":  [
-                                        "11.png",
-                                        "a05.png",
-                                        "ab02.png",
-                                        "d05.png",
-                                        "a05_W.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ナイトシールド_KNIGHTSHIELD",
-                       "name":  "ナイトシールド_KNIGHTSHIELD",
-                       "variants":  [
-                                        "12.png",
-                                        "c05.png",
-                                        "f05.png",
-                                        "f08.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ナイトメイル_KNIGHTMAIL",
-                       "name":  "ナイトメイル_KNIGHTMAIL",
-                       "variants":  [
-                                        "11.png",
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ナイトランス_KNIGHTLANCE",
-                       "name":  "ナイトランス_KNIGHTLANCE",
-                       "variants":  [
-                                        "11.png",
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ビクトリーヴァルキリー_VICTORYVALKYRIE",
-                       "name":  "ビクトリーヴァルキリー_VICTORYVALKYRIE",
-                       "variants":  [
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/フェニックスウイング_PHOENIXWING",
-                       "name":  "フェニックスウイング_PHOENIXWING",
-                       "variants":  [
-                                        "10.png",
-                                        "11.png",
-                                        "e05.png",
-                                        "j01.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/フェニックスフェザー_PHOENIXFEATHER",
-                       "name":  "フェニックスフェザー_PHOENIXFEATHER",
-                       "variants":  [
-                                        "05.png",
-                                        "10.png",
-                                        "e05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/フェニックスラダー_PHOENIXRUDDER",
-                       "name":  "フェニックスラダー_PHOENIXRUDDER",
-                       "variants":  [
-                                        "a05.png",
-                                        "e05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ブラックシェル_BLACKSHELL",
-                       "name":  "ブラックシェル_BLACKSHELL",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png",
-                                        "e05s.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/プテラスイング_PTERASWING",
-                       "name":  "プテラスイング_PTERASWING",
-                       "variants":  [
-                                        "b01.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ヘルズサイズ_HELLSSCYTHE",
-                       "name":  "ヘルズサイズ_HELLSSCYTHE",
-                       "variants":  [
-                                        "12.png",
-                                        "13.png",
-                                        "a05.png",
-                                        "d05.png",
-                                        "d05g.png",
-
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ヘルズチェイン_HELLSCHAIN",
-                       "name":  "ヘルズチェイン_HELLSCHAIN",
-                       "variants":  [
-                                        "11.png",
-                                        "a05.png",
-                                        "c06.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ヘルズハンマー_HELLSHAMMER",
-                       "name":  "ヘルズハンマー_HELLSHAMMER",
-                       "variants":  [
-                                        "11.png",
-                                        "a05.png",
-                                        "h01.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ベアスクラッチ_BEARSCRATCH",
-                       "name":  "ベアスクラッチ_BEARSCRATCH",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ホエールウェーブ_WHALEWAVE",
-                       "name":  "ホエールウェーブ_WHALEWAVE",
-                       "variants":  [
-                                        "a06.png",
-                                        "b05.png",
-                                        "c05.png",
-                                        "f05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/マミーカース_MUMMYCURSE",
-                       "name":  "マミーカース_MUMMYCURSE",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/マンダロリアンMANDALORIAN",
-                       "name":  "マンダロリアンMANDALORIAN",
-                       "variants":  [
-                                        "a05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/マンモスタスク_MUMMOTHTUSK",
-                       "name":  "マンモスタスク_MUMMOTHTUSK",
-                       "variants":  [
-                                        "10.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/メガトロンMEGATRON",
-                       "name":  "メガトロンMEGATRON",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/メテオドラグーン_METEORDRAGOON",
-                       "name":  "メテオドラグーン_METEORDRAGOON",
-                       "variants":  [
-                                        "11.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/モフギデオンMOFF GIDEON",
-                       "name":  "モフギデオンMOFF GIDEON",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ユニコーンスティング_UNICORNSTING",
-                       "name":  "ユニコーンスティング_UNICORNSTING",
-                       "variants":  [
-                                        "a05.png",
-                                        "a17.png",
-                                        "c05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ライトニングエルドラゴアッパー型_LIGHTNING L-DRAGOUPPER",
-                       "name":  "ライトニングエルドラゴアッパー型_LIGHTNING L-DRAGOUPPER",
-                       "variants":  [
-                                        "12.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ライトニングエルドラゴ連打型_LIGHTNING L-DRAGORUSH",
-                       "name":  "ライトニングエルドラゴ連打型_LIGHTNING L-DRAGORUSH",
-                       "variants":  [
-                                        "22.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ライノホーン_RHINOHORN",
-                       "name":  "ライノホーン_RHINOHORN",
-                       "variants":  [
-                                        "a05.png",
-                                        "f06.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ルークスカイウォーカーLUKE SKYWARKER",
-                       "name":  "ルークスカイウォーカーLUKE SKYWARKER",
-                       "variants":  [
-                                        "a05.png",
-                                        "f08.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/レオンクレスト_LEONCREST",
-                       "name":  "レオンクレスト_LEONCREST",
-                       "variants":  [
-                                        "11.png",
-                                        "d05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/レオンクロー_LEONCLAW",
-                       "name":  "レオンクロー_LEONCLAW",
-                       "variants":  [
-                                        "13.png",
-                                        "a06.png",
-                                        "d05.png",
-                                        "e05.png"
-                                    ]
-                   },
-                                      {
-                       "path":  "/piezas/blades/YELLKONG",
-                       "name":  "YELLKONG",
-                       "variants":  [
-                                        "Yell_Kong_3-60GB.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ロックレオーネ_ROCK LEONE",
-                       "name":  "ロックレオーネ_ROCK LEONE",
-                       "variants":  [
-                                        "13.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ワイバーンゲイル_WYVERNGALE",
-                       "name":  "ワイバーンゲイル_WYVERNGALE",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png",
-                                        "f05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ワイバーンホバー_WYVERNHOVER",
-                       "name":  "ワイバーンホバー_WYVERNHOVER",
-                       "variants":  [
-                                        "ai01.png",
-                                        "gi01.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ヴァイスタイガー_WEISSTIGER",
-                       "name":  "ヴァイスタイガー_WEISSTIGER",
-                       "variants":  [
-                                        "12.png",
-                                        "f05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ヴァイパーテイル_VIPERTAIL",
-                       "name":  "ヴァイパーテイル_VIPERTAIL",
-                       "variants":  [
-                                        "a05.png",
-                                        "b05.png",
-                                        "c05.png",
-                                        "d05.png",
-                                        "f05.png"
-                                    ]
-                   },
-                   {
-                       "path":  "/piezas/blades/ヴェノムVEMON",
-                       "name":  "ヴェノムVEMON",
-                       "variants":  [
-                                        "b05.png"
-                                    ]
-                   }
-               ],
-    "cx_chips":  [
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Cerberus",
-                         "variants":  [
-                                          "Cerberus.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Dran",
-                         "variants":  [
-                                          "Dran.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Emperor",
-                         "variants":  [
-                                          "Emperor.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Fox",
-                         "variants":  [
-                                          "Fox.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Hells",
-                         "variants":  [
-                                          "Hells.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Pegasus",
-                         "variants":  [
-                                          "Pegasus.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Perseus",
-                         "variants":  [
-                                          "Perseus.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Rhino",
-                         "variants":  [
-                                          "Rhino.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Sol",
-                         "variants":  [
-                                          "Sol.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Valkyrie",
-                         "variants":  [
-                                          "Valkyrie.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Whale",
-                         "variants":  [
-                                          "Whale.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Wizzard",
-                         "variants":  [
-                                          "Wizzard.png"
-                                      ]
-                     },
-                     {
-                         "path":  "/piezas/blades/cx/chips",
-                         "name":  "Wolf",
-                         "variants":  [
-                                          "Wolf.png"
-                                      ]
-                     }
-                 ],
-    "cx_main_blades":  [
-                                   {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Arc",
-                               "variants":  [
-                                                "arc_yellow.png",
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Blast",
-                               "variants":  [
-                                                "Blast.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Brush",
-                               "variants":  [
-                                                "Brush.png",
-                                                "brush_gold.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Brave",
-                               "variants":  [
-                                                "Brave.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Dark",
-                               "variants":  [
-                                                "Dark.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Eclipse ataque",
-                               "variants":  [
-                                                "Eclipse ataque.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Eclipse Defensa",
-                               "variants":  [
-                                                "Eclipse Defensa.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Fang",
-                               "variants":  [
-                                                "Fang.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Flame",
-                               "variants":  [
-                                                "Flame.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Hunt",
-                               "variants":  [
-                                                "Hunt.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Might",
-                               "variants":  [
-                                                "Might.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Reaper",
-                               "variants":  [
-                                                "Reaper.png"
-                                            ]
-                           },
-                           {
-                               "path":  "/piezas/blades/cx/main_blade",
-                               "name":  "Volt",
-                               "variants":  [
-                                                "Volt.png"
-                                            ]
-                           }
-                       ],
-    "bits":  [
-                 {
-                     "path":  "/piezas/bits/Ａ_アクセル_ACCEL",
-                     "name":  "Ａ_アクセル_ACCEL",
-                     "variants":  [
-                                      "14.png",
-                                      "19.png",
-                                      "a09.png",
-                                      "a13.png",
-                                      "a19.png",
-                                      "ca01.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｂ_ボール_BALL",
-                     "name":  "Ｂ_ボール_BALL",
-                     "variants":  [
-                                      "08.png",
-                                      "16.png",
-                                      "18.png",
-                                      "a09.png",
-                                      "a13.png",
-                                      "a15.png",
-                                      "b07.png",
-                                      "b09.png",
-                                      "b13.png",
-                                      "c07.png",
-                                      "d01.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＢＳ_バウンドスパイク_BOUNDSPIKE",
-                     "name":  "ＢＳ_バウンドスパイク_BOUNDSPIKE",
-                     "variants":  [
-                                      "13.png",
-                                      "23.png",
-                                      "a14.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｃ_サイクロン_CYCLONE",
-                     "name":  "Ｃ_サイクロン_CYCLONE",
-                     "variants":  [
-                                      "15.png",
-                                      "22.png",
-                                      "b07.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｄ_ドット_DOT",
-                     "name":  "Ｄ_ドット_DOT",
-                     "variants":  [
-                                      "21.png",
-                                      "a13.png",
-                                      "b09.png",
-                                      "b16.png",
-                                      "c07.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＤＢ_ディスクボール_DISK BALL",
-                     "name":  "ＤＢ_ディスクボール_DISK BALL",
-                     "variants":  [
-                                      "14.png",
-                                      "21.png",
-                                      "29.png",
-                                      "b09.png",
-                                      "c09.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｅ_エレベート_ELEVATE",
-                     "name":  "Ｅ_エレベート_ELEVATE",
-                     "variants":  [
-                                      "20.png",
-                                      "a13.png",
-                                      "d07.png",
-                                      "b07.png",
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｆ_フラット_FLAT",
-                     "name":  "Ｆ_フラット_FLAT",
-                     "variants":  [
-                                      "06.png",
-                                      "14.png",
-                                      "30.png",
-                                      "a09.png",
-                                      "a10.png",
-                                      "a13.png",
-                                      "b07.png",
-                                      "b09.png",
-                                      "c07.png",
-                                      "c09.png",
-                                      "d07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＦＢ_フリーボール_FREEBALL",
-                     "name":  "ＦＢ_フリーボール_FREEBALL",
-                     "variants":  [
-                                      "19.png",
-                                      "c13.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｇ_グライド_GLIDE",
-                     "name":  "Ｇ_グライド_GLIDE",
-                     "variants":  [
-                                      "a15.png",
-                                      "e07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＧＢ_ギヤボール_GEAR BALL",
-                     "name":  "ＧＢ_ギヤボール_GEAR BALL",
-                     "variants":  [
-                                      "a10.png",
-                                      "a11.png",
-                                      "a15.png",
-                                      "c07.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＧＦ_ギヤフラット_GEAR FLAT",
-                     "name":  "ＧＦ_ギヤフラット_GEAR FLAT",
-                     "variants":  [
-                                      "15.png",
-                                      "18.png",
-                                      "20.png",
-                                      "c09.png",
-                                      "c13.png",
-                                      "j03.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＧＮ_ギヤニードル_GEAR NEEDLE",
-                     "name":  "ＧＮ_ギヤニードル_GEAR NEEDLE",
-                     "variants":  [
-                                      "21.png",
-                                      "a15.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＧＰ_ギヤポイント_GEAR POINT",
-                     "name":  "ＧＰ_ギヤポイント_GEAR POINT",
-                     "variants":  [
-                                      "21.png",
-                                      "a14.png",
-                                      "c07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＧＲ_ギアラッシュ_GEARRUSH",
-                     "name":  "ＧＲ_ギアラッシュ_GEARRUSH",
-                     "variants":  [
-                                      "a22.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｈ_ヘキサ_HEXA",
-                     "name":  "Ｈ_ヘキサ_HEXA",
-                     "variants":  [
-                                      "21.png",
-                                      "a09.png",
-                                      "b07.png",
-                                      "e07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＨＮ_ハイニードル_HIGH NEEDLE",
-                     "name":  "ＨＮ_ハイニードル_HIGH NEEDLE",
-                     "variants":  [
-                                      "16.png",
-                                      "b07.png",
-                                      "b09.png",
-                                      "c07.png",
-                                      "e07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＨＴ_ハイテーパー_HIGH TAPER",
-                     "name":  "ＨＴ_ハイテーパー_HIGH TAPER",
-                     "variants":  [
-                                      "15.png",
-                                      "a12.png",
-                                      "b07.png",
-                                      "b16.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｊ_ジョルト_JOLT",
-                     "name":  "Ｊ_ジョルト_JOLT",
-                     "variants":  [
-                                      "23.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｋ_キック_KICK",
-                     "name":  "Ｋ_キック_KICK",
-                     "variants":  [
-                                      "a30.png",
-                                      "d07.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｌ_レベル_LEVEL",
-                     "name":  "Ｌ_レベル_LEVEL",
-                     "variants":  [
-                                      "23.png",
-                                      "b15.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＬＦ_ローフラット_LOW FLAT",
-                     "name":  "ＬＦ_ローフラット_LOW FLAT",
-                     "variants":  [
-                                      "a09.png",
-                                      "a13.png",
-                                      "b09.png",
-                                      "c09.png",
-                                      "d07.png",
-                                      "e07.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＬＯ_ローオーブ_LOWORB",
-                     "name":  "ＬＯ_ローオーブ_LOWORB",
-                     "variants":  [
-                                      "19.png",
-                                      "29.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＬＲ_ローラッシュ_LOWRUSH",
-                     "name":  "ＬＲ_ローラッシュ_LOWRUSH",
-                     "variants":  [
-                                      "19.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｍ_マージ_MERGE",
-                     "name":  "Ｍ_マージ_MERGE",
-                     "variants":  [
-                                      "21.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＭＮ_メタルニードル_METALNEEDLE",
-                     "name":  "ＭＮ_メタルニードル_METALNEEDLE",
-                     "variants":  [
-                                      "a15.png",
-                                      "a16.png",
-                                      "a17.png",
-                                      "d07.png",
-                                      "h05.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｎ_ニードル_NEEDLE",
-                     "name":  "Ｎ_ニードル_NEEDLE",
-                     "variants":  [
-                                      "09.png",
-                                      "16.png",
-                                      "18.png",
-                                      "19.png",
-                                      "a08.png",
-                                      "b07.png",
-                                      "b09.png",
-                                      "b13.png",
-                                      "e07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｏ_オーブ_ORB",
-                     "name":  "Ｏ_オーブ_ORB",
-                     "variants":  [
-                                      "05.png",
-                                      "a13.png",
-                                      "b07.png",
-                                      "c07.png",
-                                      "c08.png",
-                                      "c10.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｏｐ_オペレート_OPERATE",
-                     "name":  "Ｏｐ_オペレート_OPERATE",
-                     "variants":  [
-                                      "a22.png",
-                                      "a27.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｐ_ポイント_POINT",
-                     "name":  "Ｐ_ポイント_POINT",
-                     "variants":  [
-                                      "03.png",
-                                      "16.png",
-                                      "a12.png",
-                                      "a13.png",
-                                      "b13.png",
-                                      "d08.png",
-                                      "h03.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｑ_クエイク_QUAKE",
-                     "name":  "Ｑ_クエイク_QUAKE",
-                     "variants":  [
-                                      "19.png",
-                                      "a16.png",
-                                      "e08.png",
-                                      "f08.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｒ_ラッシュ_RUSH",
-                     "name":  "Ｒ_ラッシュ_RUSH",
-                     "variants":  [
-                                      "a08.png",
-                                      "a12.png",
-                                      "d07.png",
-                                      "h04.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＲＡ_ラバーアクセル_RUBBERACCEL",
-                     "name":  "ＲＡ_ラバーアクセル_RUBBERACCEL",
-                     "variants":  [
-                                      "17.png",
-                                      "a13.png",
-                                      "b11.png",
-                                      "c13.png",
-                                      "g01.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｓ_スパイク_SPIKE",
-                     "name":  "Ｓ_スパイク_SPIKE",
-                     "variants":  [
-                                      "a11.png",
-                                      "b08.png",
-                                      "b09.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｔ_テーパー_TAPER",
-                     "name":  "Ｔ_テーパー_TAPER",
-                     "variants":  [
-                                      "07.png",
-                                      "16.png",
-                                      "19.png",
-                                      "a09.png",
-                                      "b07.png",
-                                      "b12.png",
-                                      "c09.png",
-                                      "e07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＴＫ_トランスキック_TRANSKICK",
-                     "name":  "ＴＫ_トランスキック_TRANSKICK",
-                     "variants":  [
-                                      "36.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＴＰ_トランスポイント_TRANSPOINT",
-                     "name":  "ＴＰ_トランスポイント_TRANSPOINT",
-                     "variants":  [
-                                      "19.png",
-                                      "d09.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｔｒ_ターボ_TURBO",
-                     "name":  "Ｔｒ_ターボ_TURBO",
-                     "variants":  [
-                                      "18.png",
-                                      "25.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｕ_ユナイト_UNITE",
-                     "name":  "Ｕ_ユナイト_UNITE",
-                     "variants":  [
-                                      "19.png",
-                                      "b13.png",
-                                      "c09.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＵＦ_アンダーフラット_UNDERFLAT",
-                     "name":  "ＵＦ_アンダーフラット_UNDERFLAT",
-                     "variants":  [
-                                      "a15.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＵＮ_アンダーニードル_UNDERNEEDLE",
-                     "name":  "ＵＮ_アンダーニードル_UNDERNEEDLE",
-                     "variants":  [
-                                      "19.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｖ_ボルテックス_VORTEX",
-                     "name":  "Ｖ_ボルテックス_VORTEX",
-                     "variants":  [
-                                      "23.png",
-                                      "29.png",
-                                      "a13.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｗ_ウェッジ_WEDGE",
-                     "name":  "Ｗ_ウェッジ_WEDGE",
-                     "variants":  [
-                                      "40.png",
-                                      "a20.png",
-                                      "b13.png",
-                                      "c09.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/ＷＢ_ウォールボール_WALLBALL",
-                     "name":  "ＷＢ_ウォールボール_WALLBALL",
-                     "variants":  [
-                                      "a21.png",
-                                      "e07.png",
-                                      "f07.png"
-                                  ]
-                 },
-                 {
-                     "path":  "/piezas/bits/Ｚ_ザップ_ZAP",
-                     "name":  "Ｚ_ザップ_ZAP",
-                     "variants":  [
-                                      "31.png"
-                                  ]
-                 }
-             ],
     "ratchets":  [
                      {
                          "path":  "/piezas/ratchets/0-60",
@@ -1370,12 +165,12 @@
                                           "f06.png"
                                       ]
                      },
-                                          {
+                     {
                          "path":  "/piezas/ratchets/1-50",
                          "name":  "1-50",
                          "variants":  [
-                                          "bp.png",
                                           "bb.png",
+                                          "bp.png"
                                       ]
                      },
                      {
@@ -1407,7 +202,8 @@
                          "variants":  [
                                           "a08.png",
                                           "a11.png",
-                                          "c07.png"
+                                          "c07.png",
+                                          "rh.png"
                                       ]
                      },
                      {
@@ -1443,6 +239,7 @@
                          "name":  "3-60",
                          "variants":  [
                                           "15.png",
+                                          "18.png",
                                           "20.png",
                                           "a08.png",
                                           "a09.png",
@@ -1454,8 +251,7 @@
                                           "c07.png",
                                           "c11.png",
                                           "e06.png",
-                                          "yellkong.png",
-                                          "18.png"
+                                          "yellkong.png"
                                       ]
                      },
                      {
@@ -1467,7 +263,7 @@
                                           "a07.png",
                                           "b09.png",
                                           "c06.png",
-                                          "c06u.png",
+                                          "c06u.png"
                                       ]
                      },
                      {
@@ -1502,6 +298,7 @@
                          "path":  "/piezas/ratchets/4-50",
                          "name":  "4-50",
                          "variants":  [
+                                          "17.png",
                                           "a11.png"
                                       ]
                      },
@@ -1637,9 +434,9 @@
                          "name":  "7-60",
                          "variants":  [
                                           "17.png",
+                                          "c06.png",
                                           "f06.png",
-                                          "fh.png",
-                                          "c06.png"
+                                          "fh.png"
                                       ]
                      },
                      {
@@ -1663,12 +460,12 @@
                          "name":  "9-60",
                          "variants":  [
                                           "16.png",
+                                          "17.png",
                                           "a07.png",
                                           "b06.png",
                                           "b07.png",
                                           "b12.png",
                                           "j02.png",
-                                          "17.png",
                                           "t9.png"
                                       ]
                      },
@@ -1701,5 +498,1332 @@
                                           "d06.png"
                                       ]
                      }
-                 ]
+                 ],
+    "cx_chips":  [
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Cerberus",
+                         "variants":  [
+                                          "Cerberus.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Dran",
+                         "variants":  [
+                                          "Dran.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Emperor",
+                         "variants":  [
+                                          "Emperor.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Fox",
+                         "variants":  [
+                                          "Fox.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Hells",
+                         "variants":  [
+                                          "Hells.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Pegasus",
+                         "variants":  [
+                                          "Pegasus.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Perseus",
+                         "variants":  [
+                                          "Perseus.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Rhino",
+                         "variants":  [
+                                          "Rhino.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Sol",
+                         "variants":  [
+                                          "Sol.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Valkyrie",
+                         "variants":  [
+                                          "Valkyrie.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Whale",
+                         "variants":  [
+                                          "Whale.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Wizzard",
+                         "variants":  [
+                                          "Wizzard.png"
+                                      ]
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Wolf",
+                         "variants":  [
+                                          "Wolf.png"
+                                      ]
+                     }
+                 ],
+    "blades":  [
+                   {
+                       "path":  "/piezas/blades/AEROPEGASUS",
+                       "name":  "AEROPEGASUS",
+                       "variants":  [
+                                        "11.png",
+                                        "12.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/BEARSCRATCH",
+                       "name":  "BEARSCRATCH",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/BLACKSHELL",
+                       "name":  "BLACKSHELL",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png",
+                                        "e05s.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/CLOCKMIRAGE",
+                       "name":  "CLOCKMIRAGE",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png",
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/COBALTDRAGOON",
+                       "name":  "COBALTDRAGOON",
+                       "variants":  [
+                                        "11.png",
+                                        "12.png",
+                                        "f05s.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/COBALTDRAKE",
+                       "name":  "COBALTDRAKE",
+                       "variants":  [
+                                        "09.png",
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/CRIMSONGARUDA",
+                       "name":  "CRIMSONGARUDA",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/CROCOCRUNCH",
+                       "name":  "CROCOCRUNCH",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DARTH VADER",
+                       "name":  "DARTH VADER",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRACIELSHIELD",
+                       "name":  "DRACIELSHIELD",
+                       "variants":  [
+                                        "13.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRAGOONSTORM",
+                       "name":  "DRAGOONSTORM",
+                       "variants":  [
+                                        "13.png",
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRAN STRIKE",
+                       "name":  "DRAN STRIKE",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRANBUSTER",
+                       "name":  "DRANBUSTER",
+                       "variants":  [
+                                        "11.png",
+                                        "a05.png",
+                                        "a05_W.png",
+                                        "ab02.png",
+                                        "d05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRANDAGGER",
+                       "name":  "DRANDAGGER",
+                       "variants":  [
+                                        "12.png",
+                                        "a05.png",
+                                        "b05.png",
+                                        "d06.png",
+                                        "e05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRANSWORD",
+                       "name":  "DRANSWORD",
+                       "variants":  [
+                                        "10.png",
+                                        "12.png",
+                                        "a06.png",
+                                        "c05.png",
+                                        "c05_w.png",
+                                        "d05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRANZERSPIRAL",
+                       "name":  "DRANZERSPIRAL",
+                       "variants":  [
+                                        "13.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/DRIGERSLASH",
+                       "name":  "DRIGERSLASH",
+                       "variants":  [
+                                        "a06.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/GOATTACKLE",
+                       "name":  "GOATTACKLE",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/GOLEMROCK",
+                       "name":  "GOLEMROCK",
+                       "variants":  [
+                                        "11.png",
+                                        "GolemRock_M-85HN.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/GOSTCIRCLE",
+                       "name":  "GOSTCIRCLE",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/HELLSCHAIN",
+                       "name":  "HELLSCHAIN",
+                       "variants":  [
+                                        "11.png",
+                                        "a05.png",
+                                        "c06.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/HELLSHAMMER",
+                       "name":  "HELLSHAMMER",
+                       "variants":  [
+                                        "11.png",
+                                        "a05.png",
+                                        "h01.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/HELLSSCYTHE",
+                       "name":  "HELLSSCYTHE",
+                       "variants":  [
+                                        "12.png",
+                                        "13.png",
+                                        "a05.png",
+                                        "d05.png",
+                                        "d05g.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/IMPACTDRAKE",
+                       "name":  "IMPACTDRAKE",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/IRON MAN",
+                       "name":  "IRON MAN",
+                       "variants":  [
+                                        "a07.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/KNIGHTLANCE",
+                       "name":  "KNIGHTLANCE",
+                       "variants":  [
+                                        "11.png",
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/KNIGHTMAIL",
+                       "name":  "KNIGHTMAIL",
+                       "variants":  [
+                                        "11.png",
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/KNIGHTSHIELD",
+                       "name":  "KNIGHTSHIELD",
+                       "variants":  [
+                                        "12.png",
+                                        "c05.png",
+                                        "f05.png",
+                                        "f08.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/LEONCLAW",
+                       "name":  "LEONCLAW",
+                       "variants":  [
+                                        "13.png",
+                                        "a06.png",
+                                        "d05.png",
+                                        "e05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/LEONCREST",
+                       "name":  "LEONCREST",
+                       "variants":  [
+                                        "11.png",
+                                        "d05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/LIGHTNING L-DRAGORUSH",
+                       "name":  "LIGHTNING L-DRAGORUSH",
+                       "variants":  [
+                                        "22.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/LIGHTNING L-DRAGOUPPER",
+                       "name":  "LIGHTNING L-DRAGOUPPER",
+                       "variants":  [
+                                        "12.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/LUKE SKYWARKER",
+                       "name":  "LUKE SKYWARKER",
+                       "variants":  [
+                                        "a05.png",
+                                        "f08.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/MANDALORIAN",
+                       "name":  "MANDALORIAN",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/MEGATRON",
+                       "name":  "MEGATRON",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/METEORDRAGOON",
+                       "name":  "METEORDRAGOON",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/MOFF GIDEON",
+                       "name":  "MOFF GIDEON",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/MUMMOTHTUSK",
+                       "name":  "MUMMOTHTUSK",
+                       "variants":  [
+                                        "10.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/MUMMYCURSE",
+                       "name":  "MUMMYCURSE",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/OPTIMUS PRIMAL",
+                       "name":  "OPTIMUS PRIMAL",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/OPTIMUS PRIME",
+                       "name":  "OPTIMUS PRIME",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/PHOENIXFEATHER",
+                       "name":  "PHOENIXFEATHER",
+                       "variants":  [
+                                        "05.png",
+                                        "10.png",
+                                        "e05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/PHOENIXRUDDER",
+                       "name":  "PHOENIXRUDDER",
+                       "variants":  [
+                                        "a05.png",
+                                        "e05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/PHOENIXWING",
+                       "name":  "PHOENIXWING",
+                       "variants":  [
+                                        "10.png",
+                                        "11.png",
+                                        "e05.png",
+                                        "j01.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/PTERASWING",
+                       "name":  "PTERASWING",
+                       "variants":  [
+                                        "b01.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/RHINOHORN",
+                       "name":  "RHINOHORN",
+                       "variants":  [
+                                        "a05.png",
+                                        "f06.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/ROCK LEONE",
+                       "name":  "ROCK LEONE",
+                       "variants":  [
+                                        "13.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SAMURAICALIBUR",
+                       "name":  "SAMURAICALIBUR",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SAMURAISTEEL",
+                       "name":  "SAMURAISTEEL",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SCORPIOSPEAR",
+                       "name":  "SCORPIOSPEAR",
+                       "variants":  [
+                                        "15.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SHARKEDGE",
+                       "name":  "SHARKEDGE",
+                       "variants":  [
+                                        "12.png",
+                                        "a05.png",
+                                        "a12.png",
+                                        "b05.png",
+                                        "e06.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SHARKGILL",
+                       "name":  "SHARKGILL",
+                       "variants":  [
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SHARKSCALE",
+                       "name":  "SHARKSCALE",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SHELTERDRAKE",
+                       "name":  "SHELTERDRAKE",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SHINOBIKNIFE",
+                       "name":  "SHINOBIKNIFE",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SHINOBISHADOW",
+                       "name":  "SHINOBISHADOW",
+                       "variants":  [
+                                        "a06.png",
+                                        "b05.png",
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SILVERWOLF",
+                       "name":  "SILVERWOLF",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SPHINXCOWL",
+                       "name":  "SPHINXCOWL",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png",
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SPIDER-MAN",
+                       "name":  "SPIDER-MAN",
+                       "variants":  [
+                                        "a05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/STARSCREAM",
+                       "name":  "STARSCREAM",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/STORMPEGASIS",
+                       "name":  "STORMPEGASIS",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/SUMURAISABER",
+                       "name":  "SUMURAISABER",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/THANOS",
+                       "name":  "THANOS",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/TRICERAPRESS",
+                       "name":  "TRICERAPRESS",
+                       "variants":  [
+                                        "11.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/TRICERASPIKY",
+                       "name":  "TRICERASPIKY",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/TYRANNOBEAT",
+                       "name":  "TYRANNOBEAT",
+                       "variants":  [
+                                        "a05.png",
+                                        "a06.png",
+                                        "b06.png",
+                                        "e01.png",
+                                        "e05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/TYRANNOROAR",
+                       "name":  "TYRANNOROAR",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/UNICORNSTING",
+                       "name":  "UNICORNSTING",
+                       "variants":  [
+                                        "a05.png",
+                                        "a17.png",
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/VEMON",
+                       "name":  "VEMON",
+                       "variants":  [
+                                        "b05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/VICTORYVALKYRIE",
+                       "name":  "VICTORYVALKYRIE",
+                       "variants":  [
+                                        "c05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/VIPERTAIL",
+                       "name":  "VIPERTAIL",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png",
+                                        "c05.png",
+                                        "d05.png",
+                                        "f05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/WEISSTIGER",
+                       "name":  "WEISSTIGER",
+                       "variants":  [
+                                        "12.png",
+                                        "f05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/WHALEWAVE",
+                       "name":  "WHALEWAVE",
+                       "variants":  [
+                                        "a06.png",
+                                        "b05.png",
+                                        "c05.png",
+                                        "f05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/WIZARDARROW",
+                       "name":  "WIZARDARROW",
+                       "variants":  [
+                                        "12.png",
+                                        "b05.png",
+                                        "e05.png",
+                                        "e15.png",
+                                        "f05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/WIZARDROD",
+                       "name":  "WIZARDROD",
+                       "variants":  [
+                                        "11.png",
+                                        "b05.png",
+                                        "d05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/WYVERNGALE",
+                       "name":  "WYVERNGALE",
+                       "variants":  [
+                                        "a05.png",
+                                        "b05.png",
+                                        "f05.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/WYVERNHOVER",
+                       "name":  "WYVERNHOVER",
+                       "variants":  [
+                                        "ai01.png",
+                                        "gi01.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/XENO XCALIBUR",
+                       "name":  "XENO XCALIBUR",
+                       "variants":  [
+                                        "12.png"
+                                    ]
+                   },
+                   {
+                       "path":  "/piezas/blades/YELLKONG",
+                       "name":  "YELLKONG",
+                       "variants":  [
+                                        "Yell_Kong_3-60GB.png"
+                                    ]
+                   }
+               ],
+    "bits":  [
+                 {
+                     "path":  "/piezas/bits/ACCEL",
+                     "name":  "ACCEL",
+                     "variants":  [
+                                      "14.png",
+                                      "19.png",
+                                      "a09.png",
+                                      "a13.png",
+                                      "a19.png",
+                                      "ca01.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/BALL",
+                     "name":  "BALL",
+                     "variants":  [
+                                      "08.png",
+                                      "16.png",
+                                      "18.png",
+                                      "a09.png",
+                                      "a13.png",
+                                      "a15.png",
+                                      "b07.png",
+                                      "b09.png",
+                                      "b13.png",
+                                      "c07.png",
+                                      "d01.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/BOUNDSPIKE",
+                     "name":  "BOUNDSPIKE",
+                     "variants":  [
+                                      "13.png",
+                                      "23.png",
+                                      "a14.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/CYCLONE",
+                     "name":  "CYCLONE",
+                     "variants":  [
+                                      "15.png",
+                                      "22.png",
+                                      "b07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/DISK BALL",
+                     "name":  "DISK BALL",
+                     "variants":  [
+                                      "14.png",
+                                      "21.png",
+                                      "29.png",
+                                      "b09.png",
+                                      "c09.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/DOT",
+                     "name":  "DOT",
+                     "variants":  [
+                                      "21.png",
+                                      "a13.png",
+                                      "b09.png",
+                                      "b16.png",
+                                      "c07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/ELEVATE",
+                     "name":  "ELEVATE",
+                     "variants":  [
+                                      "20.png",
+                                      "a13.png",
+                                      "b07.png",
+                                      "d07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/FLAT",
+                     "name":  "FLAT",
+                     "variants":  [
+                                      "06.png",
+                                      "14.png",
+                                      "30.png",
+                                      "a09.png",
+                                      "a10.png",
+                                      "a13.png",
+                                      "b07.png",
+                                      "b09.png",
+                                      "c07.png",
+                                      "c09.png",
+                                      "d07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/FREE FLAT",
+                     "name":  "FREE FLAT",
+                     "variants":  [
+                                      "19.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/FREEBALL",
+                     "name":  "FREEBALL",
+                     "variants":  [
+                                      "19.png",
+                                      "c13.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GEAR BALL",
+                     "name":  "GEAR BALL",
+                     "variants":  [
+                                      "a10.png",
+                                      "a11.png",
+                                      "a15.png",
+                                      "c07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GEAR FLAT",
+                     "name":  "GEAR FLAT",
+                     "variants":  [
+                                      "15.png",
+                                      "18.png",
+                                      "20.png",
+                                      "c09.png",
+                                      "c13.png",
+                                      "j03.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GEAR NEEDLE",
+                     "name":  "GEAR NEEDLE",
+                     "variants":  [
+                                      "21.png",
+                                      "a15.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GEAR POINT",
+                     "name":  "GEAR POINT",
+                     "variants":  [
+                                      "21.png",
+                                      "a14.png",
+                                      "c07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GEAR UNITE",
+                     "name":  "GEAR UNITE",
+                     "variants":  [
+                                      "a27.png",
+                                      "d07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GEARRUSH",
+                     "name":  "GEARRUSH",
+                     "variants":  [
+                                      "a22.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/GLIDE",
+                     "name":  "GLIDE",
+                     "variants":  [
+                                      "a15.png",
+                                      "e07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/HEXA",
+                     "name":  "HEXA",
+                     "variants":  [
+                                      "21.png",
+                                      "a09.png",
+                                      "b07.png",
+                                      "e07.png",
+                                      "16.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/HIGH NEEDLE",
+                     "name":  "HIGH NEEDLE",
+                     "variants":  [
+                                      "16.png",
+                                      "b07.png",
+                                      "b09.png",
+                                      "c07.png",
+                                      "e07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/HIGH TAPER",
+                     "name":  "HIGH TAPER",
+                     "variants":  [
+                                      "15.png",
+                                      "a12.png",
+                                      "b07.png",
+                                      "b16.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/JOLT",
+                     "name":  "JOLT",
+                     "variants":  [
+                                      "23.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/KICK",
+                     "name":  "KICK",
+                     "variants":  [
+                                      "a30.png",
+                                      "d07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/LEVEL",
+                     "name":  "LEVEL",
+                     "variants":  [
+                                      "23.png",
+                                      "b15.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/LOW FLAT",
+                     "name":  "LOW FLAT",
+                     "variants":  [
+                                      "a09.png",
+                                      "a13.png",
+                                      "b09.png",
+                                      "c09.png",
+                                      "d07.png",
+                                      "e07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/LOWORB",
+                     "name":  "LOWORB",
+                     "variants":  [
+                                      "19.png",
+                                      "29.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/LOWRUSH",
+                     "name":  "LOWRUSH",
+                     "variants":  [
+                                      "19.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/MERGE",
+                     "name":  "MERGE",
+                     "variants":  [
+                                      "21.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/METALNEEDLE",
+                     "name":  "METALNEEDLE",
+                     "variants":  [
+                                      "a15.png",
+                                      "a16.png",
+                                      "a17.png",
+                                      "d07.png",
+                                      "h05.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/NEEDLE",
+                     "name":  "NEEDLE",
+                     "variants":  [
+                                      "09.png",
+                                      "16.png",
+                                      "18.png",
+                                      "19.png",
+                                      "a08.png",
+                                      "b07.png",
+                                      "b09.png",
+                                      "b13.png",
+                                      "e07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/OPERATE",
+                     "name":  "OPERATE",
+                     "variants":  [
+                                      "a22.png",
+                                      "a27.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/ORB",
+                     "name":  "ORB",
+                     "variants":  [
+                                      "05.png",
+                                      "a13.png",
+                                      "b07.png",
+                                      "c07.png",
+                                      "c08.png",
+                                      "c10.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/POINT",
+                     "name":  "POINT",
+                     "variants":  [
+                                      "03.png",
+                                      "16.png",
+                                      "a12.png",
+                                      "a13.png",
+                                      "b13.png",
+                                      "d08.png",
+                                      "h03.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/QUAKE",
+                     "name":  "QUAKE",
+                     "variants":  [
+                                      "19.png",
+                                      "a16.png",
+                                      "e08.png",
+                                      "f08.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/RUBBERACCEL",
+                     "name":  "RUBBERACCEL",
+                     "variants":  [
+                                      "17.png",
+                                      "a13.png",
+                                      "b11.png",
+                                      "c13.png",
+                                      "g01.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/RUSH",
+                     "name":  "RUSH",
+                     "variants":  [
+                                      "a08.png",
+                                      "a12.png",
+                                      "d07.png",
+                                      "h04.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/SPIKE",
+                     "name":  "SPIKE",
+                     "variants":  [
+                                      "a11.png",
+                                      "b08.png",
+                                      "b09.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/TAPER",
+                     "name":  "TAPER",
+                     "variants":  [
+                                      "07.png",
+                                      "16.png",
+                                      "19.png",
+                                      "a09.png",
+                                      "b07.png",
+                                      "b12.png",
+                                      "c09.png",
+                                      "e07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/TRANSKICK",
+                     "name":  "TRANSKICK",
+                     "variants":  [
+                                      "36.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/TRANSPOINT",
+                     "name":  "TRANSPOINT",
+                     "variants":  [
+                                      "19.png",
+                                      "d09.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/TURBO",
+                     "name":  "TURBO",
+                     "variants":  [
+                                      "18.png",
+                                      "25.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/UNDERFLAT",
+                     "name":  "UNDERFLAT",
+                     "variants":  [
+                                      "a15.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/UNDERNEEDLE",
+                     "name":  "UNDERNEEDLE",
+                     "variants":  [
+                                      "19.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/UNITE",
+                     "name":  "UNITE",
+                     "variants":  [
+                                      "19.png",
+                                      "b13.png",
+                                      "c09.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/VORTEX",
+                     "name":  "VORTEX",
+                     "variants":  [
+                                      "23.png",
+                                      "29.png",
+                                      "a13.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/WALLBALL",
+                     "name":  "WALLBALL",
+                     "variants":  [
+                                      "a21.png",
+                                      "e07.png",
+                                      "f07.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/WEDGE",
+                     "name":  "WEDGE",
+                     "variants":  [
+                                      "40.png",
+                                      "a20.png",
+                                      "b13.png",
+                                      "c09.png"
+                                  ]
+                 },
+                 {
+                     "path":  "/piezas/bits/ZAP",
+                     "name":  "ZAP",
+                     "variants":  [
+                                      "31.png"
+                                  ]
+                 }
+             ],
+    "cx_main_blades":  [
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "yellow",
+                               "variants":  [
+                                                "arc_yellow.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Blast",
+                               "variants":  [
+                                                "Blast.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Brave",
+                               "variants":  [
+                                                "Brave.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Brush",
+                               "variants":  [
+                                                "Brush.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "gold",
+                               "variants":  [
+                                                "brush_gold.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Dark",
+                               "variants":  [
+                                                "Dark.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Eclipse ataque",
+                               "variants":  [
+                                                "Eclipse ataque.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Eclipse Defensa",
+                               "variants":  [
+                                                "Eclipse Defensa.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Fang",
+                               "variants":  [
+                                                "Fang.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Flame",
+                               "variants":  [
+                                                "Flame.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Hunt",
+                               "variants":  [
+                                                "Hunt.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Might",
+                               "variants":  [
+                                                "Might.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Reaper",
+                               "variants":  [
+                                                "Reaper.png"
+                                            ]
+                           },
+                           {
+                               "path":  "/piezas/blades/cx/main_blade",
+                               "name":  "Volt",
+                               "variants":  [
+                                                "Volt.png"
+                                            ]
+                           }
+                       ],
+    "cx_infinity_metal_blades":  [
+                                     {
+                                         "path":  "/piezas/blades/cx/cx infinity/blade infinity/BLITZ",
+                                         "name":  "BLITZ",
+                                         "variants":  [
+                                                          "26.png",
+                                                          "a09.png"
+                                                      ]
+                                     },
+                                     {
+                                         "path":  "/piezas/blades/cx/cx infinity/blade infinity/DELTA",
+                                         "name":  "DELTA",
+                                         "variants":  [
+                                                          "a13.png"
+                                                      ]
+                                     },
+                                     {
+                                         "path":  "/piezas/blades/cx/cx infinity/blade infinity/FORTRESS",
+                                         "name":  "FORTRESS",
+                                         "variants":  [
+                                                          "21.png"
+                                                      ]
+                                     },
+                                     {
+                                         "path":  "/piezas/blades/cx/cx infinity/blade infinity/RAGE",
+                                         "name":  "RAGE",
+                                         "variants":  [
+                                                          "13.png"
+                                                      ]
+                                     }
+                                 ]
 };

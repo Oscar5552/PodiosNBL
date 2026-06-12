@@ -44,6 +44,8 @@ body {
 /* Ajustados a 0.85 brightness para que no se vean tan oscuras */
 .blade-normal-img,
 .cx-main,
+.cx-metal,
+.cx-over,
 .cx-assist,
 .cx-chip {
     opacity: 1 !important;
@@ -85,17 +87,42 @@ body {
     transform: translate(-50%, -50%) !important;
 }
 
-/* Orden de capas: Assist (fondo) → Main → Chip (frente) */
+.cx-metal {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.cx-over {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 92% !important;
+    height: 92% !important;
+    object-fit: contain !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Orden de capas: Assist → Main/Metal → Over → Chip */
 .cx-assist {
     z-index: 1 !important;
 }
 
-.cx-main {
+.cx-main,
+.cx-metal {
     z-index: 2 !important;
 }
 
-.cx-chip {
+.cx-over {
     z-index: 3 !important;
+}
+
+.cx-chip {
+    z-index: 4 !important;
 }
 
 .slot-icon img {
