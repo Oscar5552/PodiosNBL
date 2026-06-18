@@ -590,7 +590,14 @@
                          "variants":  [
                                           "Wolf.png"
                                       ]
-                     }
+                     },
+                     {
+                         "path":  "/piezas/blades/cx/chips",
+                         "name":  "Knight",
+                         "variants":  [
+                                          "Knight.png"
+                                      ]
+                     },
                  ],
     "blades":  [
                    {
@@ -1647,7 +1654,8 @@
                      "path":  "/piezas/bits/UNDERNEEDLE",
                      "name":  "UNDERNEEDLE",
                      "variants":  [
-                                      "19.png"
+                                      "19.png",
+                                      "37.png"
                                   ]
                  },
                  {
