@@ -14,6 +14,7 @@ $data = @{
     cx_assists = @()
     cx_infinity_metal_blades = @()
     cx_infinity_over_blades = @()
+    ux_infinity_blades = @()
 }
 
 # Función que limpia la ruta cortando todo lo que esté antes de "piezas"
@@ -121,7 +122,7 @@ Write-Host "Escaneando carpetas..."
 if (Test-Path "$rootPath\blades") {
     $all = Get-ChildItem -Path "$rootPath\blades" -Directory
     foreach ($f in $all) {
-        if ($f.Name -ne "cx") {
+        if ($f.Name -notin @('cx', 'UX')) {
             $imgs = Get-ChildItem -Path $f.FullName -Filter *.png
             if ($imgs.Count -gt 0) {
                 $clean = Get-Clean-Relative-Path $f.FullName
@@ -150,11 +151,17 @@ $pInfinityOver  = "$rootPath\blades\cx\cx infinity\assist infinity"
 $data.cx_infinity_metal_blades = Get-FolderParts $pInfinityMetal
 $data.cx_infinity_over_blades  = Get-FolderParts $pInfinityOver
 
+# UX Infinity: solo main blade (carpetas en blades/UX)
+$data.ux_infinity_blades = Get-FolderParts "$rootPath\blades\UX"
+
 # 3. Piezas (Carpetas)
 $data.ratchets = Get-FolderParts "$rootPath\ratchets"
 $data.bits = Get-FolderParts "$rootPath\bits"
 
-$json = $data | ConvertTo-Json -Depth 4
+Add-Type -AssemblyName System.Web.Extensions
+$serializer = New-Object System.Web.Script.Serialization.JavaScriptSerializer
+$serializer.MaxJsonLength = 33554432
+$json = $serializer.Serialize($data)
 Set-Content -Path $outputFile -Value "const partsData = $json;" -Encoding UTF8
 
 Write-Host "LISTO. Abre index.html y prueba."

@@ -1,8 +1,8 @@
 // --- ESTADO INICIAL ---
 let deckState = [
-    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } },
-    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } },
-    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } }
+    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null }, uxParts: { main: null } },
+    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null }, uxParts: { main: null } },
+    { type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null }, uxParts: { main: null } }
 ];
 
 let currentEdit = { index: 0, partType: '' };
@@ -16,6 +16,11 @@ let playerDrag = { active: false, startX: 0, startY: 0, imgStartX: 0, imgStartY:
 
 // Cargar DB
 const db = (typeof partsData !== 'undefined') ? partsData : {};
+
+function asPartsList(value) {
+    if (!value) return [];
+    return Array.isArray(value) ? value : [value];
+}
 
 function initializeDate() {
     const today = new Date();
@@ -253,7 +258,7 @@ function updateDeckSize(delta) {
     if (newSize < 1 || newSize > 6) return;
 
     if (delta > 0) {
-        deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null } });
+        deckState.push({ type: 'std', blade: null, ratchet: null, bit: null, cxParts: { chip: null, main: null, assist: null, metal: null, over: null }, uxParts: { main: null } });
     } else {
         deckState.pop();
     }
@@ -325,6 +330,12 @@ function renderDeck() {
                 <img src="${srcChip}" class="cx-chip">
             `;
 
+        // --- RENDERIZADO UX INFINITY (blade + bit, sin ratchet) ---
+        } else if (combo.type === 'ux-inf' && combo.uxParts && combo.uxParts.main) {
+            const srcBlade = getImgSrc(combo.uxParts.main.path, combo.uxParts.main.variants[0]);
+            bladeHtml = `<img src="${srcBlade}" class="blade-normal-img">`;
+            bladeName = cleanDisplayName(combo.uxParts.main.name);
+
         } else if (combo.blade) {
             // STANDARD
             const srcBlade = getImgSrc(combo.blade.path, combo.blade.variants[0]);
@@ -341,8 +352,8 @@ function renderDeck() {
         const rName = combo.ratchet ? cleanDisplayName(combo.ratchet.name) : "Ratchet";
         const bName = combo.bit ? cleanDisplayName(combo.bit.name) : "Bit";
 
-        const hasComboBit = combo.bit && isComboBit(combo.bit.name);
-        const ratchetSlot = hasComboBit ? '' : `
+        const hideRatchet = combo.type === 'ux-inf' || (combo.bit && isComboBit(combo.bit.name));
+        const ratchetSlot = hideRatchet ? '' : `
             <div class="slot-group">
                 <div class="slot-icon" onclick="openModal(${index}, 'ratchet')">${rImg}</div>
                 <div class="part-label">${rName}</div>
@@ -414,7 +425,7 @@ function openModal(index, partType) {
 
 function switchTab(tab) {
     currentBladeTab = tab;
-    const tabIndex = { std: 0, cx: 1, 'cx-inf': 2 };
+    const tabIndex = { std: 0, cx: 1, 'cx-inf': 2, 'ux-inf': 3 };
     document.querySelectorAll('#blade-tabs .tab-btn').forEach((b, i) => {
         b.classList.toggle('active', i === tabIndex[tab]);
     });
@@ -427,14 +438,17 @@ function switchTab(tab) {
             combo.type = 'std';
             combo.blade = selected;
             combo.cxParts = { chip: null, main: null, assist: null, metal: null, over: null };
+            combo.uxParts = { main: null };
             closeModal();
             renderDeck();
         };
         renderList(db.blades, currentSearchCallback);
     } else if (tab === 'cx') {
         renderCXStep1();
-    } else {
+    } else if (tab === 'cx-inf') {
         renderCXInfinityStep1();
+    } else {
+        renderUXInfinityStep1();
     }
 }
 
@@ -465,6 +479,7 @@ function renderCXStep3(chip, main) {
         combo.type = 'cx';
         combo.blade = null;
         combo.cxParts = { chip, main, assist, metal: null, over: null };
+        combo.uxParts = { main: null };
         closeModal();
         renderDeck();
     };
@@ -507,10 +522,38 @@ function renderCXInfinityStep4(chip, metal, over) {
         combo.type = 'cx-inf';
         combo.blade = null;
         combo.cxParts = { chip, metal, over, assist, main: null };
+        combo.uxParts = { main: null };
         closeModal();
         renderDeck();
     };
     renderList(db.cx_assists, currentSearchCallback, false);
+}
+
+function renderUXInfinityStep1() {
+    const grid = document.getElementById('modal-grid');
+    grid.innerHTML = '<h4 style="grid-column:1/-1; color:white; text-align:center;">PASO 1: MAIN BLADE</h4>';
+    currentListItems = asPartsList(db.ux_infinity_blades);
+    currentSearchCallback = (main) => renderUXInfinityStep2(main);
+    renderList(asPartsList(db.ux_infinity_blades), currentSearchCallback, false);
+}
+
+function renderUXInfinityStep2(main) {
+    const grid = document.getElementById('modal-grid');
+    grid.innerHTML = '<h4 style="grid-column:1/-1; color:white; text-align:center;">PASO 2: BIT</h4>';
+    document.getElementById('search-box').value = '';
+    currentListItems = db.bits;
+    currentSearchCallback = (bit) => {
+        const combo = deckState[currentEdit.index];
+        combo.type = 'ux-inf';
+        combo.blade = null;
+        combo.ratchet = null;
+        combo.cxParts = { chip: null, main: null, assist: null, metal: null, over: null };
+        combo.uxParts = { main };
+        combo.bit = bit;
+        closeModal();
+        renderDeck();
+    };
+    renderList(db.bits, currentSearchCallback, false);
 }
 
 function renderList(items, onSelectFinal, clearGrid = true) {
@@ -547,7 +590,8 @@ function showVariants(item, onSelectFinal) {
         if (currentEdit.partType === 'blade') {
             if (currentBladeTab === 'std') switchTab('std');
             else if (currentBladeTab === 'cx') renderCXStep1();
-            else renderCXInfinityStep1();
+            else if (currentBladeTab === 'cx-inf') renderCXInfinityStep1();
+            else renderUXInfinityStep1();
         } else openModal(currentEdit.index, currentEdit.partType);
     };
     grid.appendChild(backBtn);
