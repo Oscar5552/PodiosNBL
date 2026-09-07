@@ -41,7 +41,6 @@ body {
 }
 
 /* --- FILTROS SELECTIVOS ANTI-NEBLINA (SOLO BLADES Y CX) --- */
-/* Ajustados a 0.85 brightness para que no se vean tan oscuras */
 .blade-normal-img,
 .cx-main,
 .cx-metal,
@@ -50,7 +49,7 @@ body {
 .cx-chip {
     opacity: 1 !important;
     filter:
-        brightness(0.85) contrast(1.8) saturate(1.1) drop-shadow(0 15px 25px rgba(0, 0, 0, 1)) !important;
+        brightness(0.88) contrast(1.5) saturate(1.0) drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95)) !important;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     mix-blend-mode: normal !important;
@@ -128,7 +127,7 @@ body {
 .slot-icon img {
     opacity: 1 !important;
     filter:
-        brightness(0.9) contrast(1.4) saturate(1.2) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.9)) !important;
+        brightness(0.92) contrast(1.3) saturate(1.05) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.85)) !important;
 }
 
 /* --- MODO FOTO --- */
