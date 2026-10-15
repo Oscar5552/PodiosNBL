@@ -137,7 +137,10 @@ $pChips = if (Test-Path "$rootPath\blades\cx\chips") { "$rootPath\blades\cx\chip
 $pMain  = if (Test-Path "$rootPath\blades\cx\main_blade") { "$rootPath\blades\cx\main_blade" } else { "$rootPath\blades\cx\main blade" }
 $pAssist= if (Test-Path "$rootPath\blades\cx\assist") { "$rootPath\blades\cx\assist" } else { "$rootPath\blades\cx\assists" }
 
-$data.cx_chips = Get-FileParts $pChips
+# Chips: una carpeta por chip (varias skins = varias variantes)
+$data.cx_chips = @()
+$data.cx_chips += Get-FileParts $pChips
+$data.cx_chips += Get-FolderParts $pChips
 $data.cx_main_blades = Get-FileParts $pMain
 
 # Assists: PNG sueltos en raíz + subcarpetas (KNUCKLE, ODD, etc.)
