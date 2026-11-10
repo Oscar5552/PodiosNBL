@@ -680,7 +680,7 @@ body.photo-mode .player-img-controls {
 .beyblade-display-area {
      position: absolute;
      top: 238px;
-     right: 24px;
+     right: 36px;
      left: auto;
      z-index: 20;
      width: auto;
@@ -915,7 +915,7 @@ height:120px;
 
 .beyblade-display-area.mode-medium{
 top:230px;
-right:24px;
+right:52px;
 }
 
 .beyblade-display-area.mode-medium .combo-row{
@@ -952,7 +952,7 @@ font-size:1.1rem;
 .beyblade-display-area.mode-compact{
 top:210px;
 left:auto;
-right:28px;
+right:70px;
 }
 
 .beyblade-display-area.mode-compact #deck-list-container{
@@ -992,7 +992,7 @@ font-size:0.95rem;
 .beyblade-display-area.mode-very-compact{
 top:198px;
 left:auto;
-right:28px;
+right:90px;
 }
 
 .beyblade-display-area.mode-very-compact #deck-list-container{
