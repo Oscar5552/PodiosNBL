@@ -353,15 +353,21 @@ function renderDeck() {
         const bName = combo.bit ? cleanDisplayName(combo.bit.name) : "Bit";
 
         const hideRatchet = combo.type === 'ux-inf' || (combo.bit && isComboBit(combo.bit.name));
-        const ratchetSlot = hideRatchet ? '' : `
-            <div class="slot-group">
+        // Siempre reservar columna de ratchet para no desalinear bits / blades
+        const ratchetSlot = hideRatchet ? `
+            <div class="slot-group ratchet-slot empty-ratchet" aria-hidden="true">
+                <div class="slot-icon"></div>
+                <div class="part-label">&nbsp;</div>
+            </div>
+        ` : `
+            <div class="slot-group ratchet-slot">
                 <div class="slot-icon" onclick="openModal(${index}, 'ratchet')">${rImg}</div>
                 <div class="part-label">${rName}</div>
             </div>
         `;
 
         row.innerHTML = `
-            <div class="slot-group">
+            <div class="slot-group blade-slot">
                 <div class="bey-image-container" onclick="openModal(${index}, 'blade')">
                     ${bladeHtml}
                 </div>
@@ -370,7 +376,7 @@ function renderDeck() {
 
             <div class="bey-parts-row">
                 ${ratchetSlot}
-                <div class="slot-group">
+                <div class="slot-group bit-slot-group">
                     <div class="slot-icon bit-slot" onclick="openModal(${index}, 'bit')">${bImg}</div>
                     <div class="part-label">${bName}</div>
                 </div>
