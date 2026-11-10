@@ -952,7 +952,7 @@ font-size:1.1rem;
 .beyblade-display-area.mode-compact{
 top:210px;
 left:auto;
-right:70px;
+right:88px;
 }
 
 .beyblade-display-area.mode-compact #deck-list-container{
@@ -992,7 +992,7 @@ font-size:0.95rem;
 .beyblade-display-area.mode-very-compact{
 top:198px;
 left:auto;
-right:90px;
+right:112px;
 }
 
 .beyblade-display-area.mode-very-compact #deck-list-container{
